@@ -1,0 +1,65 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="floorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#DEB887;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#CD853F;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="wallGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5DEB3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#DEB887;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Back wall -->
+  <rect width="400" height="200" fill="url(#wallGrad)"/>
+
+  <!-- Floor with perspective -->
+  <polygon points="0,200 400,200 350,300 50,300" fill="url(#floorGrad)"/>
+
+  <!-- Side walls with perspective -->
+  <polygon points="0,0 50,50 50,300 0,200" fill="#D2B48C"/>
+  <polygon points="400,0 350,50 350,300 400,200" fill="#D2B48C"/>
+
+  <!-- Central Rameumptom -->
+  <ellipse cx="200" cy="230" rx="25" ry="15" fill="#8B4513"/> <!-- Base shadow -->
+  <rect x="185" y="180" width="30" height="50" fill="#A0522D" stroke="#654321" stroke-width="1"/>
+  <rect x="182" y="175" width="36" height="6" fill="#654321"/>
+
+  <!-- Seating benches arranged around -->
+  <rect x="80" y="220" width="60" height="15" fill="#8B4513" rx="3"/>
+  <rect x="260" y="220" width="60" height="15" fill="#8B4513" rx="3"/>
+  <rect x="120" y="250" width="50" height="12" fill="#8B4513" rx="3"/>
+  <rect x="230" y="250" width="50" height="12" fill="#8B4513" rx="3"/>
+
+  <!-- People seated -->
+  <g id="seated">
+    <circle cx="0" cy="-8" r="4" fill="#F4C2A1"/>
+    <rect x="-2" y="-5" width="4" height="8" fill="#654321"/>
+  </g>
+
+  <use href="#seated" transform="translate(100, 228)"/>
+  <use href="#seated" transform="translate(115, 228)"/>
+  <use href="#seated" transform="translate(130, 228)"/>
+  <use href="#seated" transform="translate(270, 228)"/>
+  <use href="#seated" transform="translate(285, 228)"/>
+  <use href="#seated" transform="translate(300, 228)"/>
+
+  <!-- Columns -->
+  <rect x="60" y="50" width="8" height="150" fill="#D2B48C"/>
+  <rect x="332" y="50" width="8" height="150" fill="#D2B48C"/>
+
+  <!-- Person on Rameumptom -->
+  <circle cx="200" cy="165" r="6" fill="#F4C2A1"/>
+  <rect x="196" y="168" width="8" height="12" fill="#800080"/>
+
+  <!-- Windows with light -->
+  <rect x="20" y="60" width="25" height="40" fill="#E6F3FF" stroke="#8B4513" stroke-width="2"/>
+  <rect x="355" y="60" width="25" height="40" fill="#E6F3FF" stroke="#8B4513" stroke-width="2"/>
+
+  <!-- Light rays -->
+  <path d="M 32 80 L 180 160" stroke="#FFD700" stroke-width="1" opacity="0.3"/>
+  <path d="M 32 90 L 185 170" stroke="#FFD700" stroke-width="1" opacity="0.3"/>
+
+  <!-- Title -->
+  <text x="200" y="25" text-anchor="middle" font-family="serif" font-size="16" font-weight="bold" fill="#002E5D">Zoramite Synagogue Interior</text>
+</svg>

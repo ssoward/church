@@ -1,0 +1,112 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="prideGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FFE4E1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFA07A;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="humilityGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#E0FFE0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#98FB98;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="divineLight" cx="50%" cy="30%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#FFD700;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Dividing line -->
+  <line x1="200" y1="0" x2="200" y2="300" stroke="#8B9DC3" stroke-width="3"/>
+
+  <!-- LEFT SIDE - Zoramite Pride -->
+  <rect x="0" y="0" width="200" height="300" fill="url(#prideGrad)"/>
+
+  <!-- Rameumptom -->
+  <rect x="85" y="120" width="30" height="60" fill="#8B4513"/>
+  <rect x="80" y="115" width="40" height="8" fill="#654321"/>
+
+  <!-- Prideful person elevated -->
+  <circle cx="100" cy="105" r="8" fill="#F4C2A1"/>
+  <rect x="94" y="108" width="12" height="15" fill="#800080"/> <!-- Rich robe -->
+  <!-- Crown -->
+  <polygon points="94,97 100,90 106,97" fill="#FFD700"/>
+  <!-- Arms raised high -->
+  <path d="M 90 112 Q 80 100 75 85" stroke="#F4C2A1" stroke-width="3" fill="none"/>
+  <path d="M 110 112 Q 120 100 125 85" stroke="#F4C2A1" stroke-width="3" fill="none"/>
+
+  <!-- Speech bubble - pride -->
+  <ellipse cx="130" cy="70" rx="50" ry="25" fill="#FFFFFF" stroke="#8B0000" stroke-width="2"/>
+  <text x="130" y="65" text-anchor="middle" font-family="serif" font-size="8" fill="#8B0000">
+    "We thank thee that
+  </text>
+  <text x="130" y="75" text-anchor="middle" font-family="serif" font-size="8" fill="#8B0000" font-weight="bold">
+    WE are chosen!"
+  </text>
+
+  <!-- Audience looking up -->
+  <g id="proud-watcher">
+    <circle cx="0" cy="0" r="4" fill="#F4C2A1"/>
+    <rect x="-2" y="2" width="4" height="8" fill="#654321"/>
+  </g>
+  <use href="#proud-watcher" transform="translate(60, 200)"/>
+  <use href="#proud-watcher" transform="translate(80, 200)"/>
+  <use href="#proud-watcher" transform="translate(120, 200)"/>
+  <use href="#proud-watcher" transform="translate(140, 200)"/>
+
+  <!-- Labels -->
+  <text x="100" y="25" text-anchor="middle" font-family="serif" font-size="14" font-weight="bold" fill="#8B0000">FALSE PRAYER</text>
+  <text x="100" y="240" text-anchor="middle" font-family="serif" font-size="9" fill="#654321">• Self-focused</text>
+  <text x="100" y="255" text-anchor="middle" font-family="serif" font-size="9" fill="#654321">• Repetitive</text>
+  <text x="100" y="270" text-anchor="middle" font-family="serif" font-size="9" fill="#654321">• Prideful</text>
+
+  <!-- RIGHT SIDE - Alma's Humility -->
+  <rect x="200" y="0" width="200" height="300" fill="url(#humilityGrad)"/>
+
+  <!-- Divine light -->
+  <ellipse cx="300" cy="80" rx="80" ry="60" fill="url(#divineLight)"/>
+
+  <!-- Alma kneeling humbly -->
+  <ellipse cx="300" cy="140" rx="12" ry="20" fill="#4A90E2"/>
+  <circle cx="300" cy="120" r="8" fill="#F4C2A1"/>
+  <!-- Hair -->
+  <path d="M 292 115 Q 300 108 308 115" fill="#8B4513"/>
+  <!-- Humble posture - arms folded -->
+  <ellipse cx="290" cy="130" rx="5" ry="8" fill="#F4C2A1" transform="rotate(-10 290 130)"/>
+  <ellipse cx="310" cy="130" rx="5" ry="8" fill="#F4C2A1" transform="rotate(10 310 130)"/>
+  <!-- Hands clasped -->
+  <ellipse cx="300" cy="128" rx="6" ry="4" fill="#F4C2A1"/>
+
+  <!-- Tears of compassion -->
+  <circle cx="296" cy="124" r="1" fill="#87CEEB"/>
+
+  <!-- Speech bubble - humility -->
+  <ellipse cx="330" cy="70" rx="50" ry="30" fill="#FFFFFF" stroke="#228B22" stroke-width="2"/>
+  <text x="330" y="60" text-anchor="middle" font-family="serif" font-size="8" fill="#228B22">
+    "O Lord, THEIR
+  </text>
+  <text x="330" y="72" text-anchor="middle" font-family="serif" font-size="8" fill="#228B22" font-weight="bold">
+    souls are precious"
+  </text>
+  <text x="330" y="84" text-anchor="middle" font-family="serif" font-size="7" fill="#228B22">
+    (verse 35)
+  </text>
+
+  <!-- Others also praying humbly -->
+  <g id="humble-prayer">
+    <circle cx="0" cy="0" r="6" fill="#F4C2A1"/>
+    <ellipse cx="0" cy="8" rx="8" ry="12" fill="#654321"/>
+    <ellipse cx="-6" cy="6" rx="3" ry="6" fill="#F4C2A1"/>
+    <ellipse cx="6" cy="6" rx="3" ry="6" fill="#F4C2A1"/>
+  </g>
+  <use href="#humble-prayer" transform="translate(250, 180) scale(0.7)"/>
+  <use href="#humble-prayer" transform="translate(350, 185) scale(0.7)"/>
+
+  <!-- Labels -->
+  <text x="300" y="25" text-anchor="middle" font-family="serif" font-size="14" font-weight="bold" fill="#228B22">TRUE PRAYER</text>
+  <text x="300" y="240" text-anchor="middle" font-family="serif" font-size="9" fill="#2F4F2F">• Others-focused</text>
+  <text x="300" y="255" text-anchor="middle" font-family="serif" font-size="9" fill="#2F4F2F">• Heartfelt</text>
+  <text x="300" y="270" text-anchor="middle" font-family="serif" font-size="9" fill="#2F4F2F">• Humble</text>
+
+  <!-- Central title -->
+  <rect x="150" y="285" width="100" height="15" fill="#FFFFFF" stroke="#002E5D" stroke-width="1"/>
+  <text x="200" y="295" text-anchor="middle" font-family="serif" font-size="10" font-weight="bold" fill="#002E5D">Two Ways to Pray</text>
+</svg>

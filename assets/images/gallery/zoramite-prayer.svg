@@ -1,0 +1,63 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="prideGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#FFA500;stop-opacity:0.1" />
+    </linearGradient>
+    <radialGradient id="haloGrad" cx="50%" cy="30%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#FFD700;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#prideGrad)"/>
+
+  <!-- Platform glow (showing pride) -->
+  <ellipse cx="200" cy="120" rx="60" ry="40" fill="url(#haloGrad)"/>
+
+  <!-- Rameumptom -->
+  <rect x="185" y="140" width="30" height="80" fill="#8B4513" stroke="#654321" stroke-width="2"/>
+  <rect x="180" y="135" width="40" height="8" fill="#654321"/>
+
+  <!-- Prideful person on platform -->
+  <circle cx="200" cy="125" r="10" fill="#F4C2A1"/>
+  <rect x="193" y="130" width="14" height="20" fill="#800080"/> <!-- Rich purple robe -->
+
+  <!-- Arms raised high in pride -->
+  <path d="M 190 135 Q 175 120 170 100" stroke="#F4C2A1" stroke-width="4" fill="none"/>
+  <path d="M 210 135 Q 225 120 230 100" stroke="#F4C2A1" stroke-width="4" fill="none"/>
+
+  <!-- Crown or rich ornaments -->
+  <rect x="195" y="115" width="10" height="5" fill="#FFD700"/>
+  <circle cx="190" cy="127" r="2" fill="#FFD700"/> <!-- Jewelry -->
+  <circle cx="210" cy="127" r="2" fill="#FFD700"/>
+
+  <!-- Speech bubble with repetitive prayer -->
+  <ellipse cx="280" cy="80" rx="80" ry="45" fill="#FFFFFF" stroke="#002E5D" stroke-width="2" opacity="0.9"/>
+  <text x="280" y="70" text-anchor="middle" font-family="serif" font-size="10" fill="#002E5D" font-weight="bold">
+    "Holy, holy God..."
+  </text>
+  <text x="280" y="85" text-anchor="middle" font-family="serif" font-size="9" fill="#002E5D">
+    "We thank thee that we
+  </text>
+  <text x="280" y="98" text-anchor="middle" font-family="serif" font-size="9" fill="#002E5D">
+    are chosen people..."
+  </text>
+
+  <!-- Watching congregation below -->
+  <g id="watcher">
+    <circle cx="0" cy="0" r="5" fill="#F4C2A1"/>
+    <rect x="-2" y="3" width="4" height="10" fill="#654321"/>
+  </g>
+
+  <use href="#watcher" transform="translate(120, 240)"/>
+  <use href="#watcher" transform="translate(140, 240)"/>
+  <use href="#watcher" transform="translate(160, 240)"/>
+  <use href="#watcher" transform="translate(240, 240)"/>
+  <use href="#watcher" transform="translate(260, 240)"/>
+  <use href="#watcher" transform="translate(280, 240)"/>
+
+  <!-- Title -->
+  <text x="200" y="25" text-anchor="middle" font-family="serif" font-size="16" font-weight="bold" fill="#002E5D">Zoramite Prayer on the Rameumptom</text>
+</svg>

@@ -1,0 +1,72 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="lightGrad" cx="50%" cy="30%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0.4" />
+      <stop offset="50%" style="stop-color:#E6F3FF;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#E6F3FF;stop-opacity:0" />
+    </radialGradient>
+    <linearGradient id="groundGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8FBC8F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#556B2F;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background landscape -->
+  <rect width="400" height="300" fill="#87CEEB"/>
+  <rect x="0" y="220" width="400" height="80" fill="url(#groundGrad)"/>
+
+  <!-- Divine light from above -->
+  <ellipse cx="200" cy="50" rx="150" ry="120" fill="url(#lightGrad)"/>
+
+  <!-- Alma kneeling in prayer -->
+  <g id="alma-praying">
+    <!-- Body kneeling -->
+    <ellipse cx="200" cy="190" rx="15" ry="25" fill="#4A90E2"/>
+
+    <!-- Head bowed -->
+    <circle cx="200" cy="160" r="12" fill="#F4C2A1"/>
+
+    <!-- Hair -->
+    <path d="M 188 155 Q 200 145 212 155" fill="#8B4513"/>
+
+    <!-- Arms in humble prayer -->
+    <ellipse cx="185" cy="175" rx="6" ry="15" fill="#F4C2A1" transform="rotate(-30 185 175)"/>
+    <ellipse cx="215" cy="175" rx="6" ry="15" fill="#F4C2A1" transform="rotate(30 215 175)"/>
+
+    <!-- Hands clasped -->
+    <ellipse cx="200" cy="170" rx="8" ry="5" fill="#F4C2A1"/>
+  </g>
+
+  <!-- Tears of compassion -->
+  <circle cx="195" cy="165" r="1" fill="#87CEEB" opacity="0.7"/>
+  <circle cx="205" cy="167" r="1" fill="#87CEEB" opacity="0.7"/>
+
+  <!-- His companions in background, also praying -->
+  <g id="companion">
+    <circle cx="0" cy="0" r="8" fill="#F4C2A1"/>
+    <rect x="-6" y="5" width="12" height="20" fill="#654321"/>
+    <ellipse cx="-8" cy="10" rx="4" ry="8" fill="#F4C2A1" transform="rotate(-20)"/>
+    <ellipse cx="8" cy="10" rx="4" ry="8" fill="#F4C2A1" transform="rotate(20)"/>
+  </g>
+
+  <use href="#companion" transform="translate(120, 190) scale(0.8)"/>
+  <use href="#companion" transform="translate(280, 185) scale(0.8)"/>
+  <use href="#companion" transform="translate(150, 200) scale(0.7)"/>
+  <use href="#companion" transform="translate(250, 200) scale(0.7)"/>
+
+  <!-- Prayer text floating above -->
+  <path d="M 200 140 Q 180 100 160 80" stroke="#FFD700" stroke-width="1" fill="none" opacity="0.6"/>
+  <text x="140" y="75" font-family="serif" font-size="9" fill="#002E5D" font-style="italic">
+    "O Lord, their souls are precious..."
+  </text>
+  <text x="130" y="90" font-family="serif" font-size="8" fill="#002E5D" font-style="italic">
+    "Give unto us power and wisdom"
+  </text>
+
+  <!-- Mountains in distance -->
+  <polygon points="0,180 50,120 100,140 150,100 200,120 250,90 300,110 350,95 400,130 400,220 0,220" fill="#8B7D6B" opacity="0.6"/>
+
+  <!-- Title -->
+  <text x="200" y="25" text-anchor="middle" font-family="serif" font-size="16" font-weight="bold" fill="#002E5D">Alma's Heartfelt Prayer</text>
+  <text x="200" y="285" text-anchor="middle" font-family="serif" font-size="10" fill="#5A6C7D" font-style="italic">Verses 26-35: Prayer of Compassion</text>
+</svg>

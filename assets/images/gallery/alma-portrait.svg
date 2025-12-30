@@ -1,0 +1,65 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="faceGrad" cx="45%" cy="35%">
+      <stop offset="0%" style="stop-color:#F4C2A1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D2B48C;stop-opacity:1" />
+    </radialGradient>
+    <linearGradient id="robeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#002E5D;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="haloGrad" cx="50%" cy="30%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#FFD700;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background with subtle gradient -->
+  <rect width="400" height="300" fill="#E6F3FF"/>
+
+  <!-- Spiritual light/halo -->
+  <ellipse cx="200" cy="100" rx="120" ry="100" fill="url(#haloGrad)"/>
+
+  <!-- Robe/clothing -->
+  <ellipse cx="200" cy="220" rx="80" ry="60" fill="url(#robeGrad)"/>
+
+  <!-- Face -->
+  <ellipse cx="200" cy="140" rx="45" ry="55" fill="url(#faceGrad)" stroke="#D2B48C" stroke-width="1"/>
+
+  <!-- Beard -->
+  <path d="M 165 160 Q 200 195 235 160 Q 220 185 200 190 Q 180 185 165 160" fill="#8B4513"/>
+
+  <!-- Hair -->
+  <path d="M 155 110 Q 200 85 245 110 Q 240 105 200 90 Q 160 105 155 110" fill="#8B4513"/>
+
+  <!-- Eyes with compassion -->
+  <ellipse cx="185" cy="130" rx="8" ry="6" fill="white"/>
+  <ellipse cx="215" cy="130" rx="8" ry="6" fill="white"/>
+  <circle cx="185" cy="130" r="4" fill="#4A90E2"/>
+  <circle cx="215" cy="130" r="4" fill="#4A90E2"/>
+  <circle cx="186" cy="129" r="2" fill="black"/>
+  <circle cx="216" cy="129" r="2" fill="black"/>
+
+  <!-- Eyebrows showing wisdom -->
+  <path d="M 175 122 Q 185 118 195 122" stroke="#8B4513" stroke-width="2" fill="none"/>
+  <path d="M 205 122 Q 215 118 225 122" stroke="#8B4513" stroke-width="2" fill="none"/>
+
+  <!-- Nose -->
+  <path d="M 198 135 L 200 145 L 202 135" stroke="#D2B48C" stroke-width="1" fill="none"/>
+
+  <!-- Mouth with gentle expression -->
+  <path d="M 190 155 Q 200 160 210 155" stroke="#D2B48C" stroke-width="2" fill="none"/>
+
+  <!-- Hands in prayer position -->
+  <ellipse cx="150" cy="200" rx="12" ry="8" fill="url(#faceGrad)" transform="rotate(-20 150 200)"/>
+  <ellipse cx="250" cy="200" rx="12" ry="8" fill="url(#faceGrad)" transform="rotate(20 250 200)"/>
+
+  <!-- Scripture scroll -->
+  <rect x="170" y="240" width="60" height="8" fill="#F5DEB3" rx="2"/>
+  <rect x="175" y="242" width="50" height="4" fill="#8B4513"/>
+
+  <!-- Title and subtitle -->
+  <text x="200" y="30" text-anchor="middle" font-family="serif" font-size="18" font-weight="bold" fill="#002E5D">Alma the Younger</text>
+  <text x="200" y="50" text-anchor="middle" font-family="serif" font-size="12" fill="#5A6C7D">High Priest and Prophet</text>
+  <text x="200" y="285" text-anchor="middle" font-family="serif" font-size="10" fill="#7B8794" font-style="italic">"O Lord, their souls are precious" - Alma 31:35</text>
+</svg>

@@ -1,0 +1,98 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bookGlow" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0.8" />
+      <stop offset="70%" style="stop-color:#E6F3FF;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#E6F3FF;stop-opacity:0" />
+    </radialGradient>
+    <linearGradient id="swordGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#C0C0C0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#808080;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="300" fill="#E6F3FF"/>
+
+  <!-- Central dividing element -->
+  <text x="200" y="150" text-anchor="middle" font-family="serif" font-size="24" font-weight="bold" fill="#002E5D">VS</text>
+
+  <!-- LEFT SIDE - The Sword (Force/Violence) -->
+  <g id="sword-side">
+    <!-- Sword -->
+    <rect x="50" y="140" width="80" height="8" fill="url(#swordGrad)"/>
+    <rect x="45" y="135" width="10" height="18" fill="#8B4513"/> <!-- Handle -->
+    <polygon points="130,144 145,139 145,149" fill="#C0C0C0"/> <!-- Point -->
+
+    <!-- Broken chains (force breaks temporarily) -->
+    <ellipse cx="80" cy="100" rx="8" ry="4" fill="#696969"/>
+    <ellipse cx="100" cy="100" rx="8" ry="4" fill="#696969"/>
+    <path d="M 75 100 L 65 95" stroke="#696969" stroke-width="3"/>
+    <path d="M 105 100 L 115 95" stroke="#696969" stroke-width="3"/>
+
+    <!-- Person cowering/resistant -->
+    <circle cx="90" cy="200" r="10" fill="#F4C2A1"/>
+    <ellipse cx="90" cy="215" rx="12" ry="18" fill="#654321"/>
+    <path d="M 80 210 Q 75 200 70 195" stroke="#F4C2A1" stroke-width="3" fill="none"/> <!-- Defensive posture -->
+    <path d="M 100 210 Q 105 200 110 195" stroke="#F4C2A1" stroke-width="3" fill="none"/>
+
+    <!-- Fearful face -->
+    <circle cx="86" cy="196" r="2" fill="black"/>
+    <circle cx="94" cy="196" r="2" fill="black"/>
+    <path d="M 86 205 Q 90 210 94 205" stroke="#654321" stroke-width="1" fill="none"/>
+
+    <!-- Label -->
+    <text x="90" y="50" text-anchor="middle" font-family="serif" font-size="12" font-weight="bold" fill="#8B0000">THE SWORD</text>
+    <text x="90" y="70" text-anchor="middle" font-family="serif" font-size="9" fill="#654321">Temporary force</text>
+    <text x="90" y="260" text-anchor="middle" font-family="serif" font-size="9" fill="#654321">• External pressure</text>
+    <text x="90" y="275" text-anchor="middle" font-family="serif" font-size="9" fill="#654321">• Breeds resentment</text>
+    <text x="90" y="290" text-anchor="middle" font-family="serif" font-size="9" fill="#654321">• Short-term compliance</text>
+  </g>
+
+  <!-- RIGHT SIDE - The Word (God's Word/Truth) -->
+  <g id="word-side">
+    <!-- Glowing book/scriptures -->
+    <ellipse cx="310" cy="144" rx="60" ry="40" fill="url(#bookGlow)"/>
+    <rect x="285" y="130" width="50" height="28" fill="#8B4513" rx="3"/>
+    <rect x="287" y="132" width="46" height="24" fill="#F5DEB3"/>
+
+    <!-- Pages -->
+    <line x1="290" y1="135" x2="330" y2="135" stroke="#8B4513" stroke-width="0.5"/>
+    <line x1="290" y1="140" x2="330" y2="140" stroke="#8B4513" stroke-width="0.5"/>
+    <line x1="290" y1="145" x2="330" y2="145" stroke="#8B4513" stroke-width="0.5"/>
+    <line x1="290" y1="150" x2="330" y2="150" stroke="#8B4513" stroke-width="0.5"/>
+
+    <!-- Light rays emanating -->
+    <path d="M 310 144 L 280 120" stroke="#FFD700" stroke-width="2" opacity="0.6"/>
+    <path d="M 310 144 L 340 120" stroke="#FFD700" stroke-width="2" opacity="0.6"/>
+    <path d="M 310 144 L 280 170" stroke="#FFD700" stroke-width="2" opacity="0.6"/>
+    <path d="M 310 144 L 340 170" stroke="#FFD700" stroke-width="2" opacity="0.6"/>
+
+    <!-- Heart transformation -->
+    <path d="M 305 100 Q 300 95 295 100 Q 300 105 305 100" fill="#FF69B4"/>
+    <path d="M 315 100 Q 310 95 305 100 Q 310 105 315 100" fill="#FF69B4"/>
+    <text x="300" y="85" font-family="serif" font-size="8" fill="#654321">Changed Heart</text>
+
+    <!-- Person with open arms (receptive) -->
+    <circle cx="310" cy="200" r="10" fill="#F4C2A1"/>
+    <ellipse cx="310" cy="215" rx="12" ry="18" fill="#4A90E2"/>
+    <path d="M 295 210 Q 285 205 280 200" stroke="#F4C2A1" stroke-width="3" fill="none"/> <!-- Open arms -->
+    <path d="M 325 210 Q 335 205 340 200" stroke="#F4C2A1" stroke-width="3" fill="none"/>
+
+    <!-- Joyful face -->
+    <circle cx="306" cy="196" r="2" fill="black"/>
+    <circle cx="314" cy="196" r="2" fill="black"/>
+    <path d="M 306 205 Q 310 208 314 205" stroke="#654321" stroke-width="2" fill="none"/>
+
+    <!-- Label -->
+    <text x="310" y="50" text-anchor="middle" font-family="serif" font-size="12" font-weight="bold" fill="#228B22">GOD'S WORD</text>
+    <text x="310" y="70" text-anchor="middle" font-family="serif" font-size="9" fill="#2F4F2F">Eternal power</text>
+    <text x="310" y="260" text-anchor="middle" font-family="serif" font-size="9" fill="#2F4F2F">• Internal transformation</text>
+    <text x="310" y="275" text-anchor="middle" font-family="serif" font-size="9" fill="#2F4F2F">• Breeds love</text>
+    <text x="310" y="290" text-anchor="middle" font-family="serif" font-size="9" fill="#2F4F2F">• Lasting conversion</text>
+  </g>
+
+  <!-- Title and scripture reference -->
+  <text x="200" y="25" text-anchor="middle" font-family="serif" font-size="14" font-weight="bold" fill="#002E5D">The Power of God's Word</text>
+  <text x="200" y="40" text-anchor="middle" font-family="serif" font-size="10" fill="#5A6C7D" font-style="italic">Alma 31:5 - More powerful than the sword</text>
+</svg>
