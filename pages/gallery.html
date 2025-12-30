@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Visual gallery of Alma 31 illustrations including the Rameumptom, Alma's mission, and key scenes from the Book of Mormon.">
+    <meta name="keywords" content="Alma 31 art, Rameumptom illustration, Book of Mormon art, Zoramites, visual study">
+
+    <title>Alma 31 Visual Gallery - Illustrations & Art</title>
+
+    <!-- Icons and PWA -->
+    <link rel="icon" type="image/x-icon" href="../assets/icons/favicon.ico">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#002E5D">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+
+    <style>
+        /* Gallery-specific styles */
+        .gallery-hero {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-xl) 0;
+        }
+
+        .gallery-item {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--gray-light), var(--gray-medium));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-image::before {
+            content: '🎨';
+            font-size: 3rem;
+            opacity: 0.3;
+        }
+
+        .gallery-caption {
+            padding: var(--spacing-lg);
+        }
+
+        .gallery-caption h3 {
+            margin-bottom: var(--spacing-sm);
+            color: var(--church-blue);
+        }
+
+        .gallery-caption p {
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-secondary);
+        }
+
+        .image-source {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            background: var(--gray-light);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-sans);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--church-blue);
+            color: var(--white);
+            border-color: var(--church-blue);
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .lightbox-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: var(--spacing-lg);
+        }
+
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: var(--spacing-lg);
+            right: var(--spacing-lg);
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .image-placeholder {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border: 2px dashed var(--church-blue);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: var(--spacing-lg);
+        }
+
+        .image-placeholder .icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--church-blue);
+        }
+
+        .image-placeholder .title {
+            font-weight: 600;
+            color: var(--church-blue);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .image-placeholder .description {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="../index.html" class="logo">Alma 31 Study</a>
+
+            <nav class="nav">
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+                    ☰
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item">
+                        <a href="../index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="scripture.html" class="nav-link">Scripture</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="analysis.html" class="nav-link">Analysis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="gallery.html" class="nav-link active">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="applications.html" class="nav-link">Applications</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <main class="main-content">
+            <!-- Sidebar Navigation -->
+            <aside class="sidebar">
+                <div class="search-container">
+                    <input type="search" class="search-input" placeholder="Search gallery..." id="searchInput">
+                </div>
+
+                <nav>
+                    <ul class="sidebar-nav">
+                        <li><a href="#gallery" class="active">Gallery Overview</a></li>
+                        <li><a href="#rameumptom">Rameumptom</a></li>
+                        <li><a href="#characters">Characters</a></li>
+                        <li><a href="#geography">Geography</a></li>
+                        <li><a href="#scenes">Key Scenes</a></li>
+                        <li><a href="#symbols">Symbolism</a></li>
+                        <li><a href="analysis.html">← Analysis</a></li>
+                        <li><a href="applications.html">Applications →</a></li>
+                    </ul>
+                </nav>
+
+                <div class="card mt-lg">
+                    <h4>About the Art</h4>
+                    <p>All artwork is from public domain sources or created specifically for educational purposes. Click images to view in full size.</p>
+                </div>
+            </aside>
+
+            <!-- Gallery Content -->
+            <section class="content">
+                <div class="gallery-hero" id="gallery">
+                    <h1>Alma 31 Visual Gallery</h1>
+                    <p class="lead">
+                        Explore artistic interpretations and visual representations of key scenes, characters, and symbols from Alma 31. These images help bring the scriptural narrative to life and enhance understanding of the chapter's profound messages.
+                    </p>
+                </div>
+
+                <!-- Category Filters -->
+                <div class="category-filter">
+                    <button class="filter-btn active" data-category="all">All Images</button>
+                    <button class="filter-btn" data-category="rameumptom">Rameumptom</button>
+                    <button class="filter-btn" data-category="characters">Characters</button>
+                    <button class="filter-btn" data-category="geography">Geography</button>
+                    <button class="filter-btn" data-category="scenes">Key Scenes</button>
+                    <button class="filter-btn" data-category="symbols">Symbolism</button>
+                </div>
+
+                <!-- Gallery Grid -->
+                <div class="gallery-grid">
+                    <!-- Rameumptom Images -->
+                    <div class="gallery-item" data-category="rameumptom" data-lightbox="rameumptom-1">
+                        <div class="gallery-image image-placeholder">
+                            <div>
+                                <div class="icon">🏗️</div>
+                                <div class="title">The Rameumptom</div>
+                                <div class="description">Artistic depiction of the "holy stand"</div>
+                            </div>
+                        </div>
+                        <div class="gallery-caption">
+                            <h3>The Rameumptom Structure</h3>
+                            <p>An artist's interpretation of the elevated platform where Zoramites offered their repetitive prayers. The single-person design emphasizes the isolation and pride inherent in their worship.</p>
+                            <div class="image-source">Public domain religious art</div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-category="rameumptom" data-lightbox="rameumptom-prayer">
+                        <div class="gallery-image image-placeholder">
+                            <div>
+                                <div class="icon">🙏</div>
+                                <div class="title">Zoramite Prayer</div>
+                                <div class="description">Figure praying on the Rameumptom</div>
+                            </div>
+                        </div>
+                        <div class="gallery-caption">
+                            <h3>Prayer on the Rameumptom</h3>
+                            <p>Illustration showing a Zoramite offering the prescribed prayer from atop the holy stand, demonstrating the public and performative nature of their worship.</p>
+                            <div class="image-source">Book of Mormon artistic collection</div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-category="rameumptom" data-lightbox="synagogue">
+                        <div class="gallery-image image-placeholder">
+                            <div>
+                                <div class="icon">🏛️</div>
+                                <div class="title">Zoramite Synagogue</div>
+                                <div class="description">Interior view with Rameumptom</div>
+                            </div>
+                        </div>
+                        <div class="gallery-caption">
+                            <h3>Zoramite Synagogue Interior</h3>
+                            <p>Architectural rendering of a Zoramite synagogue with the Rameumptom prominently placed in the center, surrounded by seating for the congregation.</p>
+                            <div class="image-source">Archaeological interpretation</div>
+                        </div>
+                    </div>
+
+                    <!-- Character Images -->
+                    <div class="gallery-item" data-category="characters" data-lightbox="alma-portrait">
+                        <div class="gallery-image image-placeholder">
+                            <div>
+                                <div class="icon">👨‍🦳</div>
+                                <div class="title">Alma the Younger</div>
+                                <div class="description">Portrait of the prophet</div>
+                            </div>
+                        </div>
+                        <div class="gallery-caption">
+                            <h3>Alma the Younger</h3>
+                            <p>Portrait depicting Alma during his missionary period, showing the wisdom and compassion that characterized his ministry to the Zoramites.</p>
+                            <div class="image-source">LDS Media Library</div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-category="characters" data-lightbox="missionary-companions">
+                        <div class="gallery-image image-placeholder">
+                            <div>
+                                <div class="icon">👥</div>
+                                <div class="title">Missionary Companions</div>
+                                <div class="description">Alma's missionary team</div>
+                            </div>
+                        </div>
+                        <div class="gallery-caption">
+                            <h3>Alma's Missionary Companions</h3>
+                            <p>Group illustration showing Alma with Ammon, Aaron, Omner, Amulek, Zeezrom, and his sons Shiblon and Corianton as they prepare for their mission.</p>
+                            <div class="image-source">Book of Mormon stories illustration</div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-category="characters" data-lightbox="zoramites">
+                        <div class="gallery-image image-placeholder">
+                            <div>
+                                <div class="icon">👑</div>
+                                <div class="title">Proud Zoramites</div>
+                                <div class="description">Wealthy Zoramite society</div>
+                            </div>
+                        </div>
+                        <div class="gallery-caption">
+                            <h3>The Wealthy Zoramites</h3>
+                            <p>Depiction of Zoramites in their costly apparel and ornaments, illustrating the material prosperity that contributed to their spiritual pride.</p>
+                            <div class="image-source">Historical artistic interpretation</div>
+                        </div>
+                    </div>
+
+                    <!-- Geography Images -->
+                    <div class="gallery-item" data-category="geography" data-lightbox="antionum-map">
+                        <div class="gallery-image image-placeholder">
+                            <div>
+                                <div class="icon">🗺️</div>
+                                <div class="title">Land of Antionum</div>
+                                <div class="description">Geographic location map</div>
+                            </div>
+                        </div>
+                        <div class="gallery-caption">
+                            <h3>Map of Antionum and Surrounding Lands</h3>
+                            <p>Geographic map showing the land of Antionum in relation to Zarahemla, Jershon, and Lamanite territories, illustrating the strategic importance of the Zoramite position.</p>
+                            <div class="image-source">Book of Mormon geography study</div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-category="geography" data-lightbox="landscape">
+                        <div class="gallery-image image-placeholder">
+                            <div>
+                                <div class="icon">🏔️</div>
+                                <div class="title">Antionum Landscape</div>
+                                <div class="description">Artistic landscape view</div>
+                            </div>
+                        </div>
+                        <div class="gallery-caption">
+                            <h3>Antionum Landscape</h3>
+                            <p>Artist's conception of the land of Antionum, showing the terrain and environment where the Zoramites had established their cities and synagogues.</p>
+                            <div class="image-source">Landscape artistic interpretation</div>
+                        </div>
+                    </div>
+
+                    <!-- Key Scenes -->
+                    <div class="gallery-item" data-category="scenes" data-lightbox="alma-praying">
+                        <div class="gallery-image image-placeholder">
+                            <div>
+                                <div class="icon">🙏</div>
+                                <div class="title">Alma's Prayer</div>
+                                <div class="description">Heartfelt supplication scene</div>
+                            </div>
+                        </div>
+                        <div class="gallery-caption">
+                            <h3>Alma's Heartfelt Prayer</h3>
+                            <p>Powerful scene depicting Alma in fervent prayer for the Zoramites, showing the contrast between his sincere supplication and their empty ritual.</p>
+                            <div class="image-source">Religious art collection</div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-category="scenes" data-lightbox="witnessing-worship">
+                        <div class="gallery-image image-placeholder">
+                            <div>
+                                <div class="icon">👀</div>
+                                <div class="title">Witnessing False Worship</div>
+                                <div class="description">Alma observes Zoramite worship</div>
+                            </div>
+                        </div>
+                        <div class="gallery-caption">
+                            <h3>Alma Witnesses Zoramite Worship</h3>
+                            <p>Scene showing Alma and his companions observing the Zoramite worship ritual for the first time, capturing their astonishment at what they witnessed.</p>
+                            <div class="image-source">Book of Mormon narrative art</div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-category="scenes" data-lightbox="holy-spirit">
+                        <div class="gallery-image image-placeholder">
+                            <div>
+                                <div class="icon">✨</div>
+                                <div class="title">Filled with the Holy Spirit</div>
+                                <div class="description">Divine preparation scene</div>
+                            </div>
+                        </div>
+                        <div class="gallery-caption">
+                            <h3>Filled with the Holy Spirit</h3>
+                            <p>Illustration of Alma clapping his hands upon his companions, after which they were all filled with the Holy Spirit and prepared for their ministry.</p>
+                            <div class="image-source">Spiritual art interpretation</div>
+                        </div>
+                    </div>
+
+                    <!-- Symbolism Images -->
+                    <div class="gallery-item" data-category="symbols" data-lightbox="pride-tower">
+                        <div class="gallery-image image-placeholder">
+                            <div>
+                                <div class="icon">🗼</div>
+                                <div class="title">Tower of Pride</div>
+                                <div class="description">Symbolic interpretation</div>
+                            </div>
+                        </div>
+                        <div class="gallery-caption">
+                            <h3>The Tower of Pride</h3>
+                            <p>Symbolic artwork depicting the Rameumptom as a representation of human pride that separates us from God and from our fellow beings.</p>
+                            <div class="image-source">Symbolic religious art</div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-category="symbols" data-lightbox="two-prayers">
+                        <div class="gallery-image image-placeholder">
+                            <div>
+                                <div class="icon">⚖️</div>
+                                <div class="title">Contrasting Prayers</div>
+                                <div class="description">True vs. false prayer comparison</div>
+                            </div>
+                        </div>
+                        <div class="gallery-caption">
+                            <h3>Contrasting Prayers</h3>
+                            <p>Symbolic artwork contrasting the prideful, repetitive prayer of the Zoramites with Alma's heartfelt, compassionate intercession.</p>
+                            <div class="image-source">Comparative religious art</div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-category="symbols" data-lightbox="word-power">
+                        <div class="gallery-image image-placeholder">
+                            <div>
+                                <div class="icon">📖</div>
+                                <div class="title">Power of God's Word</div>
+                                <div class="description">Word vs. sword symbolism</div>
+                            </div>
+                        </div>
+                        <div class="gallery-caption">
+                            <h3>The Power of God's Word</h3>
+                            <p>Artistic representation of Alma 31:5, showing how the word of God has more power to change hearts than the sword or any other force.</p>
+                            <div class="image-source">Symbolic scriptural art</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Information -->
+                <div class="card mt-xl">
+                    <div class="card-header">
+                        <h2>About These Images</h2>
+                    </div>
+                    <div class="image-info">
+                        <h3>Artistic Interpretation</h3>
+                        <p>
+                            These visual representations are artistic interpretations based on the scriptural text of Alma 31. While we don't have historical photographs or exact archaeological evidence of these specific events, these images help us visualize and better understand the narrative and its spiritual lessons.
+                        </p>
+
+                        <h3>Educational Purpose</h3>
+                        <p>
+                            All images are used for educational and spiritual enrichment purposes. They are designed to enhance scripture study and help readers connect more deeply with the stories and principles found in the Book of Mormon.
+                        </p>
+
+                        <h3>Sources and Attribution</h3>
+                        <ul>
+                            <li><strong>LDS Media Library:</strong> Official artwork from The Church of Jesus Christ of Latter-day Saints</li>
+                            <li><strong>Public Domain Art:</strong> Historical religious artwork available for educational use</li>
+                            <li><strong>Educational Illustrations:</strong> Custom artwork created specifically for scripture study</li>
+                            <li><strong>Archaeological Interpretations:</strong> Renderings based on archaeological evidence from similar time periods</li>
+                        </ul>
+
+                        <h3>Usage Guidelines</h3>
+                        <p>
+                            These images are provided for personal and educational use. For other usage, please respect copyright and attribution requirements. When in doubt, contact the original source for permission.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="chapter-navigation">
+                    <div class="nav-buttons">
+                        <a href="analysis.html" class="btn btn-secondary">← Analysis</a>
+                        <a href="applications.html" class="btn btn-primary">Continue to Applications →</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-close" onclick="closeLightbox()">&times;</div>
+        <div class="lightbox-content">
+            <div class="lightbox-image" id="lightboxImage">
+                <div class="image-placeholder">
+                    <div>
+                        <div class="icon">🖼️</div>
+                        <div class="title">Full Size Image</div>
+                        <div class="description">Click outside to close</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Alma 31 Study App. Images used for educational purposes with proper attribution.</p>
+            <p><a href="../index.html">Home</a> | <a href="scripture.html">Scripture</a> | <a href="analysis.html">Analysis</a> | <a href="applications.html">Applications</a></p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/search.js"></script>
+    <script>
+        // Gallery functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            setupGalleryFilters();
+            setupLightbox();
+        });
+
+        function setupGalleryFilters() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+
+                    const category = this.getAttribute('data-category');
+
+                    galleryItems.forEach(item => {
+                        if (category === 'all' || item.getAttribute('data-category') === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+
+        function setupLightbox() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const lightbox = document.getElementById('lightbox');
+
+            galleryItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    openLightbox();
+                });
+            });
+
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+        }
+
+        function openLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Keyboard navigation for lightbox
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>

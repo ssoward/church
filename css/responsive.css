@@ -1,0 +1,296 @@
+/* Responsive Styles for Alma 31 Study App */
+/* Mobile-first approach with progressive enhancement */
+
+/* Tablet Styles (768px and down) */
+@media screen and (max-width: 768px) {
+  /* Typography adjustments for tablet */
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.5rem; }
+
+  /* Header adjustments */
+  .header-content {
+    padding: 0 var(--spacing-sm);
+  }
+
+  .logo {
+    font-size: 1.25rem;
+  }
+
+  /* Navigation - show menu toggle */
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--white);
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px var(--shadow);
+    flex-direction: column;
+    padding: var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+
+  .nav-menu.active {
+    display: flex;
+  }
+
+  .nav-link {
+    padding: var(--spacing-md);
+    text-align: center;
+    border-radius: 4px;
+  }
+
+  /* Main layout - single column */
+  .main-content {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg) 0;
+  }
+
+  /* Sidebar becomes horizontal on tablet */
+  .sidebar {
+    position: static;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .sidebar-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+  }
+
+  .sidebar-nav li {
+    margin-bottom: 0;
+    flex: 1;
+    min-width: 150px;
+  }
+
+  .sidebar-nav a {
+    text-align: center;
+    padding: var(--spacing-sm);
+  }
+
+  /* Content adjustments */
+  .content {
+    padding: var(--spacing-lg);
+  }
+
+  /* Gallery adjustments */
+  .gallery {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+  }
+
+  /* Container padding */
+  .container {
+    padding: 0 var(--spacing-sm);
+  }
+}
+
+/* Mobile Styles (480px and down) */
+@media screen and (max-width: 480px) {
+  /* Typography for mobile */
+  h1 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+  h2 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+  h3 {
+    font-size: 1.25rem;
+    line-height: 1.2;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  /* Header mobile adjustments */
+  .header {
+    height: 56px;
+  }
+
+  .header-content {
+    height: 56px;
+  }
+
+  .logo {
+    font-size: 1.125rem;
+  }
+
+  /* Main layout mobile */
+  .main-content {
+    padding: var(--spacing-md) 0;
+    gap: var(--spacing-md);
+  }
+
+  /* Sidebar mobile - stacked navigation */
+  .sidebar {
+    background-color: transparent;
+    padding: 0;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .sidebar-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--spacing-xs);
+  }
+
+  .sidebar-nav a {
+    padding: var(--spacing-sm);
+    font-size: 0.875rem;
+    text-align: center;
+  }
+
+  /* Content mobile */
+  .content {
+    padding: var(--spacing-md);
+    margin: 0 var(--spacing-xs);
+  }
+
+  /* Verse styling mobile */
+  .verse {
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm);
+  }
+
+  .verse-number {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  /* Cards mobile */
+  .card {
+    padding: var(--spacing-md);
+    margin: 0 0 var(--spacing-md) 0;
+  }
+
+  /* Gallery mobile - single column */
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+
+  .gallery-image {
+    height: 180px;
+  }
+
+  /* Buttons mobile */
+  .btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.875rem;
+    width: 100%;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  /* Search mobile */
+  .search-input {
+    padding: var(--spacing-md);
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  /* Footer mobile */
+  .footer {
+    padding: var(--spacing-md) 0;
+  }
+
+  .footer p {
+    font-size: 0.875rem;
+  }
+
+  /* Touch targets - ensure 44px minimum */
+  .nav-link,
+  .sidebar-nav a,
+  .btn {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Landscape mobile adjustments */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .main-content {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .sidebar-nav {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Ensure crisp rendering on retina displays */
+  .logo,
+  .nav-link,
+  .btn {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --church-blue: #000080;
+    --text-primary: #000000;
+    --border-color: #000000;
+  }
+
+  .btn-primary {
+    border: 2px solid var(--white);
+  }
+
+  .btn-secondary {
+    border: 2px solid var(--church-blue);
+  }
+}
+
+/* Dark mode support (for future implementation) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --white: #1a1a1a;
+    --black: #ffffff;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --gray-light: #2d2d2d;
+    --gray-medium: #404040;
+    --border-color: #404040;
+    --shadow: rgba(255, 255, 255, 0.1);
+  }
+
+  .header {
+    border-bottom-color: var(--border-color);
+  }
+
+  .search-input {
+    background-color: var(--gray-light);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+  }
+}

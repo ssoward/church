@@ -1,0 +1,27 @@
+{
+  "name": "alma31-study",
+  "version": "1.0.0",
+  "description": "A responsive web application for studying Alma 31 from the Book of Mormon, inspired by churchofjesuschrist.org",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8080",
+    "build": "echo 'Static site - no build process needed'",
+    "deploy": "echo 'Ready for static deployment to Vercel/Netlify'"
+  },
+  "keywords": [
+    "alma31",
+    "book-of-mormon",
+    "scripture-study",
+    "lds",
+    "church",
+    "web-app",
+    "pwa"
+  ],
+  "author": "Church Study App",
+  "license": "MIT",
+  "homepage": "https://alma31study.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/alma31-study.git"
+  }
+}
