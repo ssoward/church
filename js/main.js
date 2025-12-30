@@ -6,6 +6,7 @@
 // DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
+    handleServiceWorkerUpdates();
 });
 
 /**
@@ -321,6 +322,53 @@ function setupAnalytics() {
     // Track page views, search queries, etc.
     console.log('Analytics setup placeholder');
 }
+
+/**
+ * Handle Service Worker Updates
+ */
+function handleServiceWorkerUpdates() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+            // Service worker has been updated, reload the page
+            console.log('Service Worker updated, reloading...');
+            window.location.reload();
+        });
+
+        // Check for updates periodically
+        navigator.serviceWorker.ready.then(registration => {
+            // Check for updates every 5 minutes
+            setInterval(() => {
+                registration.update();
+            }, 5 * 60 * 1000);
+        });
+    }
+}
+
+/**
+ * Force cache refresh (for debugging)
+ */
+function clearAppCache() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(registrations => {
+            registrations.forEach(registration => {
+                registration.unregister();
+            });
+        });
+
+        if ('caches' in window) {
+            caches.keys().then(names => {
+                names.forEach(name => {
+                    caches.delete(name);
+                });
+            });
+        }
+
+        window.location.reload(true);
+    }
+}
+
+// Expose cache clear function globally for debugging
+window.clearAppCache = clearAppCache;
 
 /**
  * Error handling and logging
