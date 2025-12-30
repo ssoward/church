@@ -3,19 +3,23 @@
 
 /* CSS Custom Properties for Church Design System */
 :root {
-  /* Colors - Official Church Palette */
-  --church-blue: #002E5D;
-  --church-blue-light: #1B4F8C;
-  --church-blue-dark: #001D3D;
+  /* Colors - Enhanced Church Palette with Better Contrast */
+  --church-blue: #0066CC;
+  --church-blue-light: #4A90E2;
+  --church-blue-dark: #004499;
+  --church-blue-accent: #E6F3FF;
   --white: #FFFFFF;
-  --black: #000000;
-  --gray-light: #F8F9FA;
-  --gray-medium: #E9ECEF;
-  --gray-dark: #6C757D;
-  --text-primary: #212529;
-  --text-secondary: #6C757D;
-  --border-color: #DEE2E6;
-  --shadow: rgba(0, 0, 0, 0.1);
+  --black: #1A1A1A;
+  --gray-light: #F8FAFB;
+  --gray-medium: #E1E8ED;
+  --gray-dark: #8B9DC3;
+  --text-primary: #2C3E50;
+  --text-secondary: #5A6C7D;
+  --text-muted: #7B8794;
+  --border-color: #D1D9E0;
+  --border-light: #E8EDF2;
+  --shadow: rgba(0, 102, 204, 0.08);
+  --shadow-hover: rgba(0, 102, 204, 0.15);
 
   /* Typography */
   --font-serif: Georgia, "Times New Roman", Times, serif;
@@ -54,7 +58,8 @@ body {
   font-family: var(--font-serif);
   line-height: 1.6;
   color: var(--text-primary);
-  background-color: var(--white);
+  background: linear-gradient(135deg, #F8FAFB 0%, #E6F3FF 100%);
+  background-attachment: fixed;
   overflow-x: hidden;
 }
 
@@ -195,19 +200,34 @@ a:hover {
 }
 
 .sidebar {
-  background-color: var(--gray-light);
-  border-radius: 8px;
+  background: linear-gradient(135deg, var(--white) 0%, var(--gray-light) 100%);
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
   padding: var(--spacing-lg);
   height: fit-content;
   position: sticky;
   top: calc(var(--header-height) + var(--spacing-xl));
+  box-shadow: 0 4px 12px var(--shadow);
 }
 
 .content {
-  background-color: var(--white);
-  padding: var(--spacing-xl);
-  border-radius: 8px;
-  box-shadow: 0 2px 8px var(--shadow);
+  background: linear-gradient(135deg, var(--white) 0%, var(--gray-light) 100%);
+  padding: var(--spacing-2xl);
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 4px 16px var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--church-blue) 0%, var(--church-blue-light) 50%, var(--church-blue) 100%);
 }
 
 /* Sidebar Navigation */
@@ -222,76 +242,129 @@ a:hover {
 
 .sidebar-nav a {
   display: block;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: 4px;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: 8px;
   font-family: var(--font-sans);
   font-weight: 500;
   transition: var(--transition);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xs);
 }
 
-.sidebar-nav a:hover,
+.sidebar-nav a:hover {
+  background: linear-gradient(135deg, var(--church-blue-accent) 0%, var(--gray-medium) 100%);
+  color: var(--church-blue-dark);
+  text-decoration: none;
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px var(--shadow-hover);
+}
+
 .sidebar-nav a.active {
-  background-color: var(--church-blue);
+  background: linear-gradient(135deg, var(--church-blue) 0%, var(--church-blue-dark) 100%);
   color: var(--white);
   text-decoration: none;
+  box-shadow: 0 4px 12px var(--shadow-hover);
+  font-weight: 600;
 }
 
 /* Scripture Verses */
 .verse {
   margin-bottom: var(--spacing-lg);
-  padding: var(--spacing-md);
-  border-left: 3px solid var(--church-blue);
-  background-color: var(--gray-light);
-  border-radius: 0 4px 4px 0;
+  padding: var(--spacing-lg);
+  border-left: 4px solid var(--church-blue);
+  background: linear-gradient(135deg, var(--white) 0%, var(--gray-light) 100%);
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 2px 8px var(--shadow);
+  transition: var(--transition);
+}
+
+.verse:hover {
+  box-shadow: 0 4px 16px var(--shadow-hover);
+  transform: translateY(-1px);
 }
 
 .verse-number {
-  font-weight: bold;
+  font-weight: 700;
   color: var(--church-blue);
   margin-right: var(--spacing-sm);
   font-family: var(--font-sans);
+  background: var(--church-blue-accent);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.9rem;
 }
 
 .verse-text {
   display: inline;
   font-style: italic;
+  color: var(--text-primary);
+}
+
+/* Special styling for prayer sections */
+.verse.zoramite-prayer {
+  border-left-color: #e74c3c;
+  background: linear-gradient(135deg, #fdf2f2 0%, #fce4e4 100%);
+}
+
+.verse.zoramite-prayer .verse-number {
+  background: #fee;
+  color: #c0392b;
+}
+
+.verse.alma-prayer {
+  border-left-color: #27ae60;
+  background: linear-gradient(135deg, #f0fff4 0%, #e8f8f5 100%);
+}
+
+.verse.alma-prayer .verse-number {
+  background: #e8f8f5;
+  color: #1e8449;
 }
 
 /* Buttons */
 .btn {
   display: inline-block;
-  padding: var(--spacing-sm) var(--spacing-lg);
+  padding: var(--spacing-md) var(--spacing-xl);
   font-family: var(--font-sans);
-  font-weight: 500;
+  font-weight: 600;
   text-align: center;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   transition: var(--transition);
   text-decoration: none;
   font-size: 1rem;
+  box-shadow: 0 2px 4px var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-hover);
 }
 
 .btn-primary {
-  background-color: var(--church-blue);
+  background: linear-gradient(135deg, var(--church-blue) 0%, var(--church-blue-dark) 100%);
   color: var(--white);
 }
 
 .btn-primary:hover {
-  background-color: var(--church-blue-light);
+  background: linear-gradient(135deg, var(--church-blue-light) 0%, var(--church-blue) 100%);
   color: var(--white);
   text-decoration: none;
 }
 
 .btn-secondary {
-  background-color: var(--white);
+  background: linear-gradient(135deg, var(--white) 0%, var(--gray-light) 100%);
   color: var(--church-blue);
-  border: 1px solid var(--church-blue);
+  border: 2px solid var(--church-blue-accent);
 }
 
 .btn-secondary:hover {
-  background-color: var(--church-blue);
-  color: var(--white);
+  background: linear-gradient(135deg, var(--church-blue-accent) 0%, var(--church-blue-light) 100%);
+  color: var(--church-blue-dark);
+  border-color: var(--church-blue);
 }
 
 /* Search Bar */
@@ -302,36 +375,56 @@ a:hover {
 
 .search-input {
   width: 100%;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
   font-family: var(--font-sans);
   font-size: 1rem;
+  background: var(--white);
+  transition: var(--transition);
+  box-shadow: 0 2px 4px var(--shadow);
 }
 
 .search-input:focus {
   outline: none;
   border-color: var(--church-blue);
-  box-shadow: 0 0 0 2px rgba(0, 46, 93, 0.2);
+  box-shadow: 0 0 0 3px var(--church-blue-accent), 0 4px 12px var(--shadow-hover);
+  transform: translateY(-1px);
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
 }
 
 /* Cards */
 .card {
-  background-color: var(--white);
-  border-radius: 8px;
-  box-shadow: 0 2px 8px var(--shadow);
-  padding: var(--spacing-lg);
-  margin-bottom: var(--spacing-lg);
+  background: linear-gradient(135deg, var(--white) 0%, var(--gray-light) 100%);
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 4px 12px var(--shadow);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  transition: var(--transition);
+}
+
+.card:hover {
+  box-shadow: 0 8px 24px var(--shadow-hover);
+  transform: translateY(-2px);
 }
 
 .card-header {
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--church-blue-accent);
+  padding-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  background: linear-gradient(135deg, var(--church-blue-accent) 0%, transparent 100%);
+  margin: calc(-1 * var(--spacing-xl)) calc(-1 * var(--spacing-xl)) var(--spacing-lg) calc(-1 * var(--spacing-xl));
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border-radius: 12px 12px 0 0;
 }
 
 .card-title {
   margin-bottom: 0;
+  color: var(--church-blue-dark);
 }
 
 /* Gallery */
