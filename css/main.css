@@ -549,3 +549,44 @@ a:hover {
 
 .hidden { display: none; }
 .visible { display: block; }
+
+/* Christ Rejection Analysis Styles */
+.error-analysis.christ-rejection {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 2px solid var(--church-blue);
+  border-radius: 8px;
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.error-analysis.christ-rejection h4 {
+  color: var(--church-blue-dark);
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--church-blue-accent);
+  padding-bottom: var(--spacing-sm);
+}
+
+.error-analysis.christ-rejection p {
+  color: #000000 !important;
+  font-weight: 500;
+}
+
+.christ-rejection p strong {
+  color: #000000 !important;
+}
+
+.christ-rejection p em {
+  color: #000000 !important;
+}
+
+.critical-point {
+  background: linear-gradient(135deg, var(--church-blue) 0%, var(--church-blue-dark) 100%);
+  color: var(--white);
+  padding: var(--spacing-lg);
+  margin: var(--spacing-lg) 0;
+  border-radius: 8px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px var(--shadow-hover);
+}
