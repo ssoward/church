@@ -5,88 +5,142 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Church Presentations</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-      background: #f4f6f9;
-      color: #333;
-      min-height: 100vh;
-    }
-    header {
-      background: linear-gradient(135deg, #0073CF 0%, #005a9c 100%);
-      color: white;
-      padding: 48px 40px 40px;
-      text-align: center;
-    }
-    header h1 { font-size: 2.4em; font-weight: 700; margin-bottom: 0.3em; }
-    header p { font-size: 1.1em; opacity: 0.85; }
-    main { max-width: 960px; margin: 48px auto; padding: 0 24px; }
-    h2 {
-      font-size: 1.1em;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #666;
-      margin-bottom: 20px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 24px;
-    }
-    .card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
       overflow: hidden;
+    }
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(135deg, #0073CF 0%, #005a9c 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><radialGradient id="grad" cx="50%25" cy="40%25" r="50%25"><stop offset="0%25" style="stop-color:rgba(255,255,255,0.15);stop-opacity:1" /><stop offset="100%25" style="stop-color:rgba(255,255,255,0);stop-opacity:1" /></radialGradient></defs><rect width="1200" height="800" fill="url(%23grad)"/></svg>');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.4;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 40px;
+      color: white;
+    }
+    .christ-icon {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 30px;
+      opacity: 0.95;
+    }
+    .hero h1 {
+      font-size: 3.5em;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.2;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    .hero p {
+      font-size: 1.3em;
+      margin-bottom: 40px;
+      opacity: 0.95;
+      line-height: 1.6;
+    }
+    .presentations {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .presentation-link {
+      display: inline-block;
+      padding: 16px 40px;
+      background: white;
+      color: #0073CF;
       text-decoration: none;
-      color: inherit;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1em;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .presentation-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+      background: #f0f0f0;
+    }
+    .presentation-link span {
       display: block;
+      font-size: 0.85em;
+      opacity: 0.7;
+      margin-top: 4px;
+      font-weight: 500;
     }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 6px 20px rgba(0,0,0,0.14); }
-    .card-banner { background: linear-gradient(135deg, #0073CF 0%, #005a9c 100%); height: 8px; }
-    .card-body { padding: 24px; }
-    .card-tag {
-      font-size: 0.72em;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: #0073CF;
-      margin-bottom: 8px;
+    footer {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.9em;
+      z-index: 1;
     }
-    .card h3 { font-size: 1.15em; font-weight: 700; margin-bottom: 8px; color: #1a1a1a; }
-    .card p { font-size: 0.85em; color: #666; line-height: 1.5; }
-    .card-footer {
-      padding: 14px 24px;
-      border-top: 1px solid #f0f0f0;
-      font-size: 0.8em;
-      color: #0073CF;
-      font-weight: 600;
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5em; }
+      .hero p { font-size: 1.1em; }
+      .christ-icon { width: 100px; height: 100px; }
     }
-    footer { text-align: center; padding: 32px; font-size: 0.82em; color: #999; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Church Presentations</h1>
-    <p>Gospel teaching resources and presentations</p>
-  </header>
-  <main>
-    <h2>All Presentations</h2>
-    <div class="grid">
+  <div class="hero">
+    <div class="hero-content">
+      <!-- Christ Symbol (Stylized Cross with Light) -->
+      <svg class="christ-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="light" cx="50%" cy="30%" r="60%">
+            <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0.8" />
+            <stop offset="100%" style="stop-color:#FFA500;stop-opacity:0.2" />
+          </radialGradient>
+        </defs>
+        <!-- Light emanation -->
+        <circle cx="50" cy="30" r="35" fill="url(#light)" opacity="0.6"/>
+        <!-- Cross -->
+        <rect x="45" y="15" width="10" height="70" fill="white" opacity="0.9"/>
+        <rect x="25" y="40" width="50" height="10" fill="white" opacity="0.9"/>
+        <!-- Center point -->
+        <circle cx="50" cy="50" r="6" fill="#FFD700" opacity="0.9"/>
+      </svg>
 
-      <a class="card" href="./ward-conference-2026/">
-        <div class="card-banner"></div>
-        <div class="card-body">
-          <div class="card-tag">Ward Conference · 2026</div>
-          <h3>PMG vs. Teaching in the Savior's Way</h3>
-          <p>A comparison of two inspired teaching manuals and how they work together as a unified teaching ecosystem.</p>
-        </div>
-        <div class="card-footer">Open presentation →</div>
-      </a>
+      <h1>Come Follow Me</h1>
+      <p>Gospel Teaching Resources & Presentations</p>
 
+      <div class="presentations">
+        <a href="./ward-conference-2026/" class="presentation-link">
+          Ward Conference 2026
+          <span>PMG vs. Teaching in the Savior's Way</span>
+        </a>
+      </div>
     </div>
-  </main>
-  <footer>The Church of Jesus Christ of Latter-day Saints</footer>
+
+    <footer>
+      The Church of Jesus Christ of Latter-day Saints
+    </footer>
+  </div>
 </body>
 </html>
