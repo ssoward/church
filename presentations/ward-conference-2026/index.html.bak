@@ -90,7 +90,7 @@
         </aside>
       </section>
 
-      <!-- SLIDE 2: Teaching the Gospel - Opening -->
+      <!-- SLIDE 5: Teaching the Gospel - Opening -->
       <section style="background: linear-gradient(135deg, var(--church-blue) 0%, var(--church-blue-dark) 100%); color: white; padding: 30px 30px 50px 30px;">
         <div style="padding: 0.3em; display: flex; flex-direction: column; justify-content: center;">
           <blockquote style="background: rgba(255, 255, 255, 0.15); border-left: 5px solid var(--church-blue-light); padding: 0.7em; font-size: 0.8em; line-height: 1.4; margin: 0 0 1em 0; font-style: italic; color: white;">
@@ -114,7 +114,7 @@
         </aside>
       </section>
 
-      <!-- SLIDE 3: PMG vs. TSW Overview -->
+      <!-- SLIDE 5: PMG vs. TSW Overview -->
       <section>
         <h1>PMG vs. TSW</h1>
         <div class="tagline" style="font-size: 0.85em; line-height: 1.5; max-width: 90%; margin: 0.5em auto;">Both "Preach My Gospel" (PMG) and "Teaching in the Savior's Way" (TSW) represent <strong style="color: var(--church-gold); font-size: 1.05em;">transformative</strong> shifts in how the Church approaches gospel teaching. While PMG <strong style="color: var(--church-gold); font-size: 1.05em;">revolutionized</strong> missionary work by replacing rigid scripts with Spirit-directed flexibility, TSW brought similar principles to all Church teaching settings.</div>
@@ -127,7 +127,7 @@
         </aside>
       </section>
 
-      <!-- SLIDE 4: TSW's 4 Core Principles -->
+      <!-- SLIDE 5: TSW's 4 Core Principles -->
       <section>
         <h2>TSW: Four Principles of Christlike Teaching</h2>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8em; margin-top: 0.5em;">
