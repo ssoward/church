@@ -5,21 +5,16 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 flex flex-col">
-      {/* Hero Section with Jesus Image */}
       <section className="flex-1 flex flex-col items-center justify-center px-4 py-12 md:py-20">
         <div className="max-w-4xl mx-auto text-center space-y-8">
-          {/* Jesus Christ Image */}
           <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto rounded-full overflow-hidden shadow-2xl border-4 border-white dark:border-slate-700">
-            <Image
+            <img
               src="https://images.unsplash.com/photo-1507019978388-6d173e1b74ba?w=800&h=800&fit=crop"
               alt="Jesus Christ"
-              fill
-              className="object-cover"
-              priority
+              className="object-cover w-full h-full"
             />
           </div>
 
-          {/* Welcome Text */}
           <div className="space-y-4">
             <h1 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-slate-100">
               ✝️ Welcome
@@ -32,14 +27,13 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Navigation Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-            <Link href="/home">
+            <Link href="/church/home">
               <Button size="lg" className="text-lg px-8 py-6">
                 Enter Church
               </Button>
             </Link>
-            <Link href="/scripture">
+            <Link href="/church/scripture">
               <Button size="lg" variant="outline" className="text-lg px-8 py-6">
                 Read Scripture
               </Button>
@@ -48,7 +42,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="py-6 text-center text-slate-400 text-sm">
         <p>✝️ Built with faith and love</p>
       </footer>
