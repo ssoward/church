@@ -75,6 +75,18 @@
   padding: 15px 30px 40px 30px;
 }
 
+/* First slide - Christ image */
+.reveal .slides > section:first-child {
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 100vh !important;
+}
+
 /* Title slide */
 .reveal .slides > section:first-child {
   background: linear-gradient(135deg, var(--church-blue) 0%, var(--church-blue-dark) 100%);
