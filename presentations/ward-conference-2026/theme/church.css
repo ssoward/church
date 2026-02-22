@@ -1,0 +1,378 @@
+/* Church-Branded Theme for Reveal.js */
+
+:root {
+  --church-blue: #0073CF;
+  --church-blue-dark: #005a9c;
+  --church-blue-light: #e6f2ff;
+  --church-gold: #C9A84C;
+  --church-teal: #2E8B57;
+  --text-dark: #333;
+  --text-light: #666;
+  --border: #ddd;
+  --bg-gray: #f8f9fa;
+}
+
+/* Override Reveal.js defaults */
+.reveal {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 32px;
+  font-weight: normal;
+  color: var(--text-dark);
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  text-transform: none;
+  font-weight: 700;
+  color: var(--church-blue);
+  line-height: 1.1;
+}
+
+.reveal h1 {
+  font-size: 2.8em;
+  text-shadow: none;
+  margin-top: 0;
+  margin-bottom: 0.3em;
+}
+
+.reveal h2 {
+  font-size: 2em;
+  margin: 0 0 0.3em 0;
+}
+
+.reveal h3 {
+  font-size: 1.5em;
+  margin: 0 0 0.2em 0;
+}
+
+.reveal p {
+  margin: 0.2em 0;
+  line-height: 1.4;
+}
+
+.reveal ul,
+.reveal ol {
+  margin: 0.2em 0;
+  text-align: left;
+}
+
+.reveal ul ul,
+.reveal ol ol {
+  margin-top: 0.2em;
+}
+
+.reveal li {
+  margin-bottom: 0.1em;
+  font-size: 0.85em;
+}
+
+/* Slide backgrounds */
+.reveal .slides > section {
+  padding: 15px 30px 40px 30px;
+}
+
+/* Title slide */
+.reveal .slides > section:first-child {
+  background: linear-gradient(135deg, var(--church-blue) 0%, var(--church-blue-dark) 100%);
+  color: white;
+  text-align: center;
+  padding: 40px 30px 80px 30px;
+}
+
+.reveal .slides > section:first-child h1 {
+  color: white;
+  font-size: 4em;
+  margin-bottom: 0.5em;
+}
+
+.reveal .slides > section:first-child h2 {
+  color: var(--church-blue-light);
+  font-size: 2em;
+  margin-bottom: 2em;
+}
+
+.reveal .slides > section:first-child .subtitle {
+  font-size: 1.3em;
+  color: var(--church-blue-light);
+  margin: 0.1em 0;
+}
+
+.reveal .slides > section:first-child .tagline {
+  font-size: 1em;
+  color: white;
+  opacity: 0.9;
+  font-style: italic;
+  margin: 0.2em 0;
+}
+
+/* Conclusion slide (last slide) */
+.reveal .slides > section:last-child {
+  background: linear-gradient(135deg, var(--church-blue) 0%, var(--church-blue-dark) 100%);
+  color: white;
+  text-align: center;
+  padding: 40px 30px 80px 30px;
+}
+
+.reveal .slides > section:last-child h2,
+.reveal .slides > section:last-child .conclusion-quote {
+  color: white;
+  font-size: 1.6em;
+  font-weight: bold;
+  margin: 0.5em 0;
+  line-height: 1.3;
+  text-shadow: none;
+}
+
+.reveal .slides > section:last-child .conclusion-subtitle {
+  font-size: 1.2em;
+  color: var(--church-blue-light);
+  margin-top: 1em;
+}
+
+.reveal .slides > section:last-child .footer-attribution {
+  margin-top: 3em;
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+
+/* Light background for "Shared DNA" slide */
+.reveal .slides > section.light-bg {
+  background: #fffbf0;
+  color: var(--text-dark);
+}
+
+.reveal .slides > section.light-bg h2 {
+  color: var(--church-blue);
+}
+
+/* Two-column layout */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  margin: 0.3em 0;
+}
+
+.col {
+  text-align: left;
+}
+
+.col h3 {
+  color: var(--church-blue);
+  font-size: 1.2em;
+  margin: 0 0 0.2em 0;
+}
+
+.col ul {
+  font-size: 0.75em;
+  margin: 0;
+}
+
+.col ul li {
+  margin-bottom: 0.15em;
+  line-height: 1.3;
+}
+
+/* Accent borders for two-column */
+.col.pmg {
+  border-left: 5px solid var(--church-gold);
+  padding-left: 1.5em;
+}
+
+.col.tsw {
+  border-left: 5px solid var(--church-teal);
+  padding-left: 1.5em;
+}
+
+/* Table styling */
+.table-slide {
+  font-size: 0.55em;
+}
+
+.reveal table {
+  margin: 0.3em auto;
+  border-collapse: collapse;
+  width: 100%;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reveal table th {
+  background: var(--church-blue);
+  color: white;
+  padding: 6px 8px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.reveal table td {
+  padding: 5px 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.reveal table tr:nth-child(even) {
+  background: var(--church-blue-light);
+}
+
+.reveal table tr:hover {
+  background: #ddf0ff;
+}
+
+.reveal table .dimension {
+  font-weight: 600;
+  color: var(--church-blue);
+  width: 25%;
+}
+
+/* Blockquote */
+.reveal blockquote {
+  background: var(--church-blue-light);
+  padding: 0.8em;
+  border-left: 5px solid var(--church-blue);
+  font-size: 1em;
+  margin: 0.2em 0;
+  font-style: italic;
+  color: var(--text-dark);
+}
+
+/* Speaker notes styling */
+.speaker-notes {
+  font-size: 0.9em;
+  color: var(--text-light);
+  margin-top: 2em;
+  padding: 1em;
+  background: var(--bg-gray);
+  border-radius: 4px;
+}
+
+/* Navigation and controls */
+.reveal .controls {
+  bottom: 30px;
+  right: 30px;
+}
+
+.reveal .controls button {
+  color: var(--church-blue);
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.reveal .controls button:hover {
+  opacity: 1;
+}
+
+.reveal .progress {
+  background: var(--church-blue);
+}
+
+.reveal .progress span {
+  background: var(--church-blue-dark);
+}
+
+/* Slide number */
+.reveal .slide-number {
+  background: var(--church-blue-light);
+  color: var(--church-blue);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 0.9em;
+}
+
+/* Emphasis and highlights */
+.reveal strong {
+  color: var(--church-blue);
+  font-weight: 700;
+}
+
+.reveal em {
+  color: var(--church-blue-dark);
+  font-style: italic;
+}
+
+.reveal code {
+  background: var(--bg-gray);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--text-dark);
+  font-family: 'Courier New', monospace;
+}
+
+/* Slide transitions */
+.reveal .slide-background {
+  transition: all 0.3s ease;
+}
+
+/* Vertical slides */
+.reveal .slides > section .slides > section {
+  text-align: left;
+  min-height: 100%;
+}
+
+/* Print style overrides */
+@media print {
+  .reveal {
+    width: 100%;
+    height: 100%;
+  }
+
+  .reveal .slides {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    margin: 0;
+    overflow: visible;
+  }
+
+  .reveal .slides > section {
+    page-break-after: always;
+    display: block;
+    overflow: visible;
+    position: relative !important;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .reveal .slide-background {
+    display: block !important;
+  }
+
+  .reveal .progress,
+  .reveal .controls {
+    display: none;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .reveal h1 {
+    font-size: 2.5em;
+  }
+
+  .reveal h2 {
+    font-size: 1.8em;
+  }
+
+  .reveal p, .reveal ul {
+    font-size: 0.9em;
+  }
+
+  .two-col {
+    grid-template-columns: 1fr;
+    gap: 1.5em;
+  }
+
+  .reveal .slides > section:first-child,
+  .reveal .slides > section:last-child {
+    padding: 60px 20px;
+  }
+
+  .table-slide {
+    font-size: 0.6em;
+  }
+}
