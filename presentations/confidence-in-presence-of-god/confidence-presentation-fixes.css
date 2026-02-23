@@ -1,0 +1,32 @@
+/* =============================================
+   TEXT OVERFLOW AND LAYOUT FIXES
+   For confidence-presentation.html
+   ============================================= */
+
+/* 1. IMPROVED SLIDE DIMENSIONS AND SCALING */
+/* Note: Update Reveal.js config to use these settings:
+   width: 1400,  // Wider to accommodate more content
+   height: 900,  // Taller to prevent vertical overflow
+   margin: 0.05, // Smaller margin for more usable space
+*/
+
+/* 2. PREVENT QUOTE BOX OVERFLOW */
+.quote-box {
+    background: var(--white);
+    padding: 1.5em;  /* Reduced from 2em */
+    border-left: 5px solid var(--gold);
+    margin: 1em 0;  /* Reduced from 1.5em */
+    font-family: 'Crimson Text', serif;
+    font-style: italic;
+    font-size: 1.2em;  /* Reduced from 1.3em */
+    line-height: 1.5;  /* Reduced from 1.6 for tighter spacing */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    max-height: none;
+    overflow-y: auto;  /* Add scroll if needed */
+    word-wrap: break-word;  /* Prevent horizontal overflow */
+    overflow-wrap: break-word;
+    hyphens: auto;  /* Enable hyphenation */
+}
+
+/* Additional fixes would continue here... */

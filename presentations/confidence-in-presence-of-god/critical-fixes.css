@@ -1,0 +1,117 @@
+/* =============================================
+   CRITICAL FIXES for confidence-presentation.html
+   Apply these immediately to fix overflow issues
+   ============================================= */
+
+/* 1. CRITICAL: Reduce quote box sizes to prevent overflow */
+.quote-box {
+    padding: 1.5em !important;      /* Reduced from 2em */
+    font-size: 1.15em !important;   /* Reduced from 1.3em */
+    line-height: 1.5 !important;    /* Reduced from 1.6 */
+    margin: 1em 0 !important;       /* Reduced from 1.5em */
+}
+
+/* 2. CRITICAL: Fix Call to Action overflow (Slide 13) */
+.cta-box {
+    padding: 2em !important;        /* Reduced from 3em - saves 32px */
+}
+
+.cta-box p {
+    font-size: 1.15em !important;   /* Reduced from 1.3em */
+    line-height: 1.6 !important;    /* Reduced from 1.8 */
+}
+
+.cta-box h2 {
+    margin-bottom: 0.8em !important;
+    font-size: 2em !important;
+}
+
+/* 3. HIGH: Reduce section padding for more content space */
+.reveal section {
+    padding: 1.5em !important;      /* Reduced from 2em */
+    overflow-y: auto !important;    /* Enable scrolling if needed */
+    box-sizing: border-box !important;
+}
+
+/* 4. HIGH: Fix stat cards minimum width */
+.stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 1.5em !important;
+}
+
+.stat-number {
+    font-size: 2.5em !important;    /* Reduced from 3em */
+}
+
+.stat-label {
+    font-size: 1em !important;      /* Reduced from 1.1em */
+}
+
+/* 5. HIGH: Reduce key points list spacing */
+.key-points li {
+    padding: 0.8em 0.8em 0.8em 2.5em !important;
+    margin: 0.8em 0 !important;
+    font-size: 1em !important;      /* Reduced from 1.1em */
+    line-height: 1.5 !important;    /* Reduced from 1.6 */
+}
+
+/* 6. MEDIUM: Reduce heading sizes slightly */
+.reveal h1 {
+    font-size: 2.5em !important;    /* Reduced from 3em */
+    margin-bottom: 0.4em !important;
+}
+
+.reveal h2 {
+    font-size: 2em !important;      /* Reduced from 2.2em */
+    margin-bottom: 0.6em !important;
+}
+
+.title-slide h1 {
+    font-size: 3em !important;      /* Reduced from 3.5em */
+}
+
+/* 7. CRITICAL: Add small phone support */
+@media (max-width: 480px) {
+    .reveal h1 { font-size: 1.6em !important; }
+    .reveal h2 { font-size: 1.3em !important; }
+    .quote-box {
+        font-size: 0.95em !important;
+        padding: 0.8em !important;
+    }
+    .stat-number { font-size: 1.8em !important; }
+    .cta-box { padding: 1.2em !important; }
+    .key-points li { font-size: 0.9em !important; }
+}
+
+/* 8. MEDIUM: Improve tablet responsiveness */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .reveal h1 { font-size: 2.2em !important; }
+    .reveal h2 { font-size: 1.8em !important; }
+    .quote-box { font-size: 1.1em !important; }
+}
+
+/* 9. Enable word wrapping everywhere */
+.reveal section * {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+}
+
+/* 10. Add smooth scrolling for overflowed content */
+.reveal section {
+    scroll-behavior: smooth !important;
+}
+
+/* Custom scrollbar styling */
+.reveal section::-webkit-scrollbar {
+    width: 8px;
+}
+
+.reveal section::-webkit-scrollbar-track {
+    background: rgba(30, 58, 95, 0.1);
+    border-radius: 4px;
+}
+
+.reveal section::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 4px;
+}

@@ -3,9 +3,9 @@
  * Provides offline functionality and improved performance through caching
  */
 
-const CACHE_NAME = 'alma31-study-v1.1.0';
-const STATIC_CACHE_NAME = 'alma31-static-v1.1.0';
-const DYNAMIC_CACHE_NAME = 'alma31-dynamic-v1.1.0';
+const CACHE_NAME = 'alma31-study-v1.2.0';
+const STATIC_CACHE_NAME = 'alma31-static-v1.2.0';
+const DYNAMIC_CACHE_NAME = 'alma31-dynamic-v1.2.0';
 
 // Static files to cache immediately
 const STATIC_ASSETS = [
@@ -21,6 +21,10 @@ const STATIC_ASSETS = [
     '/pages/gallery.html',
     '/pages/applications.html',
     '/pages/about.html',
+    // Presentation files
+    '/presentations/confidence-in-presence-of-god/confidence-presentation.html',
+    '/presentations/confidence-in-presence-of-god/confidence-presentation-fixes.css',
+    '/presentations/confidence-in-presence-of-god/critical-fixes.css',
     // Add common icon paths
     '/assets/icons/icon-192x192.png',
     '/assets/icons/icon-512x512.png',
