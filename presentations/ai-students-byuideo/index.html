@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI in the Tech Industry — The Majesty of the Moment</title>
+  <link rel="stylesheet" href="../reveal/dist/reset.css">
+  <link rel="stylesheet" href="../reveal/dist/reveal.css">
+  <link rel="stylesheet" href="../reveal/dist/theme/white.css">
+  <link rel="stylesheet" href="./theme/church.css">
+  <style>
+    /* Presentation-specific styles */
+    .reveal .slides > section {
+      text-align: center;
+    }
+
+    .reveal .slides > section .content-left {
+      text-align: left;
+    }
+
+    /* Table adjustments */
+    .table-slide .comparison-table {
+      font-size: 0.65em;
+      width: 95%;
+      margin: 1em auto;
+    }
+
+    .table-slide .comparison-table td,
+    .table-slide .comparison-table th {
+      padding: 8px 6px;
+    }
+
+    /* Grid for AI applications */
+    .ai-applications {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8em;
+      text-align: left;
+      font-size: 0.7em;
+      margin-top: 0.5em;
+    }
+
+    .app-card {
+      border-left: 4px solid var(--church-blue);
+      padding-left: 1em;
+      background: rgba(0, 115, 207, 0.05);
+      padding: 0.5em 0 0.5em 1em;
+    }
+
+    .app-card h4 {
+      font-size: 0.9em;
+      color: var(--church-blue);
+      margin: 0 0 0.2em 0;
+      font-weight: 600;
+    }
+
+    .app-card p {
+      font-size: 0.85em;
+      margin: 0;
+      line-height: 1.3;
+      color: var(--text-dark);
+    }
+
+    /* Two-column for Professional/Spiritual prep */
+    .prep-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1em;
+      margin-top: 0.5em;
+    }
+
+    .prep-section {
+      text-align: left;
+    }
+
+    .prep-section h3 {
+      font-size: 1.1em;
+      color: var(--church-blue);
+      margin: 0 0 0.3em 0;
+    }
+
+    .prep-section ol {
+      font-size: 0.7em;
+      padding-left: 1.3em;
+      margin: 0;
+    }
+
+    .prep-section li {
+      margin-bottom: 0.4em;
+      line-height: 1.4;
+    }
+
+    /* Subtitle styling on title slide */
+    .title-subtitle {
+      font-size: 1.4em;
+      color: var(--church-blue-light);
+      margin-bottom: 0.5em;
+      font-weight: 400;
+    }
+
+    .title-byline {
+      font-size: 0.85em;
+      color: rgba(255, 255, 255, 0.85);
+      margin-top: 1.5em;
+      font-weight: 300;
+    }
+
+    /* Closing slide */
+    .closing-amen {
+      font-size: 1.3em;
+      color: var(--church-gold);
+      margin-top: 1.5em;
+      font-weight: 600;
+    }
+
+    /* Highlight styling */
+    .highlight {
+      color: var(--church-gold);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: Title Slide -->
+      <section style="background: linear-gradient(135deg, var(--church-blue) 0%, var(--church-blue-dark) 100%); color: white; padding: 40px 30px 80px 30px;">
+        <h1 style="font-size: 3em; margin-bottom: 0.3em;">The Majesty of the Moment</h1>
+        <div class="title-subtitle">AI in the Tech Industry</div>
+        <p style="font-size: 1.1em; opacity: 0.9; margin-top: 1em; max-width: 800px;">Witnessing the Lord's Work Through Technology</p>
+        <div class="title-byline">A Message for BYU Idaho Students<br>February 2026</div>
+        <aside class="notes">
+          Welcome. We gather at a pivotal moment in human history. AI represents the most transformative technology since the printing press—and you are here by divine design, prepared to witness and participate in the hastening of the Lord's work.
+
+          This presentation is built on the conviction that what you're seeing in AI is not coincidence, but providence. You're not entering the tech industry by accident. The Lord knew when He needed you.
+
+          Let's explore what this moment means, why you're here, and how you can build systems that serve billions and further His kingdom.
+        </aside>
+      </section>
+
+      <!-- SLIDE 2: Opening Hook -->
+      <section>
+        <h2>You Are Not Just Entering Tech</h2>
+        <blockquote style="background: rgba(0, 115, 207, 0.15); border-left: 5px solid var(--church-blue); padding: 1em; font-size: 0.95em; line-height: 1.5; margin: 0.5em 0;">
+          "You are entering the most transformative moment in human history since the printing press."
+        </blockquote>
+        <div style="text-align: left; max-width: 900px; margin: 1em auto; font-size: 0.8em; line-height: 1.6;">
+          <p><strong style="color: var(--church-blue); font-size: 1.05em;">Every decade has its revolution:</strong> the PC, the internet, mobile. But AI is <strong>different in scale and scope.</strong></p>
+          <p><strong style="color: var(--church-blue); font-size: 1.05em;">It's not just a new tool—</strong> it's a <strong>force multiplier for human capability.</strong></p>
+          <p style="font-style: italic; color: var(--text-light); margin-top: 0.5em;"><strong style="color: var(--church-blue);">And you are here by design,</strong> not by accident. The Lord knew when He needed you.</p>
+        </div>
+        <aside class="notes">
+          Let's set the context. Throughout history, every decade brings technological innovation. The personal computer changed how we work. The internet connected the world. Mobile put computers in our pockets.
+
+          But AI is fundamentally different. It's not just another tool. It's a force multiplier—it amplifies human capability in unprecedented ways.
+
+          And here's the spiritual dimension: You didn't land here by chance. Your timing is providential. The Lord needs engineers, designers, and technologists right now to build the systems that will enable His work to move forward at scale.
+
+          This isn't hyperbole. This is the reality of the moment you're entering.
+        </aside>
+      </section>
+
+      <!-- SLIDE 3: Theme 1 - Liberation of the Engineer -->
+      <section class="table-slide">
+        <h2>The Liberation of the Engineer</h2>
+        <p style="font-size: 0.8em; margin-bottom: 0.5em;">AI doesn't replace engineers—it <strong style="color: var(--church-blue);">elevates</strong> them.</p>
+        <table class="comparison-table">
+          <thead>
+            <tr style="background: var(--church-blue); color: white;">
+              <th>Old Reality</th>
+              <th>New Reality</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Boilerplate code</strong></td>
+              <td><strong>AI generates scaffolds</strong> while you architect</td>
+            </tr>
+            <tr>
+              <td><strong>Manual testing</strong> of edge cases</td>
+              <td><strong>AI-assisted test generation</strong> with strategic oversight</td>
+            </tr>
+            <tr>
+              <td><strong>Documentation</strong> written after the fact</td>
+              <td><strong>AI generates</strong> documentation you refine</td>
+            </tr>
+            <tr>
+              <td><strong>Debugging syntax</strong> errors</td>
+              <td><strong>Focus on system design</strong> and user experience</td>
+            </tr>
+            <tr>
+              <td><strong>Grunt work</strong> consuming time</td>
+              <td><strong>Strategic work</strong> creating value</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="text-align: left; max-width: 900px; margin: 0.8em auto; font-size: 0.72em; line-height: 1.4;">
+          <p><strong style="color: var(--church-blue);">The Shift:</strong> From "implementer" to <strong>"strategist and director."</strong> Your <strong>creativity becomes the scarce resource</strong>—and that's what companies will pay for.</p>
+        </div>
+        <aside class="notes">
+          Think about what engineering has traditionally been: endless configuration, repetitive debugging of syntax errors, boilerplate code that numbs the mind, documentation that takes more time than the solution itself.
+
+          AI changes this equation fundamentally.
+
+          With AI, you're not spending 80% of your time on grunt work. You're spending 80% of your time on what matters: architecture, design, user experience, solving novel problems.
+
+          This is a massive shift in what it means to be an engineer. You're elevated from "implementer" to "strategist and director." The thing that will be scarce and valuable is your creativity, your judgment, your vision for how systems should work—not your ability to type code.
+
+          This is the liberation. The boring stuff becomes automated. Your unique human capability becomes the bottleneck, and that's precisely where you should be spending your time.
+        </aside>
+      </section>
+
+      <!-- SLIDE 4: Theme 2 - Temples & Technology -->
+      <section style="background: linear-gradient(135deg, var(--church-blue) 0%, var(--church-blue-dark) 100%); color: white; padding: 30px 30px 50px 30px;">
+        <h2 style="color: white; font-size: 1.8em;">The Convergence of Technology and Temples</h2>
+        <p style="font-size: 0.8em; margin: 0.5em 0; opacity: 0.95;">Temples are being announced at <strong>unprecedented rates.</strong> But how do we scale?</p>
+        <div class="ai-applications" style="color: var(--text-dark);">
+          <div class="app-card">
+            <h4>Translation</h4>
+            <p>Rapid scripture translation in emerging languages</p>
+          </div>
+          <div class="app-card">
+            <h4>Training</h4>
+            <p>Standardized temple ordinance training across cultures</p>
+          </div>
+          <div class="app-card">
+            <h4>Architecture</h4>
+            <p>AI-assisted design optimizes sacred space</p>
+          </div>
+          <div class="app-card">
+            <h4>Genealogical Records</h4>
+            <p>Preserve and access billions of ancestral records</p>
+          </div>
+          <div class="app-card">
+            <h4>Global Communication</h4>
+            <p>Bridge language barriers for worldwide membership</p>
+          </div>
+          <div class="app-card">
+            <h4>Member Experience</h4>
+            <p>Personalized guidance for temple participation</p>
+          </div>
+        </div>
+        <div style="text-align: center; margin-top: 1em; font-size: 0.75em; font-style: italic; opacity: 0.9;">
+          <p><strong style="color: var(--church-gold);">The Pattern:</strong> The Lord always provides the means <strong>before</strong> the need becomes overwhelming.</p>
+        </div>
+        <aside class="notes">
+          Consider the Church's trajectory. Temples are being announced at rates we've never seen before. President Nelson speaks of constructing temples in locations we never imagined possible. The youth are being prepared on a global scale.
+
+          But here's the operational challenge: How do you staff, train, architect, build, maintain, and operate this proliferation of sacred edifices? How do you keep the work moving forward when the scale is unprecedented?
+
+          The answer is that AI provides the enabling technology for all of these dimensions.
+
+          This isn't speculation. These are real applications that are being deployed right now. Translation models that work in dozens of languages. Training systems that can standardize protocols across cultures. Design optimization. Genealogical record processing. Global communication that breaks down language barriers.
+
+          And here's the theological pattern: The Lord always provides the means before the need becomes overwhelming. Joseph Smith had the Urim and Thummim before the translation needed to happen. The pioneers had revelation on irrigation before the desert needed to bloom. We have AI now—before the full scope of temple growth requires it.
+
+          This is not coincidence. It's providence.
+        </aside>
+      </section>
+
+      <!-- SLIDE 5: Theme 3 - The Hastening Work -->
+      <section>
+        <h2>The Hastening Work of the Lord</h2>
+        <blockquote style="background: rgba(0, 115, 207, 0.15); border-left: 5px solid var(--church-blue); padding: 0.8em; font-size: 0.9em; line-height: 1.5; margin: 0.5em 0; text-align: left;">
+          <em>"Behold, I will hasten my work in its time... and by the angel of His Spirit... He will bear witness of His word."</em>
+          <br><span style="font-size: 0.85em; color: var(--text-light); display: block; margin-top: 0.3em;">— Doctrine & Covenants 88:73-75</span>
+        </blockquote>
+        <div style="text-align: left; max-width: 900px; margin: 1em auto; font-size: 0.78em; line-height: 1.6;">
+          <p style="margin-bottom: 0.5em;"><strong style="color: var(--church-blue); font-size: 1.05em;">What does this mean for us?</strong></p>
+          <ul style="margin: 0 0 0.8em 1.3em;">
+            <li>The Lord doesn't do things suddenly—<strong>He prepares the way.</strong></li>
+            <li>The groundwork is laid <strong>before</strong> the miracle.</li>
+            <li>AI is not coincidental—it's <strong>providential.</strong></li>
+          </ul>
+          <p style="margin-bottom: 0.5em; margin-top: 0.8em;"><strong style="color: var(--church-blue); font-size: 1.05em;">The Printing Press and the Restoration:</strong></p>
+          <p>Just as the printing press enabled 19th-century growth, <strong>AI enables 21st-century scale.</strong> The Lord provides the mechanisms of dissemination; we provide the obedience and consecration.</p>
+        </div>
+        <aside class="notes">
+          Doctrine and Covenants 88:73-75 tells us that the Lord will hasten His work in its time. That's not metaphorical language. It's a statement of divine purpose.
+
+          But notice: The Lord doesn't do things suddenly, with no preparation. He prepares the way. He lays the groundwork before the miracle becomes visible to everyone.
+
+          This is how I understand AI in the context of the latter-day work. It's not a surprise to God. It's part of the preparation. It's the mechanism He's providing before we need it most.
+
+          Think about the parallel with the printing press. In 1820, right before the Restoration began, the printing press had been invented and was spreading. Without it, there's no way the Book of Mormon gets translated, printed, and distributed to the world. The Restoration couldn't have happened at the scale it did without that technology being in place.
+
+          Now, in the 21st century, we have AI. And it arrives just as the Lord is accelerating His work—temple announcements, global growth, the hastening of both the gathering and the temple work.
+
+          That's not coincidence. That's the Lord providing the mechanisms before the need becomes overwhelming.
+        </aside>
+      </section>
+
+      <!-- SLIDE 6: Theme 4 - Majesty of the Moment -->
+      <section style="background: linear-gradient(135deg, var(--church-blue) 0%, var(--church-blue-dark) 100%); color: white; padding: 30px 30px 50px 30px;">
+        <h2 style="color: white; font-size: 1.8em; margin-bottom: 0.5em;">The Majesty of the Moment</h2>
+        <p style="font-size: 0.8em; margin-bottom: 1em; opacity: 0.95;">Do not miss this.</p>
+        <blockquote style="background: rgba(255, 255, 255, 0.15); border-left: 5px solid var(--church-blue-light); padding: 0.6em; font-size: 0.75em; line-height: 1.4; margin: 0 0 0.8em 0; font-style: italic; color: white; text-align: left;">
+          "We live in a time of miracles. Look for them."
+          <br><span style="font-size: 0.9em; display: block; margin-top: 0.2em;">— Elder David A. Bednar</span>
+        </blockquote>
+        <div style="text-align: left; max-width: 900px; margin: 0 auto; font-size: 0.75em; line-height: 1.5;">
+          <p style="margin-bottom: 0.4em;"><strong style="color: var(--church-gold);">AI Is One of His Mightiest Miracles:</strong></p>
+          <ul style="margin: 0 0 0.8em 1.3em;">
+            <li><strong>Language is no longer a barrier</strong> — AI translates instantaneously</li>
+            <li><strong>Knowledge is democratized</strong> — What took years of education is now accessible</li>
+            <li><strong>Capability is amplified</strong> — What required teams now requires vision</li>
+            <li><strong>Reach is global</strong> — Local problems have global solutions</li>
+          </ul>
+          <p style="margin-top: 0.6em;"><strong style="color: var(--church-gold);">Your Role in This Moment:</strong></p>
+          <p>You are not passive observers. You are <strong>witnesses</strong> of the hastening, <strong>participants</strong> in the miracle, <strong>builders</strong> of the infrastructure, and <strong>stewards</strong> of this technology.</p>
+        </div>
+        <aside class="notes">
+          There are moments in history when God's hand is visible to those with eyes to see. When the Spirit whispers: "This is significant. Pay attention. You are part of prophecy."
+
+          This is one of those moments.
+
+          AI represents one of the Lord's mightiest miracles—not because it's perfect, but because it enables His work to move forward in ways that were impossible before.
+
+          Language barriers—gone. A missionary in Brazil and a member in Japan can communicate instantly, with meaning preserved. Knowledge that used to require a PhD is now accessible to anyone willing to ask. The capability to design complex systems that once required massive teams is now accessible to individuals with vision and creativity. And global reach—a local problem can now have a global solution.
+
+          But here's what I want to emphasize: You're not passive observers of this miracle. You're participants. You're the builders. You're the stewards of this technology.
+
+          When you stand before the Lord, you'll be able to say: "I saw the miracle happening, and I joined in. I used the tools You provided to further Your work."
+
+          That's your opportunity in this moment.
+        </aside>
+      </section>
+
+      <!-- SLIDE 7: Application - Professional Preparation -->
+      <section>
+        <h2>Professional Preparation</h2>
+        <div style="max-width: 900px; margin: 0 auto;">
+          <div style="text-align: left; font-size: 0.78em; line-height: 1.6;">
+            <ol style="padding-left: 1.5em; margin: 0;">
+              <li style="margin-bottom: 0.6em;">
+                <strong style="color: var(--church-blue);">Learn AI deeply</strong>
+                <br><span style="font-size: 0.95em;">Not superficially. Understand the fundamentals of how these systems work, their limitations, their potential.</span>
+              </li>
+              <li style="margin-bottom: 0.6em;">
+                <strong style="color: var(--church-blue);">Maintain ethical standards</strong>
+                <br><span style="font-size: 0.95em;">AI amplifies intent. If you use it for good, it multiplies the good. Stay grounded in gospel principles.</span>
+              </li>
+              <li style="margin-bottom: 0.6em;">
+                <strong style="color: var(--church-blue);">Develop creativity</strong>
+                <br><span style="font-size: 0.95em;">The boring code will be automated. Your value is in insight, vision, and solving problems that matter.</span>
+              </li>
+              <li style="margin-bottom: 0;">
+                <strong style="color: var(--church-blue);">Stay grounded in doctrine</strong>
+                <br><span style="font-size: 0.95em;">Technology is a tool. The gospel is the foundation. Keep that relationship clear.</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+        <aside class="notes">
+          Practically, what does this mean for you? How do you prepare for this moment professionally?
+
+          First, learn AI deeply, not superficially. Don't just use ChatGPT. Understand how these models work, what they can do, what their limitations are, what the research frontier looks like. Be a student of the field.
+
+          Second, maintain ethical standards. This is crucial. AI amplifies whatever intent you feed into it. If you use it to multiply good, it will. If you use it for harm, it will do that too. Stay grounded in the principles that matter—honesty, integrity, service to others.
+
+          Third, develop creativity. This is what I said earlier: the boring code is being automated. Your value as an engineer is going to be your ability to imagine solutions to problems that don't have obvious answers. That's where creativity matters.
+
+          And fourth, stay grounded in doctrine. Don't let the technology seduce you into thinking it's more important than it is. It's a tool. It's powerful, but it's a tool. The gospel—your relationship with Heavenly Father, your discipleship to Jesus Christ—that's the foundation. Keep that as your north star.
+        </aside>
+      </section>
+
+      <!-- SLIDE 8: Application - Spiritual Preparation -->
+      <section>
+        <h2>Spiritual Preparation</h2>
+        <div style="max-width: 900px; margin: 0 auto;">
+          <div style="text-align: left; font-size: 0.78em; line-height: 1.6;">
+            <ol style="padding-left: 1.5em; margin: 0 0 1em 0;">
+              <li style="margin-bottom: 0.6em;">
+                <strong style="color: var(--church-blue);">Recognize the divine timing</strong>
+                <br><span style="font-size: 0.95em;">You're here for a reason. This isn't luck or chance. The Lord placed you in this moment.</span>
+              </li>
+              <li style="margin-bottom: 0.6em;">
+                <strong style="color: var(--church-blue);">Seek spiritual gifts</strong>
+                <br><span style="font-size: 0.95em;">Discernment will be critical in a rapidly changing field. Ask for wisdom. Seek personal revelation.</span>
+              </li>
+              <li style="margin-bottom: 0.6em;">
+                <strong style="color: var(--church-blue);">Stay worthy</strong>
+                <br><span style="font-size: 0.95em;">The Lord needs temple-worthy engineers in positions of influence. Your personal righteousness matters.</span>
+              </li>
+              <li style="margin-bottom: 1em;">
+                <strong style="color: var(--church-blue);">Look for the miracles</strong>
+                <br><span style="font-size: 0.95em;">They're happening. Don't become cynical. Stay awake. Notice where the Lord is working.</span>
+              </li>
+            </ol>
+            <div style="background: rgba(0, 115, 207, 0.1); border-left: 4px solid var(--church-blue); padding: 0.7em 0 0.7em 1em; margin-top: 0.8em;">
+              <p style="margin: 0; font-size: 0.85em;"><strong style="color: var(--church-blue);">The Invitation:</strong></p>
+              <p style="margin: 0.3em 0 0 0; font-size: 0.85em;">You have the opportunity to build systems that serve <strong>billions</strong>, create technology that <strong>protects families</strong>, design tools that <strong>spread truth</strong>, and work on problems that matter <strong>eternally.</strong></p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          And spiritually, how do you prepare?
+
+          First, recognize the divine timing. I keep coming back to this because it's foundational. You didn't land here by chance. The Lord needs you now. That's not hyperbole. That's a spiritual reality you should take seriously.
+
+          Second, seek spiritual gifts—particularly discernment. The tech world moves fast, and there will be ethical questions, philosophical questions, choices that don't have clear answers. You need spiritual discernment to navigate those. Pray for it. Ask for wisdom. Seek personal revelation.
+
+          Third, stay worthy. If the Lord is going to use you in significant ways, you need to be in a position where you can receive inspiration. That means being temple-worthy, living the standards, keeping your covenants.
+
+          And fourth, don't become cynical. Look for the miracles. They're happening. You're part of them. Stay awake to how the Lord is working in this moment.
+
+          And here's the invitation: You can use your skills to build systems that serve billions. You can create technology that protects families. You can design tools that spread truth. You can work on problems that will matter eternally—not just in your career, but in the history of God's work on the earth.
+
+          That's not rhetoric. That's your actual opportunity.
+        </aside>
+      </section>
+
+      <!-- SLIDE 9: Closing -->
+      <section style="background: linear-gradient(135deg, var(--church-blue) 0%, var(--church-blue-dark) 100%); color: white; padding: 40px 30px 80px 30px;">
+        <h2 style="color: white; font-size: 1.8em; margin-bottom: 0.8em;">Your Charge</h2>
+        <blockquote style="background: rgba(255, 255, 255, 0.15); border-left: 5px solid var(--church-gold); padding: 1em; font-size: 0.95em; line-height: 1.6; margin: 0 0 1.2em 0; font-style: italic; color: white; max-width: 850px; margin-left: auto; margin-right: auto; text-align: left;">
+          "Don't look at AI as just another tech trend. Look at it as the Lord looking at you and saying: 'Here are the tools. Now go build My kingdom with greater power than any previous generation had access to.'"
+        </blockquote>
+        <div style="text-align: center; font-size: 1.1em; line-height: 1.8; margin-top: 2em;">
+          <p style="margin: 0;"><strong>The majesty of the moment</strong> is that you are here.</p>
+          <p style="margin: 0.5em 0;"><strong>The miracle</strong> is already unfolding.</p>
+          <p style="margin: 0.5em 0;"><strong>The invitation</strong> is to participate.</p>
+          <div class="closing-amen">In the name of Jesus Christ, amen.</div>
+        </div>
+        <aside class="notes">
+          This is the charge I want to leave with you.
+
+          Don't look at AI as just another tech trend. Don't reduce it to job anxiety or productivity metrics or quarterly earnings. Look at it as the Lord looking at you and saying: "Here are the tools. Now go build My kingdom with greater power than any previous generation had access to."
+
+          The majesty of the moment is that you are here. At this time. With this technology. With this opportunity.
+
+          The miracle is already unfolding. You don't have to wait for it to happen. It's happening right now.
+
+          And the invitation is for you to participate. Not as passive observers. As builders. As stewards. As witnesses of the Lord's work in these latter days.
+
+          In the name of Jesus Christ, amen.
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js scripts -->
+  <script src="../reveal/dist/reveal.js"></script>
+  <script src="../reveal/plugin/notes/notes.js"></script>
+  <script>
+    // Initialize Reveal.js
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      progress: true,
+      controls: true,
+      center: true,
+      margin: 0.1,
+      transition: 'slide',
+      backgroundTransition: 'fade',
+      plugins: [ RevealNotes ]
+    });
+
+    // Custom keyboard handler for 'S' key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 's' || e.key === 'S') {
+        const notesPlugin = Reveal.getPlugin('notes');
+        if (notesPlugin) {
+          notesPlugin.open();
+        }
+      }
+    });
+  </script>
+</body>
+</html>
