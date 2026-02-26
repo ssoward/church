@@ -8,6 +8,7 @@
   --church-blue-light: #4A90E2;
   --church-blue-dark: #004499;
   --church-blue-accent: #E6F3FF;
+  --church-gold: #C9A84C;
   --white: #FFFFFF;
   --black: #1A1A1A;
   --gray-light: #F8FAFB;
@@ -101,6 +102,11 @@ h6 {
 p {
   margin-bottom: var(--spacing-md);
   font-size: 1.125rem;
+}
+
+strong {
+  color: var(--church-gold);
+  font-weight: 600;
 }
 
 /* Links */
