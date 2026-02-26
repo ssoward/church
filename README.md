@@ -2,6 +2,10 @@
 
 A responsive web application for deep, interactive study of Alma 31 from the Book of Mormon. Inspired by the clean, reverent design of churchofjesuschrist.org.
 
+## View Online
+
+**Gospel Presentations**: https://ssoward.github.io/church/presentations/
+
 ## Features
 
 - **Scripture Text**: Full Alma 31 with verse-by-verse display
