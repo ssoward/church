@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ward Sunday School Presidents Training</title>
+
+  <!-- Reveal.js CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/white.min.css" />
+
+  <style>
+    :root {
+      --church-blue: #003087;
+      --church-gold: #C9A84C;
+      --church-light: #f5f0e8;
+      --church-dark: #1a1a2e;
+    }
+
+    .reveal {
+      font-family: 'Georgia', serif;
+      font-size: 28px;
+    }
+
+    .reveal .slides section {
+      text-align: left;
+      padding: 8px 20px !important;
+    }
+
+    /* Title slide */
+    .title-slide {
+      text-align: center !important;
+      background: linear-gradient(160deg, var(--church-blue) 0%, #001a4d 100%);
+      color: white !important;
+    }
+
+    .title-slide h1 {
+      color: var(--church-gold) !important;
+      font-size: 1.3em !important;
+      line-height: 1.2;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+    }
+
+    .title-slide h2 {
+      color: #e8dfc8 !important;
+      font-size: 0.85em !important;
+      font-weight: normal;
+    }
+
+    .title-slide .meta {
+      color: #c8d8f0 !important;
+      font-size: 0.62em;
+      margin-top: 0.7em;
+      line-height: 1.6;
+    }
+
+    .title-slide .divider {
+      width: 80px;
+      height: 3px;
+      background: var(--church-gold);
+      margin: 0.8em auto;
+      border-radius: 2px;
+    }
+
+    /* Section header slides */
+    .section-slide {
+      color: white !important;
+      text-align: center !important;
+    }
+
+    .section-slide h2 {
+      color: #ffffff !important;
+      font-size: 1.2em !important;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+    }
+
+    .section-slide .section-num {
+      font-size: 2.5em;
+      color: rgba(0,0,0,0.15);
+      font-weight: bold;
+      position: absolute;
+      top: 0.2em;
+      right: 0.3em;
+    }
+
+    .section-slide p {
+      color: #ffffff !important;
+      font-size: 0.8em;
+    }
+
+    /* Content slides */
+    .reveal h2 {
+      color: var(--church-blue) !important;
+      font-size: 0.95em !important;
+      border-bottom: 2px solid var(--church-gold);
+      padding-bottom: 0.2em;
+      margin-bottom: 0.4em;
+    }
+
+    .reveal h3 {
+      color: var(--church-blue) !important;
+      font-size: 0.8em !important;
+      margin-bottom: 0.3em;
+    }
+
+    .reveal ul {
+      margin-left: 0.8em;
+    }
+
+    .reveal ul li {
+      font-size: 0.7em;
+      margin-bottom: 0.3em;
+      line-height: 1.4;
+    }
+
+    .reveal ul li::marker {
+      color: var(--church-gold);
+    }
+
+    /* Quote block */
+    .quote-box {
+      background: #f0f4ff;
+      border-left: 5px solid var(--church-blue);
+      border-radius: 0 8px 8px 0;
+      padding: 0.5em 0.8em;
+      margin: 0.4em 0;
+      font-style: italic;
+      font-size: 0.68em;
+      line-height: 1.4;
+      color: #222;
+    }
+
+    .quote-attribution {
+      text-align: right;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 0.85em;
+      color: var(--church-blue);
+      margin-top: 0.4em;
+    }
+
+    /* Highlight box */
+    .highlight-box {
+      background: linear-gradient(135deg, #fff8e6, #fffaf0);
+      border: 2px solid var(--church-gold);
+      border-radius: 8px;
+      padding: 0.4em 0.7em;
+      margin: 0.3em 0;
+      font-size: 0.68em;
+    }
+
+    .highlight-box .label {
+      font-weight: bold;
+      color: var(--church-gold);
+      font-size: 0.8em;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.3em;
+    }
+
+    /* Agenda grid */
+    .agenda-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.35em;
+      margin-top: 0.3em;
+    }
+
+    .agenda-item {
+      background: #f5f0e8;
+      border-radius: 6px;
+      padding: 0.35em 0.6em;
+      font-size: 0.62em;
+    }
+
+    .agenda-item .time {
+      color: var(--church-gold);
+      font-weight: bold;
+      font-size: 0.85em;
+    }
+
+    .agenda-item .title {
+      color: var(--church-blue);
+      font-weight: bold;
+    }
+
+    /* Two-column layout */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1em;
+      align-items: start;
+    }
+
+    /* Scripture reference */
+    .scripture {
+      color: var(--church-blue);
+      font-size: 0.72em;
+      font-style: italic;
+      margin-bottom: 0.6em;
+    }
+
+    /* Closing slide */
+    .closing-slide {
+      background: linear-gradient(160deg, rgba(0,26,77,0.85) 0%, rgba(0,48,135,0.85) 100%) !important;
+      color: white !important;
+      text-align: center !important;
+    }
+
+    .closing-slide h2 {
+      color: var(--church-gold) !important;
+      border: none !important;
+      font-size: 1.1em !important;
+    }
+
+    .closing-slide p {
+      color: #c8d8f0 !important;
+      font-size: 0.7em;
+      line-height: 1.6;
+    }
+
+    .cross-icon {
+      font-size: 2em;
+      margin: 0.2em 0;
+    }
+
+    /* Slide image float */
+    .slide-img {
+      float: right;
+      width: 220px;
+      margin: 0 0 0.5em 1em;
+      border-radius: 8px;
+      box-shadow: 2px 4px 14px rgba(0,0,0,0.25);
+      object-fit: cover;
+    }
+
+    /* Progress & controls styling */
+    .reveal .progress {
+      color: var(--church-gold);
+    }
+
+    .reveal .controls {
+      color: var(--church-blue);
+    }
+
+    /* Pill badge */
+    .pill {
+      display: inline-block;
+      background: var(--church-blue);
+      color: white;
+      border-radius: 20px;
+      padding: 0.15em 0.7em;
+      font-size: 0.65em;
+      vertical-align: middle;
+      margin-left: 0.3em;
+    }
+
+    .pill.gold {
+      background: var(--church-gold);
+      color: #222;
+    }
+
+    /* Footer-style speaker note hint */
+    .slide-tag {
+      position: absolute;
+      bottom: 0.4em;
+      right: 1em;
+      font-size: 0.5em;
+      color: #aaa;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ===== TITLE SLIDE ===== -->
+    <section class="title-slide"
+      data-background-image="https://www.churchofjesuschrist.org/imgs/3ddf5fc9377fa8c689484d15432f8caebf00b295/full/500%2C/0/default"
+      data-background-size="cover"
+      data-background-position="center"
+      data-background-opacity="0.18">
+      <div class="divider"></div>
+      <h1>Ward Sunday School Presidents<br>Training Meeting</h1>
+      <div class="divider"></div>
+      <h2>Israel Canyon Saratoga Springs Stake</h2>
+      <div class="meta">
+        <strong>Sunday, March 22, 2026 &nbsp;·&nbsp; 7:00 PM</strong><br />
+        Relief Society Room, Stake Center<br /><br />
+        Conducted by <strong>Scott Soward</strong><br />
+        Stake Sunday School President
+      </div>
+    </section>
+
+    <!-- ===== ATTENDEES ===== -->
+    <section>
+      <h2>Welcome — Attendees Tonight</h2>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.55em; margin-top: 0.4em;">
+
+        <div class="agenda-item">
+          <div class="title" style="color: var(--church-blue); border-bottom: 1px solid var(--church-gold); margin-bottom:0.3em; padding-bottom:0.2em;">Cahill Ward</div>
+          <div style="font-size:0.85em;">Brian Malin <span class="pill gold">Pres</span></div>
+        </div>
+
+        <div class="agenda-item">
+          <div class="title" style="color: var(--church-blue); border-bottom: 1px solid var(--church-gold); margin-bottom:0.3em; padding-bottom:0.2em;">Honeysuckle Ward</div>
+          <div style="font-size:0.85em;">B.J. Sollars <span class="pill gold">Pres</span></div>
+          <div style="font-size:0.85em;">Jack Mangum <span class="pill">1st</span></div>
+          <div style="font-size:0.85em;">Braden Thompson <span class="pill">2nd</span></div>
+        </div>
+
+        <div class="agenda-item">
+          <div class="title" style="color: var(--church-blue); border-bottom: 1px solid var(--church-gold); margin-bottom:0.3em; padding-bottom:0.2em;">Hunter Ward</div>
+          <div style="font-size:0.85em;">Darren Stuart <span class="pill gold">Pres</span></div>
+          <div style="font-size:0.85em;">James Hyland <span class="pill">Sec</span></div>
+        </div>
+
+        <div class="agenda-item">
+          <div class="title" style="color: var(--church-blue); border-bottom: 1px solid var(--church-gold); margin-bottom:0.3em; padding-bottom:0.2em;">Morgan Ward</div>
+          <div style="font-size:0.85em;">Cory Smith <span class="pill gold">Pres</span></div>
+          <div style="font-size:0.85em;">Kendal Hunsaker <span class="pill">2nd</span></div>
+        </div>
+
+        <div class="agenda-item">
+          <div class="title" style="color: var(--church-blue); border-bottom: 1px solid var(--church-gold); margin-bottom:0.3em; padding-bottom:0.2em;">Saddlebrook Ward</div>
+          <div style="font-size:0.85em;">Gavin McClellan <span class="pill gold">Pres</span></div>
+          <div style="font-size:0.85em;">Jace Robison <span class="pill">1st</span></div>
+          <div style="font-size:0.85em;">Jessie Green <span class="pill">2nd</span></div>
+        </div>
+
+        <div class="agenda-item">
+          <div class="title" style="color: var(--church-blue); border-bottom: 1px solid var(--church-gold); margin-bottom:0.3em; padding-bottom:0.2em;">Shadow Ridge Ward</div>
+          <div style="font-size:0.85em;">Rich Rosenlof <span class="pill gold">Pres</span></div>
+          <div style="font-size:0.85em;">Philip De la Vega <span class="pill">1st</span></div>
+          <div style="font-size:0.85em;">Thomas Walsh <span class="pill">2nd</span></div>
+        </div>
+
+        <div class="agenda-item" style="grid-column: span 3;">
+          <div class="title" style="color: var(--church-blue); border-bottom: 1px solid var(--church-gold); margin-bottom:0.3em; padding-bottom:0.2em;">Spring Meadow Ward</div>
+          <div style="display:flex; gap: 1.5em; font-size:0.85em;">
+            <span>Anthony Provenza <span class="pill gold">Pres</span></span>
+            <span>Mark Grotefend <span class="pill">1st</span></span>
+            <span>Jason Ostler <span class="pill">2nd</span></span>
+          </div>
+        </div>
+
+      </div>
+      <div style="font-size:0.6em; color:#888; margin-top:0.5em; text-align:center;">
+        <span class="pill gold" style="font-size:1em;">Pres</span> President &nbsp;
+        <span class="pill" style="font-size:1em;">1st</span> First Counselor &nbsp;
+        <span class="pill" style="font-size:1em;">2nd</span> Second Counselor &nbsp;
+        <span class="pill" style="font-size:1em;">Sec</span> Secretary
+      </div>
+    </section>
+
+    <!-- ===== PURPOSE ===== -->
+    <section>
+      <h2>Purpose of This Gathering</h2>
+      <ul>
+        <li>Unite ward Sunday School presidents across the stake</li>
+        <li>Elevate gospel teaching in every ward setting</li>
+        <li>Draw from <em>Teaching in the Savior's Way</em></li>
+        <li>Recognize the miracles and tools of our day</li>
+        <li>Focus on <strong>the one</strong> — not just the ninety and nine</li>
+        <li>Fulfill our duties as outlined in the General Handbook (section 13)</li>
+        <li>Strengthen <strong>home-centered, Church-supported</strong> gospel learning</li>
+      </ul>
+      <div class="highlight-box">
+        <div class="label">Tonight's Format</div>
+        60–90 minutes &nbsp;·&nbsp; Discussion &nbsp;·&nbsp; Sharing &nbsp;·&nbsp; Spirit-led &nbsp;·&nbsp; Refreshments after
+      </div>
+    </section>
+
+    <!-- ===== AGENDA OVERVIEW ===== -->
+    <section>
+      <h2>Agenda at a Glance</h2>
+      <div class="agenda-grid">
+        <div class="agenda-item">
+          <div class="time">5–10 min</div>
+          <div class="title">1. Opening</div>
+          Hymn, prayer, introductions
+        </div>
+        <div class="agenda-item">
+          <div class="time">10–12 min</div>
+          <div class="title">2. Handbook Duties</div>
+          General Handbook, section 13
+        </div>
+        <div class="agenda-item">
+          <div class="time">10–12 min</div>
+          <div class="title">3. Teaching in the Savior's Way</div>
+          Core principles & examples
+        </div>
+        <div class="agenda-item">
+          <div class="time">10–12 min</div>
+          <div class="title">4. Focus on the One</div>
+          The lost sheep parable
+        </div>
+        <div class="agenda-item">
+          <div class="time">10–12 min</div>
+          <div class="title">5. Miracles of Our Day</div>
+          AI, technology & Pres. Nelson
+        </div>
+        <div class="agenda-item">
+          <div class="time">10–12 min</div>
+          <div class="title">6. Elevating Teaching</div>
+          Home-centered & Come Follow Me
+        </div>
+        <div class="agenda-item" style="grid-column: span 2;">
+          <div class="time">5–10 min</div>
+          <div class="title">7. Closing + Refreshments &amp; Fellowship</div>
+          Commitments, hymn, prayer, treats!
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 1: OPENING ===== -->
+    <section class="section-slide" data-background-gradient="linear-gradient(135deg, #7a5c1e 0%, #C9A84C 100%)">
+      <div class="section-num">1</div>
+      <h2>Opening</h2>
+      <p>Welcome &nbsp;·&nbsp; Hymn &nbsp;·&nbsp; Prayer &nbsp;·&nbsp; Purpose</p>
+    </section>
+
+    <section>
+      <h2>Opening — 5–10 Minutes</h2>
+      <ul>
+        <li><strong>Welcome</strong> and introductions — please share your name and ward</li>
+        <li><strong>Opening Hymn:</strong> <em>"Teach Me to Walk in the Light"</em></li>
+        <li><strong>Opening Prayer</strong></li>
+        <li><strong>Brief statement of purpose</strong></li>
+      </ul>
+      <div class="quote-box">
+        "No other work transcends that of righteous, intentional parenting!"
+        <div class="quote-attribution">— President Russell M. Nelson</div>
+      </div>
+      <p style="font-size:0.72em; color:#555; margin-top:0.8em;">The same principle applies to teaching God's children in Sunday School — intentional, Spirit-led instruction changes lives.</p>
+    </section>
+
+    <!-- ===== SECTION 2: HANDBOOK DUTIES ===== -->
+    <section class="section-slide" data-background-gradient="linear-gradient(135deg, #7a5c1e 0%, #C9A84C 100%)">
+      <div class="section-num">2</div>
+      <h2>Duties of the Ward Sunday School Presidency</h2>
+      <p>General Handbook, Section 13</p>
+    </section>
+
+    <section>
+      <h2>Key Duties — General Handbook §13</h2>
+      <div class="two-col">
+        <ul>
+          <li>Serve on the <strong>ward council</strong></li>
+          <li>Oversee <strong>home- and church-centered</strong> gospel learning</li>
+          <li><strong>Support and instruct teachers</strong> — observe, give feedback</li>
+          <li>Organize and oversee <strong>Sunday School classes</strong></li>
+        </ul>
+        <ul>
+          <li>Encourage <strong>outreach to non-attenders</strong></li>
+          <li>Help members make and keep <strong>sacred covenants</strong></li>
+          <li>Recommend <strong>teachers</strong> to the bishopric</li>
+          <li>Help implement <strong>Come, Follow Me</strong></li>
+        </ul>
+      </div>
+      <div class="highlight-box" style="margin-top:0.8em;">
+        <div class="label">Discussion Question</div>
+        How can we more effectively fulfill these duties in our individual wards?
+      </div>
+    </section>
+
+    <!-- ===== SECTION 3: TEACHING IN THE SAVIOR'S WAY ===== -->
+    <section class="section-slide" data-background-gradient="linear-gradient(135deg, #7a5c1e 0%, #C9A84C 100%)">
+      <div class="section-num">3</div>
+      <h2>Teaching in the Savior's Way</h2>
+      <p>Core principles of Christlike teaching</p>
+    </section>
+
+    <section>
+      <h2>Core Principles</h2>
+      <img class="slide-img" src="https://www.churchofjesuschrist.org/imgs/94ad9711c67b272e1b6634b0ffdc39796f081c7c/full/500%2C/0/default" alt="Christ Ordaining the Apostles" />
+      <ul>
+        <li><strong>Love</strong> — The Savior saw each person as an individual of infinite worth</li>
+        <li><strong>Simplicity</strong> — Teach clear doctrine; avoid complexity that distracts</li>
+        <li><strong>Questions</strong> — Ask inspired questions that invite reflection and revelation</li>
+        <li><strong>Invitations</strong> — Invite learners to act, not just to know</li>
+        <li><strong>Spirit-led</strong> — Yield to promptings; the Spirit is the real teacher</li>
+      </ul>
+      <div class="highlight-box">
+        <div class="label">Share a Moment</div>
+        Can 1–2 presidents share a brief example of Christlike teaching they witnessed — in Sunday School or elsewhere?
+      </div>
+    </section>
+
+    <section>
+      <h2>Connecting Teaching to the Handbook</h2>
+      <div class="quote-box">
+        "Christlike teachers love the people they teach, help them feel the Spirit, and inspire them to become more like the Savior."
+        <div class="quote-attribution">— <em>Teaching in the Savior's Way</em></div>
+      </div>
+      <ul>
+        <li>We are not just dispensing information — we are inviting <strong>conversion</strong></li>
+        <li>The handbook asks us to help teachers <strong>improve learning and teaching</strong></li>
+        <li>Our role: <em>observe, encourage, and develop</em> the teachers in our wards</li>
+      </ul>
+    </section>
+
+    <!-- ===== SECTION 4: FOCUS ON THE ONE ===== -->
+    <section class="section-slide" data-background-gradient="linear-gradient(135deg, #7a5c1e 0%, #C9A84C 100%)">
+      <div class="section-num">4</div>
+      <h2>Focus on the One</h2>
+      <p>Not Just the Ninety and Nine</p>
+    </section>
+
+    <section>
+      <h2>The Parable of the Lost Sheep</h2>
+      <div style="display:grid; grid-template-columns: 1fr 200px; gap: 1em; align-items: start;">
+        <div>
+          <p class="scripture">Luke 15:3–7</p>
+          <div class="quote-box">
+            "What man of you, having an hundred sheep, if he lose one of them, doth not leave the ninety and nine in the wilderness, and go after that which is lost, until he find it?"
+            <div class="quote-attribution">— Luke 15:4</div>
+          </div>
+          <ul>
+            <li>Every class member matters — especially those who are absent</li>
+            <li>Sunday School presidencies can model and inspire <strong>personal ministering</strong></li>
+            <li>Reach out to the lost, the wandering, and the newly moved-in</li>
+          </ul>
+        </div>
+        <img src="https://www.churchofjesuschrist.org/imgs/8344ebb490a1c6f0f04b5d3574618d74cb0bfada/full/500%2C/0/default" alt="Christ Comforts Mary and Martha"
+          style="width:100%; border-radius:8px; box-shadow:2px 4px 14px rgba(0,0,0,0.25); object-fit:cover;" />
+      </div>
+    </section>
+
+    <section>
+      <h2>Practical Ideas: Reaching the One</h2>
+      <div class="two-col">
+        <div>
+          <h3>In Sunday School Classes</h3>
+          <ul>
+            <li>Assign a classmate to follow up with absentees</li>
+            <li>Save a seat; send a text: "We missed you"</li>
+            <li>Ask teachers to note who is struggling or disengaged</li>
+          </ul>
+        </div>
+        <div>
+          <h3>As a Presidency</h3>
+          <ul>
+            <li>Review attendance trends with the ward council</li>
+            <li>Coordinate with ministering brothers and sisters</li>
+            <li>Make personal calls to inactive youth or adults</li>
+          </ul>
+        </div>
+      </div>
+      <div class="highlight-box" style="margin-top:0.8em;">
+        <div class="label">Group Sharing</div>
+        What practical ideas have worked in your ward for reaching the one?
+      </div>
+    </section>
+
+    <!-- ===== SECTION 5: MIRACLES OF OUR DAY ===== -->
+    <section class="section-slide" data-background-gradient="linear-gradient(135deg, #7a5c1e 0%, #C9A84C 100%)">
+      <div class="section-num">5</div>
+      <h2>Miracles of Our Day</h2>
+      <p>"Do Not Miss the Majesty of This Moment"</p>
+    </section>
+
+    <section>
+      <h2>President Nelson's Witness</h2>
+      <div class="quote-box" style="font-size:0.82em;">
+        "Do you see what is happening right before our eyes? I pray that we will not miss the majesty of this moment! The Lord is indeed hastening His work."
+        <div class="quote-attribution">— President Russell M. Nelson, October 2024 General Conference</div>
+      </div>
+      <ul>
+        <li>We live in a time of unprecedented spiritual and temporal blessings</li>
+        <li>The gathering of Israel is accelerating — <em>we are part of it</em></li>
+        <li>New tools are being placed in our hands for a reason</li>
+        <li>Our responsibility: <strong>use these tools with discernment and the Spirit</strong></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>AI &amp; Technology as Modern Aids</h2>
+      <ul>
+        <li><strong>Gospel study:</strong> Use AI to explore scriptures, cross-references, historical context</li>
+        <li><strong>Lesson preparation:</strong> Generate discussion questions, find quotes, summarize talks</li>
+        <li><strong>Personalized outreach:</strong> Craft thoughtful messages to class members</li>
+        <li><strong>Come, Follow Me:</strong> Deeper preparation in less time</li>
+      </ul>
+      <div class="highlight-box">
+        <div class="label">Key Principle</div>
+        Technology serves the Spirit — it never replaces it. Let promptings lead; let tools assist.
+      </div>
+      <div class="quote-box" style="margin-top:0.6em;">
+        "We have been given these miraculous resources to help us in our sacred responsibilities."
+        <div class="quote-attribution">— General Handbook</div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 6: ELEVATING TEACHING ===== -->
+    <section class="section-slide" data-background-gradient="linear-gradient(135deg, #7a5c1e 0%, #C9A84C 100%)">
+      <div class="section-num">6</div>
+      <h2>Elevating Teaching</h2>
+      <p>Home-Centered, Church-Supported Gospel Learning</p>
+    </section>
+
+    <section>
+      <h2>Raising Teaching Quality</h2>
+      <ul>
+        <li>Teach <strong>doctrine and principles</strong> — not just stories or activities</li>
+        <li>Connect Sunday learning to <strong>daily living and Come, Follow Me</strong></li>
+        <li>Invite learners to <em>feel</em> the Spirit, not just <em>hear</em> information</li>
+        <li>Application: "What will you do this week because of what we discussed?"</li>
+      </ul>
+      <div class="highlight-box">
+        <div class="label">Home-Centered Model</div>
+        The Church supports what happens at home — not the other way around. Sunday School reinforces and inspires family gospel learning.
+      </div>
+    </section>
+
+    <section>
+      <h2>Supporting Teachers &amp; Families</h2>
+      <div class="two-col">
+        <div>
+          <h3>Supporting Teachers</h3>
+          <ul>
+            <li>Observe classes periodically</li>
+            <li>Offer specific, kind feedback</li>
+            <li>Share <em>Teaching in the Savior's Way</em> resources</li>
+            <li>Ensure teachers feel valued and trained</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Supporting Families</h3>
+          <ul>
+            <li>Encourage Come, Follow Me at home</li>
+            <li>Share ideas in ward council</li>
+            <li>Equip parents to be the primary gospel teachers</li>
+            <li>Celebrate family learning wins</li>
+          </ul>
+        </div>
+      </div>
+      <div class="highlight-box" style="margin-top:0.8em;">
+        <div class="label">Brainstorm</div>
+        How can your presidency better support teachers and families this year?
+      </div>
+    </section>
+
+    <!-- ===== SECTION 7: CLOSING ===== -->
+    <section class="section-slide" data-background-gradient="linear-gradient(135deg, #7a5c1e 0%, #C9A84C 100%)">
+      <div class="section-num">7</div>
+      <h2>Closing</h2>
+      <p>Commitments &nbsp;·&nbsp; Hymn &nbsp;·&nbsp; Prayer &nbsp;·&nbsp; Refreshments</p>
+    </section>
+
+    <section>
+      <h2>Personal Commitments</h2>
+      <p style="font-size:0.78em; color:#555;">Take a moment to reflect — what one thing will you do differently or begin in your ward?</p>
+      <ul>
+        <li>Which duty from the handbook will you prioritize this month?</li>
+        <li>Who is <em>the one</em> you will reach out to this week?</li>
+        <li>How will you use a new tool to elevate your preparation or outreach?</li>
+        <li>How will you encourage and develop your teachers?</li>
+      </ul>
+      <div class="highlight-box">
+        <div class="label">Suggested Closing Hymn</div>
+        "The Spirit of God" — #2
+      </div>
+    </section>
+
+    <!-- ===== FINAL / CLOSING ===== -->
+    <section class="closing-slide"
+      data-background-image="https://www.churchofjesuschrist.org/imgs/f21442a93e2a9e35276edf6a3b49acc9b2561cf7/full/500%2C/0/default"
+      data-background-size="cover"
+      data-background-position="center"
+      data-background-opacity="0.22">
+      <div class="cross-icon">✦</div>
+      <h2>In the Savior's Service</h2>
+      <p>
+        Thank you for your dedication to this important work.<br /><br />
+        <strong style="color: #C9A84C;">Please stay for refreshments and fellowship!</strong><br /><br />
+        Questions or ideas? Contact Scott Soward<br />
+        📱 801-664-6319
+      </p>
+      <div style="margin-top:1.2em; font-size:0.6em; color:#8899bb;">
+        Israel Canyon Saratoga Springs Stake &nbsp;·&nbsp; March 22, 2026
+      </div>
+    </section>
+
+  </div><!-- /.slides -->
+</div><!-- /.reveal -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    transition: 'fade',
+    transitionSpeed: 'slow',
+    controls: true,
+    progress: true,
+    center: false,
+    width: 1100,
+    height: 700,
+    margin: 0.05,
+  });
+</script>
+</body>
+</html>
