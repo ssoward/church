@@ -3,135 +3,307 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Church Presentations</title>
+  <title>Gospel Presentations — Israel Canyon Saratoga Springs Stake</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { width: 100%; height: 100%; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-      overflow: hidden;
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue: #003087;
+      --blue-light: #0073CF;
+      --gold: #C9A84C;
+      --gold-light: #e8c97a;
+      --cream: #f5f0e8;
+      --dark: #1a1a2e;
+      --gray: #6b7280;
     }
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      background: linear-gradient(135deg, #0073CF 0%, #005a9c 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow: hidden;
+
+    html { scroll-behavior: smooth; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Georgia, sans-serif; background: #fafaf8; color: var(--dark); min-height: 100vh; }
+
+    /* ===== HEADER ===== */
+    header {
+      background: linear-gradient(160deg, var(--blue) 0%, #001a4d 100%);
+      color: white; padding: 60px 24px 50px; text-align: center; position: relative; overflow: hidden;
     }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><radialGradient id="grad" cx="50%25" cy="40%25" r="50%25"><stop offset="0%25" style="stop-color:rgba(255,255,255,0.15);stop-opacity:1" /><stop offset="100%25" style="stop-color:rgba(255,255,255,0);stop-opacity:1" /></radialGradient></defs><rect width="1200" height="800" fill="url(%23grad)"/></svg>');
-      background-size: cover;
-      background-position: center;
-      opacity: 0.4;
+    header::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.18) 0%, transparent 70%);
+      pointer-events: none;
     }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      padding: 40px;
-      color: white;
+    .header-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+    .header-divider { width: 60px; height: 3px; background: var(--gold); margin: 0 auto 24px; border-radius: 2px; }
+    header h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; line-height: 1.2; color: white; margin-bottom: 12px; text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+    header .subtitle { font-size: clamp(0.9rem, 2vw, 1.1rem); color: rgba(255,255,255,0.75); line-height: 1.6; }
+    header .org { display: inline-block; margin-top: 16px; font-size: 0.8rem; color: var(--gold-light); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ===== FILTER BAR ===== */
+    .filter-bar {
+      background: white; border-bottom: 1px solid #e5e7eb; padding: 14px 24px;
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     }
-    .christ-icon {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 30px;
-      opacity: 0.95;
-    }
-    .hero h1 {
-      font-size: 3.5em;
-      font-weight: 700;
-      margin-bottom: 20px;
-      line-height: 1.2;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    }
-    .hero p {
-      font-size: 1.3em;
-      margin-bottom: 40px;
-      opacity: 0.95;
-      line-height: 1.6;
-    }
-    .presentations {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .presentation-link {
-      display: inline-block;
-      padding: 16px 40px;
-      background: white;
-      color: #0073CF;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 1em;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-    .presentation-link:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 25px rgba(0,0,0,0.3);
-      background: #f0f0f0;
-    }
-    .presentation-link span {
-      display: block;
-      font-size: 0.85em;
-      opacity: 0.7;
-      margin-top: 4px;
-      font-weight: 500;
-    }
-    footer {
-      position: absolute;
-      bottom: 20px;
-      left: 0;
-      right: 0;
-      text-align: center;
-      color: rgba(255,255,255,0.8);
-      font-size: 0.9em;
-      z-index: 1;
-    }
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 2.5em; }
-      .hero p { font-size: 1.1em; }
-      .christ-icon { width: 100px; height: 100px; }
+    .filter-label { font-size: 0.75rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.05em; margin-right: 4px; }
+    .filter-btn { padding: 5px 16px; border-radius: 20px; border: 1.5px solid #d1d5db; background: white; color: var(--gray); font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+    .filter-btn:hover { border-color: var(--blue); color: var(--blue); }
+    .filter-btn.active { background: var(--blue); border-color: var(--blue); color: white; }
+
+    /* ===== MAIN ===== */
+    main { max-width: 1140px; margin: 0 auto; padding: 48px 24px 80px; }
+    .section-heading { font-size: 0.72rem; font-weight: 700; color: var(--gray); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+    .section-heading::after { content: ''; flex: 1; height: 1px; background: #e5e7eb; }
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; }
+
+    /* ===== CARD ===== */
+    .card { background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; border: 1px solid rgba(0,0,0,0.06); }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 4px 20px rgba(0,48,135,0.12), 0 1px 3px rgba(0,0,0,0.08); }
+    .card-banner { height: 7px; background: linear-gradient(90deg, var(--blue) 0%, var(--blue-light) 100%); }
+    .card-banner.gold { background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 100%); }
+    .card-banner.teal { background: linear-gradient(90deg, #0f766e 0%, #14b8a6 100%); }
+    .card-banner.warm { background: linear-gradient(90deg, #92400e 0%, #d97706 100%); }
+    .card-body { padding: 22px 22px 14px; flex: 1; }
+
+    .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+    .tag { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+    .tag.stake { background: #eff6ff; color: #1d4ed8; }
+    .tag.ward { background: #f0fdf4; color: #166534; }
+    .tag.youth { background: #fef3c7; color: #92400e; }
+    .tag.teaching { background: #f5f0ff; color: #6d28d9; }
+    .tag.leadership { background: #fff1f2; color: #be123c; }
+    .tag.technology { background: #f0fdfa; color: #0f766e; }
+
+    .card-date { font-size: 0.7rem; color: var(--gray); margin-bottom: 7px; display: flex; align-items: center; gap: 5px; }
+    .card h2 { font-size: 1.06rem; font-weight: 700; color: var(--blue); line-height: 1.3; margin-bottom: 5px; }
+    .card .card-sub { font-size: 0.8rem; color: var(--gold); font-weight: 600; margin-bottom: 9px; }
+    .card p { font-size: 0.82rem; color: #4b5563; line-height: 1.6; }
+    .card-audience { margin-top: 11px; font-size: 0.7rem; color: var(--gray); display: flex; align-items: center; gap: 5px; }
+
+    .card-footer { padding: 14px 22px 18px; border-top: 1px solid #f3f4f6; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .btn-open { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; background: var(--blue); color: white; text-decoration: none; border-radius: 7px; font-size: 0.8rem; font-weight: 600; transition: background 0.2s, transform 0.15s; }
+    .btn-open:hover { background: #001a5c; transform: translateX(1px); }
+    .slides-count { font-size: 0.7rem; color: #9ca3af; }
+
+    /* ===== ADD NEW PLACEHOLDER ===== */
+    .card-add { border: 2px dashed #d1d5db; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 24px; text-align: center; color: #9ca3af; background: transparent; min-height: 260px; transition: border-color 0.2s, color 0.2s; }
+    .card-add:hover { border-color: var(--blue-light); color: var(--blue-light); }
+    .card-add svg { width: 34px; height: 34px; margin-bottom: 12px; opacity: 0.45; }
+    .card-add strong { font-size: 0.88rem; display: block; margin-bottom: 6px; }
+    .card-add p { font-size: 0.8rem; line-height: 1.6; }
+    .card-add code { font-size: 0.78rem; background: #f3f4f6; padding: 1px 5px; border-radius: 4px; }
+
+    /* ===== FOOTER ===== */
+    footer { background: var(--dark); color: rgba(255,255,255,0.5); text-align: center; padding: 26px 24px; font-size: 0.76rem; line-height: 1.7; }
+    footer a { color: var(--gold); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    .card-wrapper.hidden { display: none; }
+
+    @media (max-width: 600px) {
+      header { padding: 40px 16px 36px; }
+      main { padding: 32px 16px 60px; }
+      .cards-grid { grid-template-columns: 1fr; gap: 18px; }
     }
   </style>
 </head>
 <body>
-  <div class="hero">
-    <div class="hero-content">
-      <h1>Gospel Presentations</h1>
-      <p>Gospel Teaching Resources & Presentations</p>
 
-      <div class="presentations">
-        <a href="./ward-conference-2026/" class="presentation-link">
-          Ward Conference 2026
-          <span>PMG vs. Teaching in the Savior's Way</span>
-        </a>
-        <a href="./confidence-in-presence-of-god/confidence-presentation.html" class="presentation-link">
-          Confidence in the Presence of God
-          <span>Based on President Russell M. Nelson's Talk</span>
-        </a>
-        <a href="./ai-students-byuideo/" class="presentation-link">
-          AI in the Tech Industry
-          <span>The Majesty of the Moment — BYU Idaho Students</span>
-        </a>
+<header>
+  <div class="header-inner">
+    <div class="header-divider"></div>
+    <h1>Gospel Presentations</h1>
+    <p class="subtitle">Teaching resources, training materials, and gospel study presentations</p>
+    <span class="org">Israel Canyon Saratoga Springs Stake</span>
+  </div>
+</header>
+
+<div class="filter-bar">
+  <span class="filter-label">Filter</span>
+  <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
+  <button class="filter-btn" onclick="filterCards('stake', this)">Stake</button>
+  <button class="filter-btn" onclick="filterCards('ward', this)">Ward</button>
+  <button class="filter-btn" onclick="filterCards('teaching', this)">Teaching</button>
+  <button class="filter-btn" onclick="filterCards('leadership', this)">Leadership</button>
+  <button class="filter-btn" onclick="filterCards('technology', this)">Technology</button>
+  <button class="filter-btn" onclick="filterCards('youth', this)">Youth</button>
+</div>
+
+<main>
+  <div class="section-heading">Presentations</div>
+
+  <div class="cards-grid" id="cards-grid">
+
+    <!-- ============================================================ -->
+    <!-- CARD: WARD SS PRESIDENTS TRAINING                            -->
+    <!-- To add a new presentation: copy one card block, update       -->
+    <!-- the data-tags, title, description, href, and banner color.   -->
+    <!-- ============================================================ -->
+    <div class="card-wrapper" data-tags="stake teaching leadership">
+      <div class="card">
+        <div class="card-banner"></div>
+        <div class="card-body">
+          <div class="card-tags">
+            <span class="tag stake">Stake</span>
+            <span class="tag teaching">Teaching</span>
+            <span class="tag leadership">Leadership</span>
+          </div>
+          <div class="card-date">
+            <svg viewBox="0 0 20 20" fill="currentColor" style="width:12px;height:12px;"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
+            March 22, 2026 · 7:00 PM
+          </div>
+          <h2>Ward Sunday School Presidents Training</h2>
+          <div class="card-sub">Teaching in the Savior's Way</div>
+          <p>An inspired discussion on elevating gospel teaching across the stake — covering handbook roles, teacher council meetings, ministering to the one, and President Nelson's witness about the miracles of our day.</p>
+          <div class="card-audience">
+            <svg viewBox="0 0 20 20" fill="currentColor" style="width:12px;height:12px;"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/></svg>
+            Audience: Ward Sunday School Presidencies · Israel Canyon Stake
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="./stake-ss-presidents-training/" class="btn-open">
+            Open Presentation
+            <svg viewBox="0 0 20 20" fill="currentColor" style="width:14px;height:14px;"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          </a>
+          <span class="slides-count">23 slides · Reveal.js</span>
+        </div>
       </div>
     </div>
 
-    <footer>
-      The Church of Jesus Christ of Latter-day Saints
-    </footer>
+    <!-- CARD: WARD CONFERENCE 2026 -->
+    <div class="card-wrapper" data-tags="ward teaching">
+      <div class="card">
+        <div class="card-banner warm"></div>
+        <div class="card-body">
+          <div class="card-tags">
+            <span class="tag ward">Ward</span>
+            <span class="tag teaching">Teaching</span>
+          </div>
+          <div class="card-date">
+            <svg viewBox="0 0 20 20" fill="currentColor" style="width:12px;height:12px;"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
+            2026
+          </div>
+          <h2>Ward Conference 2026</h2>
+          <div class="card-sub">PMG vs. Teaching in the Savior's Way</div>
+          <p>A comparison of Preach My Gospel and Teaching in the Savior's Way, exploring how both resources work together to strengthen gospel teaching at home and in the Church.</p>
+          <div class="card-audience">
+            <svg viewBox="0 0 20 20" fill="currentColor" style="width:12px;height:12px;"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/></svg>
+            Audience: Ward Members
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="./ward-conference-2026/" class="btn-open">
+            Open Presentation
+            <svg viewBox="0 0 20 20" fill="currentColor" style="width:14px;height:14px;"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          </a>
+          <span class="slides-count">Reveal.js</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD: CONFIDENCE IN THE PRESENCE OF GOD -->
+    <div class="card-wrapper" data-tags="stake teaching">
+      <div class="card">
+        <div class="card-banner gold"></div>
+        <div class="card-body">
+          <div class="card-tags">
+            <span class="tag stake">Stake</span>
+            <span class="tag teaching">Teaching</span>
+          </div>
+          <div class="card-date">
+            <svg viewBox="0 0 20 20" fill="currentColor" style="width:12px;height:12px;"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
+            2025–2026
+          </div>
+          <h2>Confidence in the Presence of God</h2>
+          <div class="card-sub">Based on President Russell M. Nelson's Talk</div>
+          <p>An exploration of what it means to stand with confidence before Heavenly Father — drawing from President Nelson's teachings on worthiness, the Atonement, and our relationship with God.</p>
+          <div class="card-audience">
+            <svg viewBox="0 0 20 20" fill="currentColor" style="width:12px;height:12px;"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/></svg>
+            Audience: General Membership
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="./confidence-in-presence-of-god/confidence-presentation.html" class="btn-open">
+            Open Presentation
+            <svg viewBox="0 0 20 20" fill="currentColor" style="width:14px;height:14px;"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          </a>
+          <span class="slides-count">Reveal.js</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD: AI IN THE TECH INDUSTRY -->
+    <div class="card-wrapper" data-tags="youth technology stake">
+      <div class="card">
+        <div class="card-banner teal"></div>
+        <div class="card-body">
+          <div class="card-tags">
+            <span class="tag youth">Youth</span>
+            <span class="tag technology">Technology</span>
+            <span class="tag stake">Stake</span>
+          </div>
+          <div class="card-date">
+            <svg viewBox="0 0 20 20" fill="currentColor" style="width:12px;height:12px;"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
+            2025–2026
+          </div>
+          <h2>AI in the Tech Industry</h2>
+          <div class="card-sub">The Majesty of the Moment — BYU Idaho Students</div>
+          <p>A presentation for BYU Idaho students on navigating artificial intelligence in the tech industry — grounded in gospel principles and President Nelson's call to not miss the majesty of our moment.</p>
+          <div class="card-audience">
+            <svg viewBox="0 0 20 20" fill="currentColor" style="width:12px;height:12px;"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/></svg>
+            Audience: BYU Idaho Students
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="./ai-students-byuideo/" class="btn-open">
+            Open Presentation
+            <svg viewBox="0 0 20 20" fill="currentColor" style="width:14px;height:14px;"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          </a>
+          <span class="slides-count">Reveal.js</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ADD NEW PRESENTATION                                         -->
+    <!-- 1. Create a subfolder under presentations/                   -->
+    <!-- 2. Add your index.html (Reveal.js recommended)              -->
+    <!-- 3. Copy a card block above, update data-tags, content, href  -->
+    <!-- ============================================================ -->
+    <div class="card-wrapper" data-tags="all">
+      <div class="card-add">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="16"/>
+          <line x1="8" y1="12" x2="16" y2="12"/>
+        </svg>
+        <strong>Add a Presentation</strong>
+        <p>Create a subfolder, add an <code>index.html</code>,<br>then copy a card block into this file.</p>
+      </div>
+    </div>
+
   </div>
+</main>
+
+<footer>
+  <div>Israel Canyon Saratoga Springs Stake &nbsp;·&nbsp; The Church of Jesus Christ of Latter-day Saints</div>
+  <div style="margin-top:6px;">
+    <a href="https://ssoward.github.io/church/">Home</a>
+    &nbsp;·&nbsp;
+    <a href="https://www.churchofjesuschrist.org" target="_blank" rel="noopener">ChurchofJesusChrist.org</a>
+  </div>
+</footer>
+
+<script>
+  function filterCards(tag, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.card-wrapper').forEach(card => {
+      const tags = card.dataset.tags || '';
+      if (tag === 'all' || tags.includes(tag)) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  }
+</script>
 </body>
 </html>
