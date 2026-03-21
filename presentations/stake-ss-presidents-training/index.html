@@ -129,7 +129,11 @@
     .reveal .controls { color: var(--church-blue); }
 
     .closing-slide p { color: #c8d8f0 !important; font-size: 0.68em; line-height: 1.8; }
-    .gratitude-slide p { color: rgba(255,255,255,0.9) !important; font-size: 0.7em; line-height: 1.8; }
+
+    /* Gratitude slide — cream background, dark text */
+    .gratitude-slide { background: var(--cream) !important; text-align: center !important; color: var(--dark) !important; }
+    .gratitude-slide h2 { color: var(--church-blue) !important; border: none !important; font-size: 1.1em !important; }
+    .gratitude-slide p { color: #2c2c3e !important; font-size: 0.72em; line-height: 1.9; }
   </style>
 </head>
 <body>
@@ -165,17 +169,16 @@
 <!-- ============================================================ -->
 <!-- SLIDE 2 — GRATITUDE                                          -->
 <!-- ============================================================ -->
-<section class="gratitude-slide"
-  data-background-image="https://www.churchofjesuschrist.org/imgs/f21442a93e2a9e35276edf6a3b49acc9b2561cf7/full/800%2C/0/default"
-  data-background-size="cover" data-background-opacity="0.25">
+<section class="gratitude-slide">
   <h2>Thank You</h2>
+  <div style="width:60px; height:3px; background:var(--church-gold); margin:0.4em auto 1em;"></div>
   <p>
     The hours you give, the lessons you support,<br>
     the teachers you encourage, the members you lift —<br>
-    <strong style="color: var(--church-gold);">it all matters to the Lord.</strong><br><br>
+    <strong style="color: var(--church-blue);">it all matters to the Lord.</strong><br><br>
     Your calling is sacred. Your service is seen.<br><br>
     <em>"I know that God is mindful of you and hears your prayers."</em><br>
-    <span style="font-size: 0.85em; color: rgba(200,216,240,0.75);">— Alma 26:37</span>
+    <span style="font-size: 0.88em; color: var(--church-blue); font-weight: bold;">— Alma 26:37</span>
   </p>
   <aside class="notes">
     Be sincere here. These men are volunteers with families, jobs, pressures. They said yes to a demanding calling and keep showing up.
@@ -313,9 +316,7 @@
 <!-- SECTION 2 HEADER — ROLES & RESPONSIBILITIES                  -->
 <!-- ============================================================ -->
 <section class="section-slide"
-  data-background-color="#001a4d"
-  data-background-image="images/Screenshot%202026-03-17%20at%207.12.39%E2%80%AFPM.png"
-  data-background-size="cover" data-background-opacity="0.3">
+  data-background-gradient="linear-gradient(160deg, #003087 0%, #001a4d 100%)">
   <div class="section-num">2</div>
   <div class="divider"></div>
   <h2>Your Sacred Calling</h2>
