@@ -260,11 +260,37 @@
     .closing-slide p { color: rgba(255,255,255,0.8) !important; font-size: 0.72em; line-height: 2; }
 
     /* ===== SLIDE IMAGE ===== */
-    .slide-img { border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+    .slide-img { border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); max-width: 100%; height: auto; }
 
     /* ===== PROGRESS / CONTROLS ===== */
     .reveal .progress { color: var(--gold); }
     .reveal .controls { color: var(--blue); }
+
+    /* ===== RESPONSIVE — TABLET (≤900px) ===== */
+    @media (max-width: 900px) {
+      .reveal { font-size: 22px; }
+      .reveal .slides section { padding: 8px 18px !important; }
+      .resource-row { grid-template-columns: repeat(2, 1fr) !important; }
+      .duty-grid { grid-template-columns: 1fr 1fr !important; }
+      .ward-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+
+    /* ===== RESPONSIVE — MOBILE (≤600px) ===== */
+    @media (max-width: 600px) {
+      .reveal { font-size: 16px; }
+      .reveal .slides section { padding: 6px 12px !important; }
+      .step-row { grid-template-columns: 1fr !important; }
+      .principle-grid { grid-template-columns: 1fr !important; }
+      .resource-row { grid-template-columns: 1fr 1fr !important; }
+      .agenda-grid { grid-template-columns: 1fr !important; }
+      .duty-grid { grid-template-columns: 1fr !important; }
+      .ward-grid { grid-template-columns: 1fr 1fr !important; }
+      .two-col { grid-template-columns: 1fr !important; }
+      .section-num { display: none; }
+      .reveal h2 { font-size: 1em !important; }
+      .title-slide h1 { font-size: 1.4em !important; }
+      .gratitude-slide .body { font-size: 0.68em; line-height: 1.7; }
+    }
   </style>
 </head>
 <body>
@@ -875,7 +901,7 @@
 <!-- ============================================================ -->
 <section>
   <h2>President Nelson: His Mightiest Works</h2>
-  <div style="display:grid; grid-template-columns:180px 1fr; gap:1.4em; align-items:center; margin-top:0.4em;">
+  <div style="display:grid; grid-template-columns:minmax(120px,180px) 1fr; gap:1.4em; align-items:center; margin-top:0.4em;">
     <img src="https://www.churchofjesuschrist.org/imgs/94ad9711c67b272e1b6634b0ffdc39796f081c7c/full/500%2C/0/default"
       alt="Christ" class="slide-img" style="width:100%;" />
     <div>
@@ -1087,6 +1113,8 @@
     width: 1100,
     height: 700,
     margin: 0.05,
+    minScale: 0.1,
+    maxScale: 2.0,
     plugins: [ RevealNotes ]
   });
 </script>
