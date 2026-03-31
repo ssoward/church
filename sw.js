@@ -21,6 +21,9 @@ const STATIC_ASSETS = [
     '/pages/gallery.html',
     '/pages/applications.html',
     '/pages/about.html',
+    // Activity files
+    '/activities/index.html',
+    '/activities/hat-riddle/index.html',
     // Presentation files
     '/presentations/confidence-in-presence-of-god/confidence-presentation.html',
     '/presentations/confidence-in-presence-of-god/confidence-presentation-fixes.css',

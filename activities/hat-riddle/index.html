@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Alien Hat Riddle</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --neon-green: #39ff14;
+    --neon-purple: #b026ff;
+    --neon-pink: #ff2cf1;
+    --neon-cyan: #00fff7;
+    --dark-bg: #0a0a1a;
+    --card-bg: #12122a;
+    --card-border: #2a2a5a;
+    --text: #e0e0f0;
+    --text-dim: #8888aa;
+    --hat-black: #1a1a2e;
+    --hat-white: #f0f0ff;
+    --eaten-red: #ff3344;
+    --saved-green: #39ff14;
+  }
+
+  body {
+    background: var(--dark-bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Stars background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1.5px 1.5px at 50% 10%, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 90% 30%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1.5px 1.5px at 15% 85%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 45% 45%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1px 1px at 80% 55%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1.5px 1.5px at 60% 90%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 25% 35%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 5% 50%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px 1px at 95% 70%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1.2px 1.2px at 35% 15%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 75% 40%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 55% 75%, rgba(255,255,255,0.6), transparent);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    padding: 30px 0 20px;
+  }
+
+  .header h1 {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    background: linear-gradient(135deg, var(--neon-green), var(--neon-cyan), var(--neon-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+  }
+
+  .header .subtitle {
+    color: var(--text-dim);
+    font-size: 1.1rem;
+  }
+
+  /* STORY CARD */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon-green), var(--neon-purple), var(--neon-pink));
+  }
+
+  .card h2 {
+    color: var(--neon-cyan);
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .card h2 .icon { font-size: 1.5rem; }
+
+  .story-text {
+    line-height: 1.7;
+    color: var(--text);
+    font-size: 0.95rem;
+  }
+
+  .story-text strong { color: var(--neon-green); }
+
+  /* CONTROLS */
+  .controls {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .btn {
+    padding: 12px 28px;
+    border: 2px solid;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: transparent;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: translateY(0); }
+
+  .btn-play {
+    color: var(--neon-green);
+    border-color: var(--neon-green);
+  }
+  .btn-play:hover {
+    background: rgba(57, 255, 20, 0.15);
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
+  }
+
+  .btn-step {
+    color: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+  }
+  .btn-step:hover {
+    background: rgba(0, 255, 247, 0.15);
+    box-shadow: 0 0 20px rgba(0, 255, 247, 0.3);
+  }
+
+  .btn-random {
+    color: var(--neon-purple);
+    border-color: var(--neon-purple);
+  }
+  .btn-random:hover {
+    background: rgba(176, 38, 255, 0.15);
+    box-shadow: 0 0 20px rgba(176, 38, 255, 0.3);
+  }
+
+  .btn-reset {
+    color: var(--neon-pink);
+    border-color: var(--neon-pink);
+  }
+  .btn-reset:hover {
+    background: rgba(255, 44, 241, 0.15);
+    box-shadow: 0 0 20px rgba(255, 44, 241, 0.3);
+  }
+
+  .btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* SCOREBOARD */
+  .scoreboard {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .score-item {
+    text-align: center;
+    min-width: 100px;
+  }
+
+  .score-item .label {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+
+  .score-item .value {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .score-saved .value { color: var(--saved-green); }
+  .score-eaten .value { color: var(--eaten-red); }
+  .score-total .value { color: var(--neon-cyan); }
+
+  /* LINE SCENE */
+  .scene-wrapper {
+    overflow-x: auto;
+    padding: 10px 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .scene {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0;
+    min-width: 900px;
+    padding: 20px 10px 30px;
+    position: relative;
+    min-height: 300px;
+  }
+
+  /* Direction labels */
+  .direction-labels {
+    display: flex;
+    justify-content: space-between;
+    min-width: 900px;
+    padding: 0 30px;
+    margin-bottom: 0;
+  }
+
+  .dir-label {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .dir-label.back { color: var(--neon-green); }
+  .dir-label.front { color: var(--neon-purple); }
+
+  /* Vision arrow */
+  .vision-arrow {
+    position: absolute;
+    bottom: 12px;
+    left: 60px;
+    right: 60px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  .vision-arrow .arrow-line {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon-cyan), var(--neon-cyan));
+    position: relative;
+  }
+
+  .vision-arrow .arrow-head {
+    width: 0; height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 10px solid var(--neon-cyan);
+  }
+
+  .vision-arrow .arrow-label {
+    position: absolute;
+    left: 50%;
+    top: -16px;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    color: var(--neon-cyan);
+    white-space: nowrap;
+    letter-spacing: 1px;
+  }
+
+  /* PERSON */
+  .person-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    flex-shrink: 0;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .person-slot.active {
+    transform: scale(1.08);
+    z-index: 10;
+  }
+
+  .person-slot.active .person-body {
+    filter: drop-shadow(0 0 12px var(--neon-cyan));
+  }
+
+  .person-slot.guessed-correct .person-body {
+    filter: drop-shadow(0 0 8px var(--saved-green));
+  }
+
+  .person-slot.guessed-wrong .person-body {
+    filter: drop-shadow(0 0 8px var(--eaten-red));
+  }
+
+  .person-number {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+
+  .person-slot.active .person-number {
+    color: var(--neon-cyan);
+  }
+
+  /* Hat */
+  .hat {
+    width: 36px;
+    height: 40px;
+    position: relative;
+    margin-bottom: -2px;
+    transition: all 0.5s ease;
+  }
+
+  .hat-top {
+    width: 28px;
+    height: 30px;
+    margin: 0 auto;
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    transition: background 0.5s ease;
+  }
+
+  .hat-brim {
+    width: 36px;
+    height: 6px;
+    border-radius: 2px;
+    transition: background 0.5s ease;
+  }
+
+  .hat.black .hat-top {
+    background: linear-gradient(135deg, #2a2a3e, #0d0d1a);
+    border: 1px solid #444466;
+    border-bottom: none;
+  }
+  .hat.black .hat-brim {
+    background: linear-gradient(180deg, #333355, #1a1a2e);
+    border: 1px solid #444466;
+  }
+
+  .hat.white .hat-top {
+    background: linear-gradient(135deg, #ffffff, #d0d0e8);
+    border: 1px solid #aaaacc;
+    border-bottom: none;
+  }
+  .hat.white .hat-brim {
+    background: linear-gradient(180deg, #f0f0ff, #d8d8f0);
+    border: 1px solid #aaaacc;
+  }
+
+  .hat.hidden .hat-top,
+  .hat.hidden .hat-brim {
+    background: linear-gradient(135deg, #555577, #333355);
+    border-color: #666688;
+  }
+
+  .hat-label {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .hat.black .hat-label { color: #8888aa; }
+  .hat.white .hat-label { color: #555577; }
+  .hat.hidden .hat-label { color: #888; }
+
+  /* Person body (simple stick figure) */
+  .person-body {
+    width: 50px;
+    height: 70px;
+    position: relative;
+    transition: filter 0.3s ease;
+  }
+
+  .person-head {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffcc88, #ee9944);
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .person-head .eyes {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .person-head .eye {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #333;
+  }
+
+  .person-torso {
+    width: 2px;
+    height: 20px;
+    background: var(--text-dim);
+    margin: 0 auto;
+  }
+
+  .person-arms {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 2px;
+    background: var(--text-dim);
+    border-radius: 1px;
+  }
+
+  .person-legs {
+    width: 20px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .person-leg {
+    width: 2px;
+    height: 18px;
+    background: var(--text-dim);
+  }
+
+  .person-leg.left { transform: rotate(10deg); }
+  .person-leg.right { transform: rotate(-10deg); }
+
+  /* Eaten state */
+  .person-slot.eaten .person-body { opacity: 0.25; }
+  .person-slot.eaten .hat { opacity: 0.25; }
+
+  .person-slot .eaten-marker {
+    display: none;
+    position: absolute;
+    top: 30px;
+    font-size: 1.6rem;
+    z-index: 5;
+  }
+
+  .person-slot.eaten .eaten-marker { display: block; }
+
+  /* Guess bubble */
+  .guess-bubble {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    background: var(--card-bg);
+    border: 2px solid var(--neon-cyan);
+    border-radius: 12px;
+    padding: 4px 10px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 20;
+  }
+
+  .guess-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid var(--neon-cyan);
+  }
+
+  .guess-bubble.show { transform: translateX(-50%) scale(1); }
+
+  .guess-bubble.correct {
+    border-color: var(--saved-green);
+    color: var(--saved-green);
+  }
+  .guess-bubble.correct::after { border-top-color: var(--saved-green); }
+
+  .guess-bubble.wrong {
+    border-color: var(--eaten-red);
+    color: var(--eaten-red);
+  }
+  .guess-bubble.wrong::after { border-top-color: var(--eaten-red); }
+
+  /* ALIEN */
+  .alien-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    flex-shrink: 0;
+    margin-left: -10px;
+    position: relative;
+  }
+
+  .alien-emoji {
+    font-size: 3rem;
+    animation: alienFloat 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(57, 255, 20, 0.5));
+  }
+
+  @keyframes alienFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .alien-label {
+    font-size: 0.65rem;
+    color: var(--neon-green);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 4px;
+  }
+
+  /* PARITY TRACKER */
+  .parity-tracker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .parity-state {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .parity-label {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+  }
+
+  .parity-value {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    border: 2px solid;
+    min-width: 80px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .parity-value.odd {
+    border-color: var(--neon-pink);
+    color: var(--neon-pink);
+    background: rgba(255, 44, 241, 0.1);
+  }
+
+  .parity-value.even {
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+    background: rgba(0, 255, 247, 0.1);
+  }
+
+  .parity-value.unknown {
+    border-color: var(--text-dim);
+    color: var(--text-dim);
+    background: rgba(136, 136, 170, 0.1);
+  }
+
+  /* REASONING PANEL */
+  .reasoning-panel {
+    min-height: 120px;
+    transition: all 0.3s ease;
+  }
+
+  .reasoning-content {
+    line-height: 1.7;
+    font-size: 0.9rem;
+  }
+
+  .reasoning-content .step-title {
+    color: var(--neon-cyan);
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .reasoning-content .detail {
+    margin-left: 16px;
+    padding: 4px 0;
+  }
+
+  .reasoning-content .detail .label-r {
+    color: var(--neon-purple);
+    font-weight: 600;
+  }
+
+  .reasoning-content .deduction {
+    margin-top: 8px;
+    padding: 10px 16px;
+    background: rgba(57, 255, 20, 0.08);
+    border-left: 3px solid var(--neon-green);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .reasoning-content .deduction.wrong {
+    background: rgba(255, 51, 68, 0.08);
+    border-left-color: var(--eaten-red);
+  }
+
+  /* EXPLANATION PANEL */
+  .explanation h3 {
+    color: var(--neon-purple);
+    margin: 16px 0 8px;
+    font-size: 1rem;
+  }
+
+  .explanation p, .explanation li {
+    line-height: 1.7;
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+
+  .explanation ul {
+    margin-left: 20px;
+    margin-bottom: 12px;
+  }
+
+  .explanation li { margin-bottom: 4px; }
+
+  .explanation .formula {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(176, 38, 255, 0.1);
+    border: 1px solid rgba(176, 38, 255, 0.3);
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+    color: var(--neon-purple);
+    margin: 4px 0;
+  }
+
+  .explanation .key-insight {
+    padding: 12px 16px;
+    background: rgba(57, 255, 20, 0.06);
+    border: 1px solid rgba(57, 255, 20, 0.2);
+    border-radius: 8px;
+    margin: 12px 0;
+  }
+
+  .explanation .key-insight strong { color: var(--neon-green); }
+
+  /* Speed control */
+  .speed-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .speed-control label {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .speed-control input[type="range"] {
+    -webkit-appearance: none;
+    width: 120px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--card-border);
+    outline: none;
+  }
+
+  .speed-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--neon-cyan);
+    cursor: pointer;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .container { padding: 12px; }
+    .card { padding: 16px; }
+    .scene { min-width: 750px; }
+    .direction-labels { min-width: 750px; }
+    .person-slot { width: 65px; }
+    .controls { gap: 8px; }
+    .btn { padding: 10px 20px; font-size: 0.85rem; }
+    .scoreboard { gap: 20px; }
+  }
+
+  /* Glow pulse for active step */
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 5px rgba(0, 255, 247, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(0, 255, 247, 0.6); }
+  }
+
+  .card.highlight {
+    animation: glowPulse 1.5s ease-in-out infinite;
+  }
+
+  /* Fade in for reasoning */
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in { animation: fadeSlideIn 0.4s ease forwards; }
+
+  /* Skull fade */
+  @keyframes skullAppear {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .person-slot.eaten .eaten-marker {
+    animation: skullAppear 0.4s ease forwards;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 30px 0 20px;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>The Alien Hat Riddle</h1>
+    <div class="subtitle">A classic logic puzzle with an extraterrestrial twist</div>
+  </div>
+
+  <!-- STORY -->
+  <div class="card" id="story-card">
+    <h2><span class="icon">&#x1F47E;</span> The Scenario</h2>
+    <div class="story-text">
+      An alien has captured <strong>10 humans</strong> and lines them up single-file.
+      Each person can see everyone <strong>in front</strong> of them, but nobody behind.
+      The alien randomly places a <strong>black or white hat</strong> on each person's head.
+      Starting from the <strong>back of the line</strong>, each person must guess the color of their own hat.
+      They may only say <strong>"Black"</strong> or <strong>"White"</strong>. Everyone hears every guess.
+      Guess wrong and the alien <strong>eats you</strong>.
+      But the humans have a secret strategy that guarantees at least <strong>9 out of 10</strong> survive...
+    </div>
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="controls">
+    <button class="btn btn-random" id="btn-randomize" onclick="randomize()">Randomize Hats</button>
+    <button class="btn btn-play" id="btn-play" onclick="playAll()">Play All</button>
+    <button class="btn btn-step" id="btn-step" onclick="stepNext()">Next Step</button>
+    <button class="btn btn-reset" id="btn-reset" onclick="resetSimulation()">Reset</button>
+  </div>
+
+  <div class="speed-control">
+    <label>Speed</label>
+    <input type="range" id="speed-slider" min="1" max="5" value="3" step="1">
+    <span id="speed-label" style="color: var(--text-dim); font-size: 0.8rem;">Normal</span>
+  </div>
+
+  <!-- SCOREBOARD -->
+  <div class="scoreboard">
+    <div class="score-item score-saved">
+      <div class="label">Saved</div>
+      <div class="value" id="score-saved">-</div>
+    </div>
+    <div class="score-item score-eaten">
+      <div class="label">Eaten</div>
+      <div class="value" id="score-eaten">-</div>
+    </div>
+    <div class="score-item score-total">
+      <div class="label">Round</div>
+      <div class="value" id="score-round">0</div>
+    </div>
+  </div>
+
+  <!-- SCENE -->
+  <div class="card">
+    <h2><span class="icon">&#x1F3A9;</span> The Line</h2>
+    <div class="scene-wrapper">
+      <div class="direction-labels">
+        <span class="dir-label back">&larr; Back (guesses first)</span>
+        <span class="dir-label front">Front (guesses last) &rarr;</span>
+      </div>
+      <div class="scene" id="scene">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- PARITY TRACKER -->
+  <div class="card" id="parity-card">
+    <h2><span class="icon">&#x1F522;</span> Parity Tracker</h2>
+    <div class="parity-tracker">
+      <div class="parity-state">
+        <span class="parity-label">Running parity of black hats:</span>
+        <span class="parity-value unknown" id="parity-display">--</span>
+      </div>
+      <div class="parity-state">
+        <span class="parity-label">Black hats seen ahead:</span>
+        <span class="parity-value unknown" id="seen-ahead-display">--</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- REASONING -->
+  <div class="card reasoning-panel" id="reasoning-card">
+    <h2><span class="icon">&#x1F9E0;</span> Reasoning</h2>
+    <div class="reasoning-content" id="reasoning-content">
+      <p style="color: var(--text-dim);">Click "Next Step" or "Play All" to begin the walkthrough.</p>
+    </div>
+  </div>
+
+  <!-- EXPLANATION -->
+  <div class="card" id="explanation-card">
+    <h2><span class="icon">&#x1F4A1;</span> Why This Works</h2>
+    <div class="explanation">
+      <h3>The Parity Strategy</h3>
+      <p>
+        The key insight is <strong>parity</strong> -- whether a count is odd or even.
+        Before the game begins, all 10 people agree on this strategy:
+      </p>
+
+      <div class="key-insight">
+        <strong>The Rule:</strong> The person at the back counts all the black hats they can see.
+        If the count is odd, they say "Black". If even, they say "White".
+        This encodes the parity of all visible black hats into a single word.
+      </div>
+
+      <h3>How Each Subsequent Person Deduces Their Hat</h3>
+      <ul>
+        <li>Everyone hears every guess and knows the strategy.</li>
+        <li>Person 2 (second from back) knows the announced parity. They can see 8 hats ahead of them.</li>
+        <li>They count the black hats they see. If the parity of what they see <em>matches</em> the announced parity, their own hat must be <strong>white</strong> (adding their hat doesn't change parity).</li>
+        <li>If the parity <em>differs</em>, their own hat must be <strong>black</strong> (their hat flips the parity).</li>
+        <li>Each person after that updates the running parity based on whether the previous guess was "Black" (flip parity) or "White" (keep parity), then applies the same logic.</li>
+      </ul>
+
+      <h3>The Math</h3>
+      <p>
+        Let <span class="formula">P</span> = parity announced by the back person (0 = even, 1 = odd).
+      </p>
+      <p>
+        For person <em>i</em>, let <span class="formula">H(i)</span> = number of "Black" guesses heard so far (from people behind, not including the back person's actual hat), and <span class="formula">S(i)</span> = number of black hats they see ahead.
+      </p>
+      <p>
+        Their hat is <strong>Black</strong> if:
+        <span class="formula">(P + H(i) + S(i)) mod 2 = 1</span>
+      </p>
+      <p>
+        Their hat is <strong>White</strong> if:
+        <span class="formula">(P + H(i) + S(i)) mod 2 = 0</span>
+      </p>
+
+      <div class="key-insight">
+        <strong>Result:</strong> The first person (back of line) has a 50/50 chance -- they are the sacrifice.
+        Everyone else can deduce their hat with <strong>100% certainty</strong>.
+        Guaranteed minimum: <strong>9 out of 10 survive</strong>.
+      </div>
+
+      <h3>Why Does the Back Person Risk Themselves?</h3>
+      <p>
+        The back person's guess encodes <em>information</em> (the parity) rather than a true guess about their own hat.
+        Their actual hat color is independent of what they see, so they have no information about it.
+        By sacrificing their certainty, they give everyone else the one piece of missing information needed.
+      </p>
+    </div>
+  </div>
+
+  <div class="footer">
+    A classic logic puzzle, visualized. The parity strategy is provably optimal for this setup.
+  </div>
+
+</div>
+
+<script>
+(function() {
+  const N = 10;
+  let hats = [];           // 0 = white, 1 = black
+  let currentStep = -1;    // -1 = not started, 0..N-1 = person guessing
+  let guesses = [];
+  let results = [];        // true = correct, false = wrong
+  let isPlaying = false;
+  let playTimer = null;
+  let roundCount = 0;
+  let totalSaved = 0;
+  let totalEaten = 0;
+
+  const speedLabels = ['Slow', 'Relaxed', 'Normal', 'Fast', 'Instant'];
+
+  function getDelay() {
+    const v = parseInt(document.getElementById('speed-slider').value);
+    return [2500, 1800, 1200, 600, 150][v - 1];
+  }
+
+  document.getElementById('speed-slider').addEventListener('input', function() {
+    document.getElementById('speed-label').textContent = speedLabels[this.value - 1];
+  });
+
+  // Initialize
+  function init() {
+    randomize();
+  }
+
+  function randomize() {
+    stopPlay();
+    hats = [];
+    for (let i = 0; i < N; i++) {
+      hats.push(Math.random() < 0.5 ? 1 : 0);
+    }
+    currentStep = -1;
+    guesses = [];
+    results = [];
+    renderScene();
+    renderParity();
+    renderReasoning();
+    updateButtons();
+  }
+
+  function resetSimulation() {
+    stopPlay();
+    currentStep = -1;
+    guesses = [];
+    results = [];
+    renderScene();
+    renderParity();
+    renderReasoning();
+    updateButtons();
+  }
+
+  function stopPlay() {
+    isPlaying = false;
+    if (playTimer) {
+      clearTimeout(playTimer);
+      playTimer = null;
+    }
+  }
+
+  function updateButtons() {
+    const done = currentStep >= N - 1;
+    document.getElementById('btn-play').disabled = done || isPlaying;
+    document.getElementById('btn-step').disabled = done || isPlaying;
+    document.getElementById('btn-randomize').disabled = isPlaying;
+    document.getElementById('btn-reset').disabled = isPlaying;
+  }
+
+  // ---- RENDERING ----
+
+  function renderScene() {
+    const scene = document.getElementById('scene');
+    scene.innerHTML = '';
+
+    for (let i = 0; i < N; i++) {
+      const slot = document.createElement('div');
+      slot.className = 'person-slot';
+      slot.id = 'person-' + i;
+
+      // Determine states
+      const hasGuessed = i < guesses.length;
+      const isActive = i === currentStep;
+      const isCorrect = hasGuessed ? results[i] : null;
+
+      if (isActive) slot.classList.add('active');
+      if (hasGuessed && isCorrect) slot.classList.add('guessed-correct');
+      if (hasGuessed && !isCorrect) {
+        slot.classList.add('guessed-wrong');
+        slot.classList.add('eaten');
+      }
+
+      // Number
+      const numEl = document.createElement('div');
+      numEl.className = 'person-number';
+      numEl.textContent = i === 0 ? '#1 (Back)' : i === N - 1 ? '#' + (i + 1) + ' (Front)' : '#' + (i + 1);
+      slot.appendChild(numEl);
+
+      // Guess bubble
+      const bubble = document.createElement('div');
+      bubble.className = 'guess-bubble';
+      if (hasGuessed) {
+        bubble.textContent = guesses[i] === 1 ? 'Black!' : 'White!';
+        bubble.classList.add('show');
+        bubble.classList.add(isCorrect ? 'correct' : 'wrong');
+      }
+      slot.appendChild(bubble);
+
+      // Hat
+      const hat = document.createElement('div');
+      const hatColor = hats[i] === 1 ? 'black' : 'white';
+      hat.className = 'hat ' + hatColor;
+
+      const hatTop = document.createElement('div');
+      hatTop.className = 'hat-top';
+      const hatLabel = document.createElement('span');
+      hatLabel.className = 'hat-label';
+      hatLabel.textContent = hats[i] === 1 ? 'B' : 'W';
+      hatTop.appendChild(hatLabel);
+
+      const hatBrim = document.createElement('div');
+      hatBrim.className = 'hat-brim';
+
+      hat.appendChild(hatTop);
+      hat.appendChild(hatBrim);
+      slot.appendChild(hat);
+
+      // Body
+      const body = document.createElement('div');
+      body.className = 'person-body';
+
+      const head = document.createElement('div');
+      head.className = 'person-head';
+      const eyes = document.createElement('div');
+      eyes.className = 'eyes';
+      eyes.innerHTML = '<div class="eye"></div><div class="eye"></div>';
+      head.appendChild(eyes);
+
+      const torso = document.createElement('div');
+      torso.className = 'person-torso';
+
+      const arms = document.createElement('div');
+      arms.className = 'person-arms';
+
+      const legs = document.createElement('div');
+      legs.className = 'person-legs';
+      legs.innerHTML = '<div class="person-leg left"></div><div class="person-leg right"></div>';
+
+      body.appendChild(head);
+      body.appendChild(torso);
+      body.appendChild(arms);
+      body.appendChild(legs);
+      slot.appendChild(body);
+
+      // Eaten marker
+      const eaten = document.createElement('div');
+      eaten.className = 'eaten-marker';
+      eaten.textContent = '\u2620\uFE0F';
+      slot.appendChild(eaten);
+
+      scene.appendChild(slot);
+    }
+
+    // Alien
+    const alienSlot = document.createElement('div');
+    alienSlot.className = 'alien-slot';
+    alienSlot.innerHTML = '<div class="alien-emoji">&#x1F47E;</div><div class="alien-label">Alien</div>';
+    scene.appendChild(alienSlot);
+
+    // Vision arrow
+    const arrow = document.createElement('div');
+    arrow.className = 'vision-arrow';
+    arrow.innerHTML = '<div class="arrow-line"><span class="arrow-label">direction of sight &#x1F440;</span></div><div class="arrow-head"></div>';
+    scene.appendChild(arrow);
+  }
+
+  function renderParity() {
+    const parityEl = document.getElementById('parity-display');
+    const seenEl = document.getElementById('seen-ahead-display');
+
+    if (currentStep < 0) {
+      parityEl.textContent = '--';
+      parityEl.className = 'parity-value unknown';
+      seenEl.textContent = '--';
+      seenEl.className = 'parity-value unknown';
+      return;
+    }
+
+    // Running parity: what the current person knows
+    // After person 0 guesses, the announced parity is known
+    const announcedParity = computeAnnouncedParity();
+
+    if (currentStep === 0) {
+      // Back person: counting black hats they see
+      const blackSeen = countBlackAhead(0);
+      const parity = blackSeen % 2; // 0=even, 1=odd
+      parityEl.textContent = parity === 1 ? 'ODD' : 'EVEN';
+      parityEl.className = 'parity-value ' + (parity === 1 ? 'odd' : 'even');
+      seenEl.textContent = blackSeen + ' black';
+      seenEl.className = 'parity-value ' + (blackSeen % 2 === 1 ? 'odd' : 'even');
+    } else {
+      // Subsequent persons: running parity from guesses heard
+      const blackGuessedBehind = countBlackGuessedBehind(currentStep);
+      const blackSeenAhead = countBlackAhead(currentStep);
+      const runningTotal = announcedParity + blackGuessedBehind + blackSeenAhead;
+      const runParity = runningTotal % 2;
+
+      parityEl.textContent = runParity === 1 ? 'ODD' : 'EVEN';
+      parityEl.className = 'parity-value ' + (runParity === 1 ? 'odd' : 'even');
+      seenEl.textContent = blackSeenAhead + ' black ahead';
+      seenEl.className = 'parity-value ' + (blackSeenAhead % 2 === 1 ? 'odd' : 'even');
+    }
+  }
+
+  function renderReasoning() {
+    const el = document.getElementById('reasoning-content');
+
+    if (currentStep < 0) {
+      el.innerHTML = '<p style="color: var(--text-dim);">Click "Next Step" or "Play All" to begin the walkthrough.</p>';
+      return;
+    }
+
+    const i = currentStep;
+    let html = '<div class="fade-in">';
+
+    if (i === 0) {
+      const blackSeen = countBlackAhead(0);
+      const parity = blackSeen % 2;
+      const guess = parity === 1 ? 1 : 0;
+      const actual = hats[0];
+      const correct = guess === actual;
+
+      html += '<div class="step-title">Step 1: Person #1 (Back of Line)</div>';
+      html += '<div class="detail"><span class="label-r">Can see:</span> All 9 hats in front of them.</div>';
+      html += '<div class="detail"><span class="label-r">Counts black hats ahead:</span> ' + blackSeen + '</div>';
+      html += '<div class="detail"><span class="label-r">Parity of count:</span> ' + (parity === 1 ? 'ODD' : 'EVEN') + '</div>';
+      html += '<div class="detail"><span class="label-r">Strategy:</span> If odd, say "Black". If even, say "White".</div>';
+      html += '<div class="detail"><span class="label-r">Announces:</span> <strong>"' + (guess === 1 ? 'Black' : 'White') + '"</strong></div>';
+      html += '<div class="deduction' + (correct ? '' : ' wrong') + '">';
+      html += correct
+        ? 'Lucky! Their hat IS ' + (actual === 1 ? 'black' : 'white') + '. They survive! But they had no way to know -- 50/50 chance.'
+        : 'Unlucky! Their hat is actually ' + (actual === 1 ? 'black' : 'white') + '. The alien eats them. This is the sacrifice -- they had a 50/50 chance.';
+      html += '</div>';
+    } else {
+      const announcedParity = computeAnnouncedParity();
+      const blackGuessedBehind = countBlackGuessedBehind(i);
+      const blackSeenAhead = countBlackAhead(i);
+      const total = announcedParity + blackGuessedBehind + blackSeenAhead;
+      const myHatMustBeBlack = total % 2 === 1;
+      const guess = myHatMustBeBlack ? 1 : 0;
+      const actual = hats[i];
+      const correct = guess === actual;
+
+      html += '<div class="step-title">Step ' + (i + 1) + ': Person #' + (i + 1) + (i === N - 1 ? ' (Front of Line)' : '') + '</div>';
+      html += '<div class="detail"><span class="label-r">Announced parity (P):</span> ' + (announcedParity === 1 ? 'ODD (1)' : 'EVEN (0)') + '</div>';
+      html += '<div class="detail"><span class="label-r">"Black" guesses heard behind (H):</span> ' + blackGuessedBehind + ' (from persons #2' + (i > 1 ? ' to #' + i : '') + ')</div>';
+      html += '<div class="detail"><span class="label-r">Black hats seen ahead (S):</span> ' + blackSeenAhead + (i < N - 1 ? ' (persons #' + (i + 2) + ' to #' + N + ')' : ' (no one ahead)') + '</div>';
+      html += '<div class="detail"><span class="label-r">Calculation:</span> (P + H + S) mod 2 = (' + announcedParity + ' + ' + blackGuessedBehind + ' + ' + blackSeenAhead + ') mod 2 = ' + (total % 2) + '</div>';
+      html += '<div class="detail"><span class="label-r">Logic:</span> If result is 1, my hat is Black. If 0, my hat is White.</div>';
+      html += '<div class="detail"><span class="label-r">Deduction:</span> <strong>"' + (guess === 1 ? 'Black' : 'White') + '"</strong></div>';
+      html += '<div class="deduction">';
+      html += 'Correct! This is guaranteed by the parity strategy -- person #' + (i + 1) + ' can always deduce their hat with certainty.';
+      html += '</div>';
+    }
+
+    html += '</div>';
+    el.innerHTML = html;
+  }
+
+  // ---- LOGIC ----
+
+  function countBlackAhead(personIndex) {
+    let count = 0;
+    for (let j = personIndex + 1; j < N; j++) {
+      if (hats[j] === 1) count++;
+    }
+    return count;
+  }
+
+  function computeAnnouncedParity() {
+    // What person 0 announced: parity of black hats they saw
+    const blackSeen = countBlackAhead(0);
+    return blackSeen % 2; // 0 = even (said White), 1 = odd (said Black)
+  }
+
+  function countBlackGuessedBehind(personIndex) {
+    // Count "Black" guesses from person 1 to person (personIndex-1)
+    // NOTE: We don't count person 0's guess here because person 0's guess
+    // IS the parity announcement (P). We only count actual "Black" guesses
+    // from persons between 0 and current person.
+    let count = 0;
+    for (let j = 1; j < personIndex; j++) {
+      if (j < guesses.length && guesses[j] === 1) count++;
+    }
+    return count;
+  }
+
+  function computeGuess(personIndex) {
+    if (personIndex === 0) {
+      const blackSeen = countBlackAhead(0);
+      return blackSeen % 2 === 1 ? 1 : 0; // odd -> Black, even -> White
+    }
+
+    const announcedParity = computeAnnouncedParity();
+    const blackGuessedBehind = countBlackGuessedBehind(personIndex);
+    const blackSeenAhead = countBlackAhead(personIndex);
+    const total = announcedParity + blackGuessedBehind + blackSeenAhead;
+    return total % 2 === 1 ? 1 : 0;
+  }
+
+  // ---- SIMULATION ----
+
+  function stepNext() {
+    if (currentStep >= N - 1) return;
+
+    currentStep++;
+    const guess = computeGuess(currentStep);
+    guesses.push(guess);
+    results.push(guess === hats[currentStep]);
+
+    renderScene();
+    renderParity();
+    renderReasoning();
+    updateButtons();
+
+    // Update scoreboard when done
+    if (currentStep >= N - 1) {
+      finishRound();
+    }
+  }
+
+  function playAll() {
+    if (currentStep >= N - 1) return;
+    isPlaying = true;
+    updateButtons();
+    playStep();
+  }
+
+  function playStep() {
+    if (!isPlaying) return;
+    if (currentStep >= N - 1) {
+      isPlaying = false;
+      updateButtons();
+      return;
+    }
+
+    stepNext();
+
+    if (currentStep < N - 1) {
+      playTimer = setTimeout(playStep, getDelay());
+    } else {
+      isPlaying = false;
+      updateButtons();
+    }
+  }
+
+  function finishRound() {
+    roundCount++;
+    let saved = 0, eaten = 0;
+    for (let i = 0; i < N; i++) {
+      if (results[i]) saved++;
+      else eaten++;
+    }
+    totalSaved += saved;
+    totalEaten += eaten;
+
+    document.getElementById('score-saved').textContent = saved;
+    document.getElementById('score-eaten').textContent = eaten;
+    document.getElementById('score-round').textContent = roundCount;
+  }
+
+  // Expose to global
+  window.randomize = randomize;
+  window.resetSimulation = resetSimulation;
+  window.playAll = playAll;
+  window.stepNext = stepNext;
+
+  // Init on load
+  init();
+})();
+</script>
+
+</body>
+</html>
