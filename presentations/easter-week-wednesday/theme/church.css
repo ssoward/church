@@ -1,0 +1,136 @@
+/* Church-Branded Theme for Reveal.js */
+
+:root {
+  --church-blue: #0073CF;
+  --church-blue-dark: #005a9c;
+  --church-blue-light: #e6f2ff;
+  --church-gold: #C9A84C;
+  --church-teal: #2E8B57;
+  --text-dark: #333;
+  --text-light: #666;
+  --border: #ddd;
+  --bg-gray: #f8f9fa;
+
+  /* Easter Week palette */
+  --easter-dark: #1a1008;
+  --easter-warm: #2c1a0a;
+  --easter-gold: #c8a96e;
+  --easter-cream: #f5ede0;
+  --easter-olive: #3d4a1c;
+}
+
+/* Override Reveal.js defaults */
+.reveal {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 32px;
+  font-weight: normal;
+  color: var(--text-dark);
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  text-transform: none;
+  font-weight: 700;
+  color: var(--church-blue);
+  line-height: 1.1;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.reveal h1 {
+  font-size: 2.8em;
+  text-shadow: none;
+  margin-top: 0;
+  margin-bottom: 0.3em;
+}
+
+.reveal h2 {
+  font-size: 2em;
+  margin: 0 0 0.3em 0;
+}
+
+.reveal h3 {
+  font-size: 1.5em;
+  margin: 0 0 0.2em 0;
+}
+
+.reveal p {
+  margin: 0.2em 0;
+  line-height: 1.4;
+}
+
+.reveal ul,
+.reveal ol {
+  margin: 0.2em 0;
+  text-align: left;
+}
+
+.reveal li {
+  margin-bottom: 0.1em;
+  font-size: 0.85em;
+}
+
+/* Slide backgrounds */
+.reveal .slides > section {
+  padding: 15px 30px 40px 30px;
+}
+
+/* Blockquote */
+.reveal blockquote {
+  background: rgba(255, 255, 255, 0.12);
+  padding: 0.8em 1.2em;
+  border-left: 5px solid var(--easter-gold);
+  font-size: 0.95em;
+  margin: 0.4em 0;
+  font-style: italic;
+  color: #f0e6d0;
+  line-height: 1.6;
+  box-shadow: none;
+  width: auto;
+}
+
+.reveal strong {
+  color: var(--easter-gold);
+  font-weight: 700;
+}
+
+/* Navigation and controls */
+.reveal .controls {
+  bottom: 30px;
+  right: 30px;
+}
+
+.reveal .controls button {
+  color: var(--easter-gold);
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.reveal .controls button:hover {
+  opacity: 1;
+}
+
+.reveal .progress {
+  background: rgba(200, 169, 110, 0.3);
+}
+
+.reveal .progress span {
+  background: var(--easter-gold);
+}
+
+.reveal .slide-number {
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--easter-gold);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 0.8em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .reveal h1 { font-size: 2em; }
+  .reveal h2 { font-size: 1.6em; }
+}
