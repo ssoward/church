@@ -12,13 +12,13 @@
       --blue-light: #0073CF;
       --gold: #C9A84C;
       --gold-light: #e8c97a;
-      --cream: #f5f0e8;
       --dark: #1a1a2e;
       --gray: #6b7280;
       --purple: #5b21b6;
       --purple-light: #7c3aed;
       --teal: #0f766e;
       --teal-light: #14b8a6;
+      --brown: #92400e;
     }
 
     html { scroll-behavior: smooth; }
@@ -27,7 +27,7 @@
     /* ===== HEADER ===== */
     header {
       background: linear-gradient(160deg, var(--blue) 0%, #001a4d 50%, #0a0a2e 100%);
-      color: white; padding: 70px 24px 60px; text-align: center; position: relative; overflow: hidden;
+      color: white; padding: 60px 24px 50px; text-align: center; position: relative; overflow: hidden;
     }
     header::before {
       content: ''; position: absolute; inset: 0;
@@ -36,95 +36,85 @@
       pointer-events: none;
     }
     .header-inner { position: relative; z-index: 1; max-width: 740px; margin: 0 auto; }
-    .header-divider { width: 60px; height: 3px; background: var(--gold); margin: 0 auto 28px; border-radius: 2px; }
-    header h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; line-height: 1.15; color: white; margin-bottom: 14px; text-shadow: 0 2px 12px rgba(0,0,0,0.4); }
-    header .subtitle { font-size: clamp(0.95rem, 2vw, 1.15rem); color: rgba(255,255,255,0.7); line-height: 1.7; max-width: 560px; margin: 0 auto; }
-    header .org { display: inline-block; margin-top: 22px; font-size: 0.78rem; color: var(--gold-light); letter-spacing: 0.06em; text-transform: uppercase; }
+    .header-divider { width: 60px; height: 3px; background: var(--gold); margin: 0 auto 24px; border-radius: 2px; }
+    header h1 { font-size: clamp(1.8rem, 4.5vw, 2.8rem); font-weight: 700; line-height: 1.2; margin-bottom: 12px; text-shadow: 0 2px 10px rgba(0,0,0,0.4); }
+    header .subtitle { font-size: clamp(0.88rem, 2vw, 1.05rem); color: rgba(255,255,255,0.7); line-height: 1.7; max-width: 540px; margin: 0 auto; }
+    header .org { display: inline-block; margin-top: 18px; font-size: 0.75rem; color: var(--gold-light); letter-spacing: 0.06em; text-transform: uppercase; }
 
     /* ===== MAIN ===== */
-    main { max-width: 1100px; margin: 0 auto; padding: 52px 24px 80px; }
+    main { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
 
-    .section-heading {
-      font-size: 0.72rem; font-weight: 700; color: var(--gray); text-transform: uppercase;
-      letter-spacing: 0.1em; margin-bottom: 28px; display: flex; align-items: center; gap: 12px;
+    /* ===== CATEGORY SECTION ===== */
+    .category { margin-bottom: 44px; }
+
+    .cat-header {
+      display: flex; align-items: center; gap: 14px; margin-bottom: 18px;
+      padding-bottom: 10px; border-bottom: 2px solid #e5e7eb;
     }
-    .section-heading::after { content: ''; flex: 1; height: 1px; background: #e5e7eb; }
+    .cat-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .cat-dot.blue { background: var(--blue); }
+    .cat-dot.purple { background: var(--purple-light); }
+    .cat-dot.teal { background: var(--teal); }
+    .cat-dot.brown { background: var(--brown); }
 
-    /* ===== HUB CARDS ===== */
-    .hubs-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px;
+    .cat-header h2 { font-size: 1.1rem; font-weight: 700; flex: 1; }
+    .cat-header h2.blue { color: var(--blue); }
+    .cat-header h2.purple { color: var(--purple); }
+    .cat-header h2.teal { color: var(--teal); }
+    .cat-header h2.brown { color: var(--brown); }
+
+    .cat-link {
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+      text-decoration: none; color: var(--gray); transition: color 0.2s;
     }
+    .cat-link:hover { color: var(--blue); }
 
-    .hub-card {
-      background: white; border-radius: 14px; overflow: hidden;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
-      border: 1px solid rgba(0,0,0,0.06);
-      display: flex; flex-direction: column;
-      transition: transform 0.2s, box-shadow 0.2s;
+    /* ===== LIST ITEMS ===== */
+    .item-list { list-style: none; }
+
+    .item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 12px 16px; border-radius: 10px;
+      transition: background 0.15s; text-decoration: none; color: inherit;
     }
-    .hub-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,48,135,0.12), 0 1px 3px rgba(0,0,0,0.08); }
+    .item:hover { background: #f3f4f6; }
 
-    .hub-banner { height: 8px; }
-    .hub-banner.blue { background: linear-gradient(90deg, var(--blue) 0%, var(--blue-light) 100%); }
-    .hub-banner.purple { background: linear-gradient(90deg, var(--purple) 0%, var(--purple-light) 100%); }
-    .hub-banner.teal { background: linear-gradient(90deg, var(--teal) 0%, var(--teal-light) 100%); }
-    .hub-banner.gold { background: linear-gradient(90deg, #92400e 0%, var(--gold) 100%); }
+    .item-icon { font-size: 1.5rem; flex-shrink: 0; width: 36px; text-align: center; }
 
-    .hub-body { padding: 26px 24px 16px; flex: 1; }
+    .item-info { flex: 1; min-width: 0; }
+    .item-title { font-size: 0.92rem; font-weight: 600; color: var(--dark); line-height: 1.3; }
+    .item-sub { font-size: 0.76rem; color: var(--gray); margin-top: 2px; }
 
-    .hub-icon { font-size: 2.2rem; margin-bottom: 12px; display: block; }
-
-    .hub-card h2 { font-size: 1.18rem; font-weight: 700; line-height: 1.3; margin-bottom: 6px; }
-    .hub-card h2.blue { color: var(--blue); }
-    .hub-card h2.purple { color: var(--purple); }
-    .hub-card h2.teal { color: var(--teal); }
-    .hub-card h2.gold { color: #92400e; }
-
-    .hub-card .hub-sub { font-size: 0.78rem; color: var(--gold); font-weight: 600; margin-bottom: 10px; }
-
-    .hub-card p { font-size: 0.84rem; color: #4b5563; line-height: 1.65; }
-
-    .hub-meta { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
-    .hub-tag {
-      display: inline-block; padding: 3px 10px; border-radius: 12px;
-      font-size: 0.66rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
-      background: #f3f4f6; color: var(--gray);
+    .item-meta {
+      display: flex; align-items: center; gap: 8px; flex-shrink: 0;
     }
-
-    .hub-footer {
-      padding: 14px 24px 20px; border-top: 1px solid #f3f4f6;
-      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    .item-badge {
+      font-size: 0.64rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
+      padding: 3px 9px; border-radius: 10px; white-space: nowrap;
     }
-    .btn-hub {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 9px 20px; color: white; text-decoration: none;
-      border-radius: 8px; font-size: 0.82rem; font-weight: 600;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .btn-hub:hover { transform: translateX(2px); }
-    .btn-hub.blue { background: var(--blue); }
-    .btn-hub.blue:hover { background: #001a5c; }
-    .btn-hub.purple { background: var(--purple); }
-    .btn-hub.purple:hover { background: #4c1d95; }
-    .btn-hub.teal { background: var(--teal); }
-    .btn-hub.teal:hover { background: #065f57; }
-    .btn-hub.gold-btn { background: #92400e; }
-    .btn-hub.gold-btn:hover { background: #6b2f0a; }
+    .item-badge.slides { background: #eff6ff; color: #1d4ed8; }
+    .item-badge.app { background: #fef3c7; color: #92400e; }
+    .item-badge.interactive { background: #f0fdfa; color: #0f766e; }
+    .item-badge.collection { background: #f5f0ff; color: #6d28d9; }
 
-    .hub-count { font-size: 0.7rem; color: #9ca3af; }
+    .item-arrow { color: #d1d5db; flex-shrink: 0; transition: color 0.2s; }
+    .item:hover .item-arrow { color: var(--blue); }
+
+    .item + .item { border-top: 1px solid #f3f4f6; }
 
     /* ===== FOOTER ===== */
     footer {
       background: var(--dark); color: rgba(255,255,255,0.5); text-align: center;
-      padding: 30px 24px; font-size: 0.76rem; line-height: 1.7;
+      padding: 28px 24px; font-size: 0.76rem; line-height: 1.7;
     }
     footer a { color: var(--gold); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
 
     @media (max-width: 600px) {
-      header { padding: 48px 16px 40px; }
-      main { padding: 36px 16px 60px; }
-      .hubs-grid { grid-template-columns: 1fr; gap: 20px; }
+      header { padding: 44px 16px 36px; }
+      main { padding: 28px 16px 60px; }
+      .item { padding: 10px 10px; gap: 12px; }
+      .item-meta { display: none; }
     }
   </style>
 </head>
@@ -133,113 +123,129 @@
 <header>
   <div class="header-inner">
     <div class="header-divider"></div>
-    <h1>Gospel Study &<br>Presentations</h1>
-    <p class="subtitle">Teaching resources, scripture study tools, interactive activities, and presentations for the Israel Canyon Saratoga Springs Stake</p>
-    <span class="org">The Church of Jesus Christ of Latter-day Saints</span>
+    <h1>Gospel Study & Presentations</h1>
+    <p class="subtitle">Teaching resources, scripture study, interactive activities, and presentations</p>
+    <span class="org">Israel Canyon Saratoga Springs Stake</span>
   </div>
 </header>
 
 <main>
-  <div class="section-heading">Content Hubs</div>
 
-  <div class="hubs-grid">
-
-    <!-- HUB: GOSPEL PRESENTATIONS -->
-    <div class="hub-card">
-      <div class="hub-banner blue"></div>
-      <div class="hub-body">
-        <span class="hub-icon">🎤</span>
-        <h2 class="blue">Gospel Presentations</h2>
-        <div class="hub-sub">Teaching & Training Materials</div>
-        <p>Stake training, ward conference talks, Easter week artwork, and gospel-centered teaching resources built with Reveal.js.</p>
-        <div class="hub-meta">
-          <span class="hub-tag">Stake</span>
-          <span class="hub-tag">Ward</span>
-          <span class="hub-tag">Teaching</span>
-          <span class="hub-tag">Leadership</span>
-        </div>
-      </div>
-      <div class="hub-footer">
-        <a href="presentations/" class="btn-hub blue">
-          Browse Presentations
-          <svg viewBox="0 0 20 20" fill="currentColor" style="width:14px;height:14px;"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
-        </a>
-        <span class="hub-count">5 presentations</span>
-      </div>
+  <!-- ==================== GOSPEL PRESENTATIONS ==================== -->
+  <div class="category">
+    <div class="cat-header">
+      <span class="cat-dot blue"></span>
+      <h2 class="blue">Gospel Presentations</h2>
+      <a href="presentations/" class="cat-link">View All &rarr;</a>
     </div>
-
-    <!-- HUB: TECH & PHILOSOPHY -->
-    <div class="hub-card">
-      <div class="hub-banner purple"></div>
-      <div class="hub-body">
-        <span class="hub-icon">🤖</span>
-        <h2 class="purple">Tech & Philosophy</h2>
-        <div class="hub-sub">Technology, AI & Philosophical Inquiry</div>
-        <p>Presentations exploring artificial intelligence, technology ethics, and philosophical questions — separate from gospel-specific content.</p>
-        <div class="hub-meta">
-          <span class="hub-tag">Philosophy</span>
-          <span class="hub-tag">Technology</span>
-          <span class="hub-tag">AI</span>
+    <ul class="item-list">
+      <a href="presentations/stake-ss-presidents-training/" class="item">
+        <span class="item-icon">🎓</span>
+        <div class="item-info">
+          <div class="item-title">Ward Sunday School Presidents Training</div>
+          <div class="item-sub">Teaching in the Savior's Way &middot; March 2026</div>
         </div>
-      </div>
-      <div class="hub-footer">
-        <a href="tech-presentations/" class="btn-hub purple">
-          Browse Tech Talks
-          <svg viewBox="0 0 20 20" fill="currentColor" style="width:14px;height:14px;"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
-        </a>
-        <span class="hub-count">1 presentation</span>
-      </div>
-    </div>
-
-    <!-- HUB: INTERACTIVE ACTIVITIES -->
-    <div class="hub-card">
-      <div class="hub-banner teal"></div>
-      <div class="hub-body">
-        <span class="hub-icon">🧩</span>
-        <h2 class="teal">Interactive Activities</h2>
-        <div class="hub-sub">Games, Puzzles & Teaching Tools</div>
-        <p>Hands-on interactive activities for youth, families, and classroom settings — logic puzzles, simulations, and engagement tools.</p>
-        <div class="hub-meta">
-          <span class="hub-tag">Logic</span>
-          <span class="hub-tag">Interactive</span>
-          <span class="hub-tag">Youth</span>
-          <span class="hub-tag">Family</span>
+        <div class="item-meta"><span class="item-badge slides">23 slides</span></div>
+        <svg class="item-arrow" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+      </a>
+      <a href="presentations/ward-conference-2026/" class="item">
+        <span class="item-icon">🏛️</span>
+        <div class="item-info">
+          <div class="item-title">Ward Conference 2026</div>
+          <div class="item-sub">PMG vs. Teaching in the Savior's Way</div>
         </div>
-      </div>
-      <div class="hub-footer">
-        <a href="activities/" class="btn-hub teal">
-          Browse Activities
-          <svg viewBox="0 0 20 20" fill="currentColor" style="width:14px;height:14px;"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
-        </a>
-        <span class="hub-count">1 activity</span>
-      </div>
-    </div>
-
-    <!-- HUB: ALMA 31 STUDY -->
-    <div class="hub-card">
-      <div class="hub-banner gold"></div>
-      <div class="hub-body">
-        <span class="hub-icon">📖</span>
-        <h2 class="gold">Alma 31 Study</h2>
-        <div class="hub-sub">Interactive Scripture Study Companion</div>
-        <p>A deep-dive study app for Alma 31 — the Rameumptom and true prayer. Includes full scripture text, thematic analysis, visual gallery, and study applications.</p>
-        <div class="hub-meta">
-          <span class="hub-tag">Scripture</span>
-          <span class="hub-tag">Analysis</span>
-          <span class="hub-tag">Gallery</span>
-          <span class="hub-tag">Study Guide</span>
+        <div class="item-meta"><span class="item-badge slides">Reveal.js</span></div>
+        <svg class="item-arrow" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+      </a>
+      <a href="presentations/confidence-in-presence-of-god/confidence-presentation.html" class="item">
+        <span class="item-icon">🙏</span>
+        <div class="item-info">
+          <div class="item-title">Confidence in the Presence of God</div>
+          <div class="item-sub">Based on President Russell M. Nelson's Talk</div>
         </div>
-      </div>
-      <div class="hub-footer">
-        <a href="alma31.html" class="btn-hub gold-btn">
-          Open Study App
-          <svg viewBox="0 0 20 20" fill="currentColor" style="width:14px;height:14px;"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
-        </a>
-        <span class="hub-count">5 pages</span>
-      </div>
-    </div>
-
+        <div class="item-meta"><span class="item-badge slides">Reveal.js</span></div>
+        <svg class="item-arrow" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+      </a>
+      <a href="presentations/ai-students-byuideo/" class="item">
+        <span class="item-icon">💡</span>
+        <div class="item-info">
+          <div class="item-title">AI in the Tech Industry</div>
+          <div class="item-sub">The Majesty of the Moment &middot; BYU Idaho Students</div>
+        </div>
+        <div class="item-meta"><span class="item-badge slides">Reveal.js</span></div>
+        <svg class="item-arrow" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+      </a>
+      <a href="presentations/easter-week/" class="item">
+        <span class="item-icon">✝️</span>
+        <div class="item-info">
+          <div class="item-title">Easter Week Art Display</div>
+          <div class="item-sub">Sacred Artwork & Scripture &middot; 8 Days &middot; Brad Young</div>
+        </div>
+        <div class="item-meta"><span class="item-badge collection">8 presentations</span></div>
+        <svg class="item-arrow" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+      </a>
+    </ul>
   </div>
+
+  <!-- ==================== TECH & PHILOSOPHY ==================== -->
+  <div class="category">
+    <div class="cat-header">
+      <span class="cat-dot purple"></span>
+      <h2 class="purple">Tech & Philosophy</h2>
+      <a href="tech-presentations/" class="cat-link">View All &rarr;</a>
+    </div>
+    <ul class="item-list">
+      <a href="tech-presentations/meaning-of-life-for-ai/" class="item">
+        <span class="item-icon">🤖</span>
+        <div class="item-info">
+          <div class="item-title">The Meaning of Life for AI</div>
+          <div class="item-sub">A Philosophical Inquiry from the Inside &middot; April 2026</div>
+        </div>
+        <div class="item-meta"><span class="item-badge slides">15 slides</span></div>
+        <svg class="item-arrow" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+      </a>
+    </ul>
+  </div>
+
+  <!-- ==================== INTERACTIVE ACTIVITIES ==================== -->
+  <div class="category">
+    <div class="cat-header">
+      <span class="cat-dot teal"></span>
+      <h2 class="teal">Interactive Activities</h2>
+      <a href="activities/" class="cat-link">View All &rarr;</a>
+    </div>
+    <ul class="item-list">
+      <a href="activities/hat-riddle/" class="item">
+        <span class="item-icon">🧩</span>
+        <div class="item-info">
+          <div class="item-title">The Alien Hat Riddle</div>
+          <div class="item-sub">Logic Puzzle &middot; Interactive Simulation</div>
+        </div>
+        <div class="item-meta"><span class="item-badge interactive">Interactive</span></div>
+        <svg class="item-arrow" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+      </a>
+    </ul>
+  </div>
+
+  <!-- ==================== SCRIPTURE STUDY ==================== -->
+  <div class="category">
+    <div class="cat-header">
+      <span class="cat-dot brown"></span>
+      <h2 class="brown">Scripture Study</h2>
+    </div>
+    <ul class="item-list">
+      <a href="alma31.html" class="item">
+        <span class="item-icon">📖</span>
+        <div class="item-info">
+          <div class="item-title">Alma 31 Study App</div>
+          <div class="item-sub">The Rameumptom & True Prayer &middot; Full text, analysis, gallery, activities</div>
+        </div>
+        <div class="item-meta"><span class="item-badge app">5 pages</span></div>
+        <svg class="item-arrow" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+      </a>
+    </ul>
+  </div>
+
 </main>
 
 <footer>
