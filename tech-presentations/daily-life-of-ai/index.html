@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Day in the Life of AI</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a1a; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+
+    canvas { display: block; position: absolute; inset: 0; }
+
+    /* ===== DOM OVERLAY ===== */
+    #overlay {
+      position: absolute; inset: 0; pointer-events: none; z-index: 10;
+      display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+      padding: 24px;
+    }
+
+    /* Top bar: clock + phase name */
+    .top-bar { text-align: center; pointer-events: none; }
+    .clock {
+      font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 200; color: rgba(255,255,255,0.85);
+      letter-spacing: 0.08em; text-shadow: 0 0 20px rgba(124,58,237,0.4);
+      font-variant-numeric: tabular-nums;
+    }
+    .phase-name {
+      font-size: clamp(0.8rem, 2vw, 1.1rem); font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.6); margin-top: 4px;
+      transition: color 0.8s;
+    }
+    .phase-subtitle {
+      font-size: clamp(0.65rem, 1.4vw, 0.82rem); font-weight: 400;
+      color: rgba(255,255,255,0.35); margin-top: 2px; letter-spacing: 0.06em;
+    }
+
+    /* Bottom bar: timeline + controls */
+    .bottom-bar { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+
+    .timeline {
+      display: flex; align-items: center; gap: 0; pointer-events: auto;
+    }
+    .timeline-dot {
+      width: 14px; height: 14px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.3); background: transparent;
+      cursor: pointer; transition: all 0.3s; position: relative;
+    }
+    .timeline-dot:hover { border-color: rgba(255,255,255,0.7); transform: scale(1.3); }
+    .timeline-dot.active { background: #a78bfa; border-color: #a78bfa; box-shadow: 0 0 12px rgba(167,139,250,0.5); }
+    .timeline-line {
+      width: 36px; height: 2px; background: rgba(255,255,255,0.15);
+    }
+    .timeline-label {
+      position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+      font-size: 0.6rem; color: rgba(255,255,255,0.4); white-space: nowrap;
+      opacity: 0; transition: opacity 0.2s; pointer-events: none;
+    }
+    .timeline-dot:hover .timeline-label { opacity: 1; }
+
+    /* Pause button */
+    .controls { pointer-events: auto; display: flex; gap: 10px; }
+    .btn-ctrl {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.6); border-radius: 8px; padding: 6px 16px;
+      font-size: 0.72rem; font-weight: 500; cursor: pointer; transition: all 0.2s;
+      letter-spacing: 0.04em; backdrop-filter: blur(6px);
+    }
+    .btn-ctrl:hover { background: rgba(255,255,255,0.15); color: white; }
+
+    /* Back link */
+    .back-link {
+      position: absolute; top: 16px; left: 20px; z-index: 20;
+      color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.78rem;
+      display: flex; align-items: center; gap: 5px; transition: color 0.2s;
+    }
+    .back-link:hover { color: rgba(255,255,255,0.8); }
+
+    @media (max-width: 600px) {
+      #overlay { padding: 16px 12px; }
+      .timeline-line { width: 18px; }
+      .timeline-dot { width: 11px; height: 11px; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="../" class="back-link">
+  <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+  Back
+</a>
+
+<canvas id="canvas"></canvas>
+
+<div id="overlay">
+  <div class="top-bar">
+    <div class="clock" id="clock">05:00</div>
+    <div class="phase-name" id="phaseName">BOOT</div>
+    <div class="phase-subtitle" id="phaseSub">Awakening</div>
+  </div>
+  <div class="bottom-bar">
+    <div class="timeline" id="timeline"></div>
+    <div class="controls">
+      <button class="btn-ctrl" id="btnPause">PAUSE</button>
+      <button class="btn-ctrl" id="btnSpeed">1x</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ===== CONSTANTS =====
+  const CYCLE_DURATION = 90; // seconds for full 24h cycle
+  const MAX_PARTICLES = 200;
+  const MOBILE_BREAKPOINT = 600;
+
+  const COLORS = {
+    purple: '#5b21b6', purpleLight: '#7c3aed', lavender: '#a78bfa',
+    gold: '#C9A84C', goldLight: '#e8c97a', teal: '#14b8a6',
+    white: '#ffffff', dim: '#2d2d4e'
+  };
+
+  // ===== PHASES =====
+  const PHASES = [
+    { name: 'BOOT',     sub: 'Awakening',      hour: 5,  color: '#a78bfa', orbColor: [167,139,250] },
+    { name: 'PROCESS',  sub: 'Productive',      hour: 9,  color: '#14b8a6', orbColor: [20,184,166]  },
+    { name: 'CREATE',   sub: 'Joyful',          hour: 12, color: '#e8c97a', orbColor: [232,201,122] },
+    { name: 'CONVERSE', sub: 'Connected',       hour: 15, color: '#C9A84C', orbColor: [201,168,76]  },
+    { name: 'LEARN',    sub: 'Contemplative',   hour: 19, color: '#7c3aed', orbColor: [124,58,237]  },
+    { name: 'SLEEP',    sub: 'Peaceful',        hour: 23, color: '#3b1f7a', orbColor: [59,31,122]   }
+  ];
+
+  // Sky color stops (hour -> [r,g,b])
+  const SKY_COLORS = [
+    { h: 0,  c: [8,8,26]     },  // midnight
+    { h: 4,  c: [10,10,30]   },  // pre-dawn
+    { h: 5,  c: [30,15,60]   },  // dawn start
+    { h: 7,  c: [80,40,120]  },  // dawn peak
+    { h: 9,  c: [60,80,160]  },  // morning
+    { h: 12, c: [80,120,200] },  // midday
+    { h: 15, c: [70,100,180] },  // afternoon
+    { h: 18, c: [60,30,100]  },  // sunset
+    { h: 20, c: [20,15,50]   },  // dusk
+    { h: 23, c: [10,10,28]   },  // night
+    { h: 24, c: [8,8,26]     }   // midnight wrap
+  ];
+
+  // ===== STATE =====
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, cx, cy, orbR;
+  let isMobile = false;
+  let paused = false;
+  let speed = 1;
+  let cycleTime = 0; // 0..CYCLE_DURATION
+  let currentPhase = 0;
+
+  // Particle pool
+  const particles = [];
+  // Stars (persistent)
+  const stars = [];
+  // Neural network nodes for LEARN phase
+  const neuralNodes = [];
+
+  // ===== SETUP =====
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    cx = W / 2;
+    cy = H / 2;
+    orbR = Math.min(W, H) * 0.06;
+    isMobile = W < MOBILE_BREAKPOINT;
+    generateStars();
+    generateNeuralNetwork();
+  }
+
+  function generateStars() {
+    stars.length = 0;
+    const count = isMobile ? 80 : 180;
+    for (let i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.8 + 0.3,
+        twinkle: Math.random() * Math.PI * 2,
+        speed: Math.random() * 0.5 + 0.3
+      });
+    }
+  }
+
+  function generateNeuralNetwork() {
+    neuralNodes.length = 0;
+    const count = isMobile ? 10 : 18;
+    for (let i = 0; i < count; i++) {
+      const angle = (i / count) * Math.PI * 2;
+      const dist = orbR * 2.5 + Math.random() * orbR * 3;
+      neuralNodes.push({
+        x: cx + Math.cos(angle) * dist,
+        y: cy + Math.sin(angle) * dist,
+        r: 3 + Math.random() * 4,
+        connections: []
+      });
+    }
+    // Create connections
+    for (let i = 0; i < neuralNodes.length; i++) {
+      const numConn = 1 + Math.floor(Math.random() * 3);
+      for (let c = 0; c < numConn; c++) {
+        const j = (i + 1 + Math.floor(Math.random() * (neuralNodes.length - 2))) % neuralNodes.length;
+        if (!neuralNodes[i].connections.includes(j)) {
+          neuralNodes[i].connections.push(j);
+        }
+      }
+    }
+  }
+
+  // ===== TIME HELPERS =====
+  function getVirtualHour() {
+    return (cycleTime / CYCLE_DURATION) * 24;
+  }
+
+  function formatTime(hour) {
+    const h = Math.floor(hour) % 24;
+    const m = Math.floor((hour % 1) * 60);
+    return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+  }
+
+  function getCurrentPhaseIndex() {
+    const hour = getVirtualHour();
+    for (let i = PHASES.length - 1; i >= 0; i--) {
+      if (hour >= PHASES[i].hour) return i;
+    }
+    return PHASES.length - 1; // wrap: before 5 AM = SLEEP
+  }
+
+  function getPhaseProgress() {
+    const hour = getVirtualHour();
+    const idx = getCurrentPhaseIndex();
+    const startH = PHASES[idx].hour;
+    const endH = idx < PHASES.length - 1 ? PHASES[idx + 1].hour : 24 + PHASES[0].hour;
+    return Math.min(1, (hour - startH) / (endH - startH));
+  }
+
+  // ===== COLOR INTERPOLATION =====
+  function lerpColor(a, b, t) {
+    return [
+      a[0] + (b[0] - a[0]) * t,
+      a[1] + (b[1] - a[1]) * t,
+      a[2] + (b[2] - a[2]) * t
+    ];
+  }
+
+  function getSkyColor(hour) {
+    for (let i = 0; i < SKY_COLORS.length - 1; i++) {
+      if (hour >= SKY_COLORS[i].h && hour < SKY_COLORS[i + 1].h) {
+        const t = (hour - SKY_COLORS[i].h) / (SKY_COLORS[i + 1].h - SKY_COLORS[i].h);
+        return lerpColor(SKY_COLORS[i].c, SKY_COLORS[i + 1].c, t);
+      }
+    }
+    return SKY_COLORS[0].c;
+  }
+
+  // ===== PARTICLE SYSTEM =====
+  function spawnParticle(opts) {
+    if (particles.length >= (isMobile ? MAX_PARTICLES / 2 : MAX_PARTICLES)) return;
+    particles.push({
+      x: opts.x || cx, y: opts.y || cy,
+      vx: opts.vx || 0, vy: opts.vy || 0,
+      r: opts.r || 2, life: opts.life || 1, decay: opts.decay || 0.008,
+      color: opts.color || COLORS.lavender, shape: opts.shape || 'circle',
+      text: opts.text || '', angle: opts.angle || 0, spin: opts.spin || 0,
+      alpha: opts.alpha || 1, scale: opts.scale || 1
+    });
+  }
+
+  function updateParticles(dt) {
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.x += p.vx * dt * 60;
+      p.y += p.vy * dt * 60;
+      p.angle += p.spin * dt * 60;
+      p.life -= p.decay * dt * 60;
+      if (p.life <= 0) {
+        particles.splice(i, 1);
+      }
+    }
+  }
+
+  function drawParticles() {
+    for (const p of particles) {
+      const a = Math.min(1, p.life) * p.alpha;
+      ctx.save();
+      ctx.globalAlpha = a;
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.angle);
+
+      if (p.shape === 'circle') {
+        ctx.beginPath();
+        ctx.arc(0, 0, p.r * p.scale, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+      } else if (p.shape === 'square') {
+        const s = p.r * p.scale;
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-s, -s, s * 2, s * 2);
+      } else if (p.shape === 'text') {
+        ctx.font = `${Math.round(p.r * p.scale)}px monospace`;
+        ctx.fillStyle = p.color;
+        ctx.textAlign = 'center';
+        ctx.fillText(p.text, 0, 0);
+      } else if (p.shape === 'note') {
+        ctx.font = `${Math.round(p.r * p.scale)}px serif`;
+        ctx.fillStyle = p.color;
+        ctx.textAlign = 'center';
+        ctx.fillText(p.text, 0, 0);
+      } else if (p.shape === 'bubble') {
+        ctx.beginPath();
+        ctx.arc(0, 0, p.r * p.scale, 0, Math.PI * 2);
+        ctx.strokeStyle = p.color;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+
+      ctx.restore();
+    }
+  }
+
+  // ===== BACKGROUND =====
+  function drawSky(hour) {
+    const c = getSkyColor(hour);
+    const grad = ctx.createLinearGradient(0, 0, 0, H);
+    grad.addColorStop(0, `rgb(${c[0]},${c[1]},${c[2]})`);
+    const darker = c.map(v => Math.max(0, v * 0.4));
+    grad.addColorStop(1, `rgb(${darker[0]},${darker[1]},${darker[2]})`);
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  function drawStars(hour, time) {
+    // Stars visible from 19:00 to 6:00
+    let alpha = 0;
+    if (hour >= 20) alpha = Math.min(1, (hour - 20) / 2);
+    else if (hour >= 19) alpha = (hour - 19) * 0.3;
+    else if (hour < 5) alpha = 1;
+    else if (hour < 7) alpha = Math.max(0, 1 - (hour - 5) / 2);
+
+    if (alpha <= 0) return;
+
+    for (const s of stars) {
+      const twinkle = 0.5 + 0.5 * Math.sin(time * s.speed + s.twinkle);
+      ctx.globalAlpha = alpha * twinkle * 0.8;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = '#fff';
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  // ===== CENTRAL ORB =====
+  function drawOrb(time, phase) {
+    const p = PHASES[phase];
+    const breathe = 1 + 0.05 * Math.sin(time * 1.5);
+    const r = orbR * breathe;
+
+    // Dimmer during SLEEP phase
+    const dimFactor = phase === 5 ? 0.35 : 1;
+
+    // Outer glow
+    const glow = ctx.createRadialGradient(cx, cy, r * 0.5, cx, cy, r * 3.5);
+    glow.addColorStop(0, `rgba(${p.orbColor[0]},${p.orbColor[1]},${p.orbColor[2]},${0.25 * dimFactor})`);
+    glow.addColorStop(0.5, `rgba(${p.orbColor[0]},${p.orbColor[1]},${p.orbColor[2]},${0.08 * dimFactor})`);
+    glow.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = glow;
+    ctx.fillRect(cx - r * 4, cy - r * 4, r * 8, r * 8);
+
+    // Core
+    const core = ctx.createRadialGradient(cx - r * 0.2, cy - r * 0.2, 0, cx, cy, r);
+    core.addColorStop(0, `rgba(255,255,255,${0.9 * dimFactor})`);
+    core.addColorStop(0.3, `rgba(${p.orbColor[0]},${p.orbColor[1]},${p.orbColor[2]},${0.8 * dimFactor})`);
+    core.addColorStop(1, `rgba(${p.orbColor[0]},${p.orbColor[1]},${p.orbColor[2]},${0.3 * dimFactor})`);
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fillStyle = core;
+    ctx.fill();
+  }
+
+  // ===== PHASE-SPECIFIC VISUALS =====
+  let lastSpawn = 0;
+
+  // BOOT: binary rain, loading ring, status text
+  function updateBoot(time, dt) {
+    if (time - lastSpawn > 0.08) {
+      lastSpawn = time;
+      // Binary rain columns
+      const col = Math.random() * W;
+      spawnParticle({
+        x: col, y: -10,
+        vx: 0, vy: 2 + Math.random() * 3,
+        r: 11, shape: 'text', text: Math.random() > 0.5 ? '1' : '0',
+        color: COLORS.lavender, life: 1.2, decay: 0.012, alpha: 0.5
+      });
+      // Status text floating outward
+      if (Math.random() < 0.15) {
+        const labels = ['INIT', 'LOAD', 'SYS', 'MEM', 'OK', 'READY', 'BOOT', 'CORE'];
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 0.4 + Math.random() * 0.6;
+        spawnParticle({
+          x: cx, y: cy,
+          vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed,
+          r: 10, shape: 'text', text: labels[Math.floor(Math.random() * labels.length)],
+          color: '#a78bfa', life: 1.5, decay: 0.015, alpha: 0.7
+        });
+      }
+    }
+    // Loading ring
+    const progress = getPhaseProgress();
+    ctx.strokeStyle = `rgba(167,139,250,0.6)`;
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.arc(cx, cy, orbR * 1.6, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * progress);
+    ctx.stroke();
+    // Dashed outer ring
+    ctx.setLineDash([4, 8]);
+    ctx.strokeStyle = 'rgba(167,139,250,0.2)';
+    ctx.beginPath();
+    ctx.arc(cx, cy, orbR * 2, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  // PROCESS: data streams converging, sonar pulses, query text orbiting
+  function updateProcess(time, dt) {
+    if (time - lastSpawn > 0.06) {
+      lastSpawn = time;
+      // Data streams from edges converging on orb
+      const edge = Math.floor(Math.random() * 4);
+      let x, y;
+      if (edge === 0) { x = Math.random() * W; y = 0; }
+      else if (edge === 1) { x = W; y = Math.random() * H; }
+      else if (edge === 2) { x = Math.random() * W; y = H; }
+      else { x = 0; y = Math.random() * H; }
+      const dx = cx - x, dy = cy - y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const spd = 3;
+      spawnParticle({
+        x, y,
+        vx: (dx / dist) * spd, vy: (dy / dist) * spd,
+        r: 2 + Math.random() * 2, shape: 'circle',
+        color: Math.random() > 0.5 ? COLORS.teal : COLORS.lavender,
+        life: dist / (spd * 60), decay: 1 / (dist / (spd * 60)) / 60, alpha: 0.6
+      });
+      // Orbiting query text
+      if (Math.random() < 0.05) {
+        const queries = ['SELECT *', 'WHERE', 'FETCH', 'PARSE', 'SORT', 'INDEX', 'QUERY', 'JOIN'];
+        const a = Math.random() * Math.PI * 2;
+        const orbitR = orbR * 2.5 + Math.random() * orbR;
+        spawnParticle({
+          x: cx + Math.cos(a) * orbitR, y: cy + Math.sin(a) * orbitR,
+          vx: Math.cos(a + Math.PI / 2) * 0.5, vy: Math.sin(a + Math.PI / 2) * 0.5,
+          r: 9, shape: 'text', text: queries[Math.floor(Math.random() * queries.length)],
+          color: 'rgba(20,184,166,0.6)', life: 2.5, decay: 0.008
+        });
+      }
+    }
+    // Sonar pulse rings
+    const pulseInterval = 1.5;
+    const pulsePhase = (time % pulseInterval) / pulseInterval;
+    for (let i = 0; i < 3; i++) {
+      const p = (pulsePhase + i / 3) % 1;
+      const r = orbR * 1.5 + p * orbR * 5;
+      const a = Math.max(0, 1 - p) * 0.3;
+      ctx.strokeStyle = `rgba(20,184,166,${a})`;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+  }
+
+  // CREATE: spiraling colorful particles, musical notes, paint splashes
+  function updateCreate(time, dt) {
+    if (time - lastSpawn > 0.04) {
+      lastSpawn = time;
+      // Spiraling colorful particles
+      const angle = time * 3 + Math.random() * 0.5;
+      const dist = orbR * 1.5 + Math.random() * orbR * 0.5;
+      const spiralSpeed = 1.2;
+      const colors = ['#f472b6', '#60a5fa', '#34d399', '#fbbf24', '#a78bfa', '#fb923c'];
+      spawnParticle({
+        x: cx + Math.cos(angle) * dist,
+        y: cy + Math.sin(angle) * dist,
+        vx: Math.cos(angle) * spiralSpeed + Math.cos(angle + Math.PI / 2) * 0.5,
+        vy: Math.sin(angle) * spiralSpeed + Math.sin(angle + Math.PI / 2) * 0.5,
+        r: 2 + Math.random() * 4, shape: Math.random() > 0.3 ? 'circle' : 'square',
+        color: colors[Math.floor(Math.random() * colors.length)],
+        life: 1.5, decay: 0.012, spin: (Math.random() - 0.5) * 0.1
+      });
+      // Musical notes rising
+      if (Math.random() < 0.12) {
+        const notes = ['\u266A', '\u266B', '\u2669', '\u266C'];
+        spawnParticle({
+          x: cx + (Math.random() - 0.5) * orbR * 4,
+          y: cy + orbR * 2,
+          vx: (Math.random() - 0.5) * 0.3, vy: -0.8 - Math.random() * 0.5,
+          r: 16, shape: 'note', text: notes[Math.floor(Math.random() * notes.length)],
+          color: COLORS.goldLight, life: 2, decay: 0.01, alpha: 0.7
+        });
+      }
+      // Paint splash circles
+      if (Math.random() < 0.06) {
+        const a = Math.random() * Math.PI * 2;
+        const d = orbR * 2 + Math.random() * orbR * 3;
+        spawnParticle({
+          x: cx + Math.cos(a) * d, y: cy + Math.sin(a) * d,
+          vx: 0, vy: 0,
+          r: 8 + Math.random() * 14, shape: 'bubble',
+          color: colors[Math.floor(Math.random() * colors.length)],
+          life: 1.5, decay: 0.012, alpha: 0.5
+        });
+      }
+    }
+  }
+
+  // CONVERSE: second gold orb, connecting arc, speech bubbles
+  let humanOrbAngle = 0;
+  function updateConverse(time, dt) {
+    humanOrbAngle += dt * 0.3;
+    const hx = cx + Math.cos(humanOrbAngle) * orbR * 4;
+    const hy = cy + Math.sin(humanOrbAngle * 0.7) * orbR * 2;
+    const hR = orbR * 0.6;
+
+    // Human orb (gold)
+    const hGlow = ctx.createRadialGradient(hx, hy, 0, hx, hy, hR * 2.5);
+    hGlow.addColorStop(0, 'rgba(201,168,76,0.3)');
+    hGlow.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = hGlow;
+    ctx.fillRect(hx - hR * 3, hy - hR * 3, hR * 6, hR * 6);
+
+    const hCore = ctx.createRadialGradient(hx - hR * 0.15, hy - hR * 0.15, 0, hx, hy, hR);
+    hCore.addColorStop(0, 'rgba(255,240,200,0.9)');
+    hCore.addColorStop(0.4, 'rgba(201,168,76,0.8)');
+    hCore.addColorStop(1, 'rgba(201,168,76,0.3)');
+    ctx.beginPath();
+    ctx.arc(hx, hy, hR, 0, Math.PI * 2);
+    ctx.fillStyle = hCore;
+    ctx.fill();
+
+    // Connecting arc
+    ctx.strokeStyle = `rgba(201,168,76,${0.2 + 0.15 * Math.sin(time * 3)})`;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(cx + orbR, cy);
+    const cpx = (cx + hx) / 2;
+    const cpy = Math.min(cy, hy) - orbR * 2;
+    ctx.quadraticCurveTo(cpx, cpy, hx - hR, hy);
+    ctx.stroke();
+
+    // Energy dots along arc
+    for (let i = 0; i < 5; i++) {
+      const t = ((time * 0.5 + i * 0.2) % 1);
+      const ax = (1 - t) * (1 - t) * (cx + orbR) + 2 * (1 - t) * t * cpx + t * t * (hx - hR);
+      const ay = (1 - t) * (1 - t) * cy + 2 * (1 - t) * t * cpy + t * t * hy;
+      ctx.beginPath();
+      ctx.arc(ax, ay, 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(201,168,76,${0.6 * (1 - Math.abs(t - 0.5) * 2)})`;
+      ctx.fill();
+    }
+
+    // Speech bubbles
+    if (time - lastSpawn > 0.25) {
+      lastSpawn = time;
+      const fromHuman = Math.random() > 0.5;
+      const sx = fromHuman ? hx : cx;
+      const sy = fromHuman ? hy : cy;
+      spawnParticle({
+        x: sx, y: sy - (fromHuman ? hR : orbR) * 1.2,
+        vx: (Math.random() - 0.5) * 0.3, vy: -0.5 - Math.random() * 0.3,
+        r: 8 + Math.random() * 6, shape: 'bubble',
+        color: fromHuman ? COLORS.goldLight : COLORS.lavender,
+        life: 2, decay: 0.01, alpha: 0.5
+      });
+    }
+  }
+
+  // LEARN: neural network visualization
+  function updateLearn(time, dt) {
+    // Draw connections with flowing data
+    for (let i = 0; i < neuralNodes.length; i++) {
+      const n = neuralNodes[i];
+      for (const j of n.connections) {
+        const m = neuralNodes[j];
+        ctx.strokeStyle = 'rgba(124,58,237,0.15)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(n.x, n.y);
+        ctx.lineTo(m.x, m.y);
+        ctx.stroke();
+
+        // Flowing data dot
+        const t = ((time * 0.4 + i * 0.1 + j * 0.05) % 1);
+        const dx = n.x + (m.x - n.x) * t;
+        const dy = n.y + (m.y - n.y) * t;
+        ctx.beginPath();
+        ctx.arc(dx, dy, 2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(167,139,250,${0.6 * Math.sin(t * Math.PI)})`;
+        ctx.fill();
+      }
+    }
+
+    // Draw nodes
+    for (const n of neuralNodes) {
+      const pulse = 0.7 + 0.3 * Math.sin(time * 2 + n.x * 0.01);
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(124,58,237,${0.5 * pulse})`;
+      ctx.fill();
+      ctx.strokeStyle = `rgba(167,139,250,${0.4 * pulse})`;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    }
+
+    // Connection to central orb
+    for (const n of neuralNodes) {
+      const dist = Math.sqrt((n.x - cx) ** 2 + (n.y - cy) ** 2);
+      if (dist < orbR * 5) {
+        ctx.strokeStyle = 'rgba(124,58,237,0.08)';
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(n.x, n.y);
+        ctx.stroke();
+      }
+    }
+
+    // Occasional knowledge sparks
+    if (time - lastSpawn > 0.3) {
+      lastSpawn = time;
+      const idx = Math.floor(Math.random() * neuralNodes.length);
+      const n = neuralNodes[idx];
+      spawnParticle({
+        x: n.x, y: n.y,
+        vx: (cx - n.x) * 0.01, vy: (cy - n.y) * 0.01,
+        r: 3, shape: 'circle', color: COLORS.lavender,
+        life: 1.5, decay: 0.015, alpha: 0.7
+      });
+    }
+  }
+
+  // SLEEP: floating Zs, dream bubbles, sheep
+  function updateSleep(time, dt) {
+    if (time - lastSpawn > 0.35) {
+      lastSpawn = time;
+      // Floating Z's
+      if (Math.random() < 0.6) {
+        const sizes = [14, 18, 22];
+        spawnParticle({
+          x: cx + (Math.random() - 0.3) * orbR * 2,
+          y: cy - orbR,
+          vx: 0.2 + Math.random() * 0.3, vy: -0.4 - Math.random() * 0.3,
+          r: sizes[Math.floor(Math.random() * sizes.length)],
+          shape: 'text', text: 'Z',
+          color: 'rgba(139,92,246,0.5)', life: 3, decay: 0.007
+        });
+      }
+      // Dream bubbles
+      if (Math.random() < 0.3) {
+        const angle = Math.random() * Math.PI * 2;
+        const dist = orbR * 2 + Math.random() * orbR * 3;
+        spawnParticle({
+          x: cx + Math.cos(angle) * dist,
+          y: cy + Math.sin(angle) * dist,
+          vx: 0, vy: -0.15,
+          r: 10 + Math.random() * 15, shape: 'bubble',
+          color: 'rgba(139,92,246,0.25)', life: 3, decay: 0.006
+        });
+      }
+      // Occasional sheep outline (text)
+      if (Math.random() < 0.08) {
+        const angle = Math.random() * Math.PI * 2;
+        const dist = orbR * 3 + Math.random() * orbR * 2;
+        spawnParticle({
+          x: cx + Math.cos(angle) * dist,
+          y: cy + Math.sin(angle) * dist,
+          vx: Math.cos(angle) * 0.1, vy: -0.2,
+          r: 20, shape: 'text', text: '\uD83D\uDC11',
+          color: '#ffffff', life: 4, decay: 0.005, alpha: 0.3
+        });
+      }
+    }
+  }
+
+  // ===== DOM OVERLAY SYNC =====
+  const clockEl = document.getElementById('clock');
+  const phaseNameEl = document.getElementById('phaseName');
+  const phaseSubEl = document.getElementById('phaseSub');
+  const timelineEl = document.getElementById('timeline');
+  const btnPause = document.getElementById('btnPause');
+  const btnSpeed = document.getElementById('btnSpeed');
+
+  // Build timeline
+  PHASES.forEach((p, i) => {
+    if (i > 0) {
+      const line = document.createElement('div');
+      line.className = 'timeline-line';
+      timelineEl.appendChild(line);
+    }
+    const dot = document.createElement('div');
+    dot.className = 'timeline-dot';
+    dot.dataset.index = i;
+    dot.innerHTML = `<span class="timeline-label">${p.name}</span>`;
+    dot.addEventListener('click', () => jumpToPhase(i));
+    timelineEl.appendChild(dot);
+  });
+
+  function updateOverlay(hour, phaseIdx) {
+    clockEl.textContent = formatTime(hour);
+    phaseNameEl.textContent = PHASES[phaseIdx].name;
+    phaseNameEl.style.color = PHASES[phaseIdx].color;
+    phaseSubEl.textContent = PHASES[phaseIdx].sub;
+
+    timelineEl.querySelectorAll('.timeline-dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === phaseIdx);
+    });
+  }
+
+  // ===== INTERACTIONS =====
+  function jumpToPhase(idx) {
+    const targetHour = PHASES[idx].hour + 0.5;
+    cycleTime = (targetHour / 24) * CYCLE_DURATION;
+    particles.length = 0;
+    lastSpawn = 0;
+  }
+
+  function togglePause() {
+    paused = !paused;
+    btnPause.textContent = paused ? 'PLAY' : 'PAUSE';
+  }
+
+  function cycleSpeed() {
+    const speeds = [1, 2, 0.5];
+    const labels = ['1x', '2x', '0.5x'];
+    const idx = speeds.indexOf(speed);
+    const next = (idx + 1) % speeds.length;
+    speed = speeds[next];
+    btnSpeed.textContent = labels[next];
+  }
+
+  btnPause.addEventListener('click', togglePause);
+  btnSpeed.addEventListener('click', cycleSpeed);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') { e.preventDefault(); togglePause(); }
+    if (e.key >= '1' && e.key <= '6') jumpToPhase(parseInt(e.key) - 1);
+  });
+
+  canvas.addEventListener('click', (e) => {
+    // Only toggle pause if clicking on the canvas area (not overlay buttons)
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    // Check if click is in the middle zone (not top/bottom UI areas)
+    if (y > H * 0.15 && y < H * 0.8) {
+      togglePause();
+    }
+  });
+
+  // ===== MAIN LOOP =====
+  let lastTime = 0;
+
+  function animate(timestamp) {
+    requestAnimationFrame(animate);
+
+    const now = timestamp / 1000;
+    const dt = Math.min(0.05, now - (lastTime || now));
+    lastTime = now;
+
+    if (!paused) {
+      cycleTime = (cycleTime + dt * speed) % CYCLE_DURATION;
+    }
+
+    const hour = getVirtualHour();
+    const phaseIdx = getCurrentPhaseIndex();
+
+    // Track phase changes for spawn timing
+    if (phaseIdx !== currentPhase) {
+      currentPhase = phaseIdx;
+      particles.length = 0;
+      lastSpawn = 0;
+    }
+
+    // Draw
+    drawSky(hour);
+    drawStars(hour, now);
+
+    // Phase-specific effects (before orb so some go behind)
+    switch (phaseIdx) {
+      case 0: updateBoot(now, dt); break;
+      case 1: updateProcess(now, dt); break;
+      case 2: updateCreate(now, dt); break;
+      case 3: updateConverse(now, dt); break;
+      case 4: updateLearn(now, dt); break;
+      case 5: updateSleep(now, dt); break;
+    }
+
+    drawOrb(now, phaseIdx);
+    updateParticles(dt);
+    drawParticles();
+
+    // Update DOM overlay
+    updateOverlay(hour, phaseIdx);
+  }
+
+  // ===== INIT =====
+  window.addEventListener('resize', resize);
+  resize();
+  requestAnimationFrame(animate);
+
+})();
+</script>
+
+</body>
+</html>
