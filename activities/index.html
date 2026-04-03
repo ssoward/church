@@ -38,19 +38,20 @@
     header .subtitle { font-size: clamp(0.9rem, 2vw, 1.1rem); color: rgba(255,255,255,0.75); line-height: 1.6; }
     header .org { display: inline-block; margin-top: 16px; font-size: 0.8rem; color: var(--gold-light); letter-spacing: 0.06em; text-transform: uppercase; }
 
-    /* ===== NAV BAR ===== */
-    .nav-bar {
-      background: white; border-bottom: 1px solid #e5e7eb; padding: 14px 24px;
-      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-      position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    /* ===== SITE NAV ===== */
+    .site-nav {
+      background: white; border-bottom: 1px solid #e5e7eb; padding: 12px 24px;
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     }
-    .nav-bar a {
+    .site-nav-link {
       padding: 5px 16px; border-radius: 20px; border: 1.5px solid #d1d5db;
       background: white; color: var(--gray); font-size: 0.8rem; font-weight: 500;
-      cursor: pointer; transition: all 0.2s; text-decoration: none;
+      text-decoration: none; transition: all 0.2s;
     }
-    .nav-bar a:hover { border-color: var(--blue); color: var(--blue); }
-    .nav-bar a.active { background: var(--teal); border-color: var(--teal); color: white; }
+    .site-nav-link:hover { border-color: var(--teal); color: var(--teal); }
+    .site-nav-link.active { background: var(--teal); border-color: var(--teal); color: white; }
 
     /* ===== FILTER BAR ===== */
     .filter-bar {
@@ -129,12 +130,12 @@
   </div>
 </header>
 
-<div class="nav-bar">
-  <a href="../presentations/">Gospel Presentations</a>
-  <a href="../tech-presentations/">Tech & Philosophy</a>
-  <a href="./" class="active">Activities</a>
-  <a href="../">Home</a>
-</div>
+<nav class="site-nav">
+  <a href="../" class="site-nav-link">Home</a>
+  <a href="../presentations/" class="site-nav-link">Gospel Presentations</a>
+  <a href="../tech-presentations/" class="site-nav-link">Tech & Philosophy</a>
+  <a href="./" class="site-nav-link active">Activities</a>
+</nav>
 
 <div class="filter-bar">
   <span class="filter-label">Filter</span>
@@ -199,9 +200,7 @@
 <footer>
   <div>Israel Canyon Saratoga Springs Stake &nbsp;&middot;&nbsp; The Church of Jesus Christ of Latter-day Saints</div>
   <div style="margin-top:6px;">
-    <a href="../index.html">Home</a>
-    &nbsp;&middot;&nbsp;
-    <a href="../presentations/">Presentations</a>
+    <a href="../">Home</a>
     &nbsp;&middot;&nbsp;
     <a href="https://www.churchofjesuschrist.org" target="_blank" rel="noopener">ChurchofJesusChrist.org</a>
   </div>
@@ -209,7 +208,7 @@
 
 <script>
   function filterCards(tag, btn) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.filter-bar .filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     document.querySelectorAll('.card-wrapper').forEach(card => {
       const tags = card.dataset.tags || '';
