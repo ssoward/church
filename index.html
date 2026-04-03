@@ -1,245 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Interactive study companion for Alma 31 from the Book of Mormon. Deep analysis, visuals, and study applications inspired by churchofjesuschrist.org.">
-    <meta name="keywords" content="Alma 31, Book of Mormon, scripture study, LDS, church, Rameumptom, prayer, pride">
-    <meta name="author" content="Alma 31 Study App">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gospel Study & Presentations — Israel Canyon Saratoga Springs Stake</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    <!-- Open Graph / Social Media -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Alma 31 Study - Interactive Scripture Study">
-    <meta property="og:description" content="Deep, interactive study of Alma 31 from the Book of Mormon with analysis, visuals, and applications.">
-    <meta property="og:image" content="assets/images/og-image.jpg">
-    <meta property="og:url" content="https://alma31study.org">
+    :root {
+      --blue: #003087;
+      --blue-light: #0073CF;
+      --gold: #C9A84C;
+      --gold-light: #e8c97a;
+      --cream: #f5f0e8;
+      --dark: #1a1a2e;
+      --gray: #6b7280;
+      --purple: #5b21b6;
+      --purple-light: #7c3aed;
+      --teal: #0f766e;
+      --teal-light: #14b8a6;
+    }
 
-    <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#002E5D">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Alma 31 Study">
+    html { scroll-behavior: smooth; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Georgia, sans-serif; background: #fafaf8; color: var(--dark); min-height: 100vh; }
 
-    <!-- Icons -->
-    <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
-    <link rel="manifest" href="manifest.json">
+    /* ===== HEADER ===== */
+    header {
+      background: linear-gradient(160deg, var(--blue) 0%, #001a4d 50%, #0a0a2e 100%);
+      color: white; padding: 70px 24px 60px; text-align: center; position: relative; overflow: hidden;
+    }
+    header::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 20%, rgba(201,168,76,0.15) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 80%, rgba(0,115,207,0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .header-inner { position: relative; z-index: 1; max-width: 740px; margin: 0 auto; }
+    .header-divider { width: 60px; height: 3px; background: var(--gold); margin: 0 auto 28px; border-radius: 2px; }
+    header h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; line-height: 1.15; color: white; margin-bottom: 14px; text-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+    header .subtitle { font-size: clamp(0.95rem, 2vw, 1.15rem); color: rgba(255,255,255,0.7); line-height: 1.7; max-width: 560px; margin: 0 auto; }
+    header .org { display: inline-block; margin-top: 22px; font-size: 0.78rem; color: var(--gold-light); letter-spacing: 0.06em; text-transform: uppercase; }
 
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    /* ===== MAIN ===== */
+    main { max-width: 1100px; margin: 0 auto; padding: 52px 24px 80px; }
 
-    <title>Alma 31 Study - Interactive Scripture Study</title>
+    .section-heading {
+      font-size: 0.72rem; font-weight: 700; color: var(--gray); text-transform: uppercase;
+      letter-spacing: 0.1em; margin-bottom: 28px; display: flex; align-items: center; gap: 12px;
+    }
+    .section-heading::after { content: ''; flex: 1; height: 1px; background: #e5e7eb; }
+
+    /* ===== HUB CARDS ===== */
+    .hubs-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px;
+    }
+
+    .hub-card {
+      background: white; border-radius: 14px; overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.06);
+      display: flex; flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .hub-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,48,135,0.12), 0 1px 3px rgba(0,0,0,0.08); }
+
+    .hub-banner { height: 8px; }
+    .hub-banner.blue { background: linear-gradient(90deg, var(--blue) 0%, var(--blue-light) 100%); }
+    .hub-banner.purple { background: linear-gradient(90deg, var(--purple) 0%, var(--purple-light) 100%); }
+    .hub-banner.teal { background: linear-gradient(90deg, var(--teal) 0%, var(--teal-light) 100%); }
+    .hub-banner.gold { background: linear-gradient(90deg, #92400e 0%, var(--gold) 100%); }
+
+    .hub-body { padding: 26px 24px 16px; flex: 1; }
+
+    .hub-icon { font-size: 2.2rem; margin-bottom: 12px; display: block; }
+
+    .hub-card h2 { font-size: 1.18rem; font-weight: 700; line-height: 1.3; margin-bottom: 6px; }
+    .hub-card h2.blue { color: var(--blue); }
+    .hub-card h2.purple { color: var(--purple); }
+    .hub-card h2.teal { color: var(--teal); }
+    .hub-card h2.gold { color: #92400e; }
+
+    .hub-card .hub-sub { font-size: 0.78rem; color: var(--gold); font-weight: 600; margin-bottom: 10px; }
+
+    .hub-card p { font-size: 0.84rem; color: #4b5563; line-height: 1.65; }
+
+    .hub-meta { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .hub-tag {
+      display: inline-block; padding: 3px 10px; border-radius: 12px;
+      font-size: 0.66rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+      background: #f3f4f6; color: var(--gray);
+    }
+
+    .hub-footer {
+      padding: 14px 24px 20px; border-top: 1px solid #f3f4f6;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .btn-hub {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 20px; color: white; text-decoration: none;
+      border-radius: 8px; font-size: 0.82rem; font-weight: 600;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-hub:hover { transform: translateX(2px); }
+    .btn-hub.blue { background: var(--blue); }
+    .btn-hub.blue:hover { background: #001a5c; }
+    .btn-hub.purple { background: var(--purple); }
+    .btn-hub.purple:hover { background: #4c1d95; }
+    .btn-hub.teal { background: var(--teal); }
+    .btn-hub.teal:hover { background: #065f57; }
+    .btn-hub.gold-btn { background: #92400e; }
+    .btn-hub.gold-btn:hover { background: #6b2f0a; }
+
+    .hub-count { font-size: 0.7rem; color: #9ca3af; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--dark); color: rgba(255,255,255,0.5); text-align: center;
+      padding: 30px 24px; font-size: 0.76rem; line-height: 1.7;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      header { padding: 48px 16px 40px; }
+      main { padding: 36px 16px 60px; }
+      .hubs-grid { grid-template-columns: 1fr; gap: 20px; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <a href="index.html" class="logo">Alma 31 Study</a>
 
-            <nav class="nav">
-                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
-                    ☰
-                </button>
-                <ul class="nav-menu" id="navMenu">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link active">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="pages/scripture.html" class="nav-link">Scripture</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="pages/analysis.html" class="nav-link">Analysis</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="pages/gallery.html" class="nav-link">Gallery</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="pages/applications.html" class="nav-link">Applications</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="presentations/" class="nav-link">Presentations</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="activities/" class="nav-link">Activities</a>
-                    </li>
-                </ul>
-            </nav>
+<header>
+  <div class="header-inner">
+    <div class="header-divider"></div>
+    <h1>Gospel Study &<br>Presentations</h1>
+    <p class="subtitle">Teaching resources, scripture study tools, interactive activities, and presentations for the Israel Canyon Saratoga Springs Stake</p>
+    <span class="org">The Church of Jesus Christ of Latter-day Saints</span>
+  </div>
+</header>
+
+<main>
+  <div class="section-heading">Content Hubs</div>
+
+  <div class="hubs-grid">
+
+    <!-- HUB: GOSPEL PRESENTATIONS -->
+    <div class="hub-card">
+      <div class="hub-banner blue"></div>
+      <div class="hub-body">
+        <span class="hub-icon">🎤</span>
+        <h2 class="blue">Gospel Presentations</h2>
+        <div class="hub-sub">Teaching & Training Materials</div>
+        <p>Stake training, ward conference talks, Easter week artwork, and gospel-centered teaching resources built with Reveal.js.</p>
+        <div class="hub-meta">
+          <span class="hub-tag">Stake</span>
+          <span class="hub-tag">Ward</span>
+          <span class="hub-tag">Teaching</span>
+          <span class="hub-tag">Leadership</span>
         </div>
-    </header>
-
-    <!-- Main Content -->
-    <div class="container">
-        <main class="main-content">
-            <!-- Sidebar Navigation -->
-            <aside class="sidebar">
-                <div class="search-container">
-                    <input type="search" class="search-input" placeholder="Search Alma 31..." id="searchInput">
-                </div>
-
-                <nav>
-                    <ul class="sidebar-nav">
-                        <li><a href="#overview" class="active">Overview</a></li>
-                        <li><a href="#key-themes">Key Themes</a></li>
-                        <li><a href="#featured-verse">Featured Verse</a></li>
-                        <li><a href="#quick-study">Quick Study</a></li>
-                        <li><a href="pages/scripture.html">Full Text</a></li>
-                        <li><a href="pages/analysis.html">Deep Analysis</a></li>
-                        <li><a href="pages/gallery.html">Visual Gallery</a></li>
-                        <li><a href="pages/applications.html">Study Ideas</a></li>
-                    </ul>
-                </nav>
-            </aside>
-
-            <!-- Main Content Area -->
-            <section class="content">
-                <!-- Hero Section -->
-                <div class="hero-section" id="overview">
-                    <h1>Alma 31: The Rameumptom and True Prayer</h1>
-                    <p class="lead">
-                        Explore one of the most powerful chapters in the Book of Mormon, where Alma encounters the prideful Zoramites and their tower of Rameumptom, leading to profound lessons about true worship, prayer, and the power of God's word.
-                    </p>
-                </div>
-
-                <!-- Key Themes Section -->
-                <div class="card" id="key-themes">
-                    <div class="card-header">
-                        <h2 class="card-title">Key Themes in Alma 31</h2>
-                    </div>
-                    <div class="themes-grid">
-                        <div class="theme-item">
-                            <h3>🙏 True vs. False Prayer</h3>
-                            <p>The contrast between the repetitive, prideful prayers of the Zoramites and Alma's heartfelt plea for the poor and afflicted.</p>
-                        </div>
-                        <div class="theme-item">
-                            <h3>⚡ Power of God's Word</h3>
-                            <p>Alma's faith in the power of the word to change hearts, demonstrated through his missionary approach to the apostate Zoramites.</p>
-                        </div>
-                        <div class="theme-item">
-                            <h3>💎 Dangers of Pride</h3>
-                            <p>The Rameumptom represents the ultimate expression of spiritual pride and separation from God and fellow beings.</p>
-                        </div>
-                        <div class="theme-item">
-                            <h3>❤️ Compassion for the Afflicted</h3>
-                            <p>Alma's heart is broken for those who are excluded and cast out, showing Christ-like compassion.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Featured Verse -->
-                <div class="card" id="featured-verse">
-                    <div class="card-header">
-                        <h2 class="card-title">Featured Verse</h2>
-                    </div>
-                    <div class="verse featured-verse">
-                        <span class="verse-number">Alma 31:5</span>
-                        <span class="verse-text">
-                            "And now, as the preaching of the word had a great tendency to lead the people to do that which was just—yea, it had had more powerful effect upon the minds of the people than the sword, or anything else, which had happened unto them—therefore Alma thought it was expedient that they should try the virtue of the word of God."
-                        </span>
-                    </div>
-                    <p class="verse-commentary">
-                        This verse establishes the central theme of the chapter: the power of God's word to transform hearts and minds more effectively than force or coercion.
-                    </p>
-                </div>
-
-                <!-- Quick Study Section -->
-                <div class="card" id="quick-study">
-                    <div class="card-header">
-                        <h2 class="card-title">Quick Study Guide</h2>
-                    </div>
-                    <div class="quick-study-content">
-                        <div class="study-column">
-                            <h3>Chapter Summary</h3>
-                            <ul>
-                                <li>Alma decides to try the power of God's word (vs. 1-5)</li>
-                                <li>Discovery of the Zoramite apostasy (vs. 6-11)</li>
-                                <li>The Rameumptom and repetitive prayer (vs. 12-23)</li>
-                                <li>Alma's prayer of anguish and compassion (vs. 24-35)</li>
-                                <li>Preparation for ministry (vs. 36-38)</li>
-                            </ul>
-                        </div>
-                        <div class="study-column">
-                            <h3>Questions for Reflection</h3>
-                            <ul>
-                                <li>How does true prayer differ from the Zoramite prayer?</li>
-                                <li>What does the Rameumptom represent in our modern world?</li>
-                                <li>Why did Alma choose words over force?</li>
-                                <li>How do we show compassion for the spiritually afflicted?</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Navigation Cards -->
-                <div class="navigation-cards">
-                    <h2>Explore Alma 31</h2>
-                    <div class="gallery">
-                        <div class="card nav-card">
-                            <h3>📖 Full Scripture Text</h3>
-                            <p>Read Alma 31 verse by verse with cross-references and footnotes.</p>
-                            <a href="pages/scripture.html" class="btn btn-primary">Read Scripture</a>
-                        </div>
-                        <div class="card nav-card">
-                            <h3>🔍 Deep Analysis</h3>
-                            <p>Explore themes, historical context, and spiritual insights from Alma 31.</p>
-                            <a href="pages/analysis.html" class="btn btn-primary">View Analysis</a>
-                        </div>
-                        <div class="card nav-card">
-                            <h3>🎨 Visual Gallery</h3>
-                            <p>See artistic representations of the Rameumptom and key scenes.</p>
-                            <a href="pages/gallery.html" class="btn btn-primary">View Gallery</a>
-                        </div>
-                        <div class="card nav-card">
-                            <h3>💡 Study Applications</h3>
-                            <p>Personal study ideas, family activities, and teaching suggestions.</p>
-                            <a href="pages/applications.html" class="btn btn-primary">Get Ideas</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
+      </div>
+      <div class="hub-footer">
+        <a href="presentations/" class="btn-hub blue">
+          Browse Presentations
+          <svg viewBox="0 0 20 20" fill="currentColor" style="width:14px;height:14px;"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        </a>
+        <span class="hub-count">5 presentations</span>
+      </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2025 Alma 31 Study App. Created for educational and spiritual enrichment.</p>
-            <p>Scripture text from the Book of Mormon. Design inspired by <a href="https://churchofjesuschrist.org">churchofjesuschrist.org</a>.</p>
-            <p><a href="pages/about.html">About</a> | <a href="#privacy">Privacy</a> | <a href="#feedback">Feedback</a></p>
+    <!-- HUB: TECH & PHILOSOPHY -->
+    <div class="hub-card">
+      <div class="hub-banner purple"></div>
+      <div class="hub-body">
+        <span class="hub-icon">🤖</span>
+        <h2 class="purple">Tech & Philosophy</h2>
+        <div class="hub-sub">Technology, AI & Philosophical Inquiry</div>
+        <p>Presentations exploring artificial intelligence, technology ethics, and philosophical questions — separate from gospel-specific content.</p>
+        <div class="hub-meta">
+          <span class="hub-tag">Philosophy</span>
+          <span class="hub-tag">Technology</span>
+          <span class="hub-tag">AI</span>
         </div>
-    </footer>
+      </div>
+      <div class="hub-footer">
+        <a href="tech-presentations/" class="btn-hub purple">
+          Browse Tech Talks
+          <svg viewBox="0 0 20 20" fill="currentColor" style="width:14px;height:14px;"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        </a>
+        <span class="hub-count">1 presentation</span>
+      </div>
+    </div>
 
-    <!-- JavaScript -->
-    <script src="js/main.js"></script>
-    <script src="js/search.js"></script>
-    <script>
-        // Register service worker for PWA with update handling
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('sw.js')
-                    .then(function(registration) {
-                        console.log('ServiceWorker registration successful');
+    <!-- HUB: INTERACTIVE ACTIVITIES -->
+    <div class="hub-card">
+      <div class="hub-banner teal"></div>
+      <div class="hub-body">
+        <span class="hub-icon">🧩</span>
+        <h2 class="teal">Interactive Activities</h2>
+        <div class="hub-sub">Games, Puzzles & Teaching Tools</div>
+        <p>Hands-on interactive activities for youth, families, and classroom settings — logic puzzles, simulations, and engagement tools.</p>
+        <div class="hub-meta">
+          <span class="hub-tag">Logic</span>
+          <span class="hub-tag">Interactive</span>
+          <span class="hub-tag">Youth</span>
+          <span class="hub-tag">Family</span>
+        </div>
+      </div>
+      <div class="hub-footer">
+        <a href="activities/" class="btn-hub teal">
+          Browse Activities
+          <svg viewBox="0 0 20 20" fill="currentColor" style="width:14px;height:14px;"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        </a>
+        <span class="hub-count">1 activity</span>
+      </div>
+    </div>
 
-                        // Check for updates
-                        registration.addEventListener('updatefound', () => {
-                            const newWorker = registration.installing;
-                            newWorker.addEventListener('statechange', () => {
-                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                    // New content available, prompt user
-                                    if (confirm('New version available! Reload to get the latest updates?')) {
-                                        newWorker.postMessage({ type: 'SKIP_WAITING' });
-                                    }
-                                }
-                            });
-                        });
-                    })
-                    .catch(function(err) {
-                        console.log('ServiceWorker registration failed: ', err);
-                    });
-            });
-        }
-    </script>
+    <!-- HUB: ALMA 31 STUDY -->
+    <div class="hub-card">
+      <div class="hub-banner gold"></div>
+      <div class="hub-body">
+        <span class="hub-icon">📖</span>
+        <h2 class="gold">Alma 31 Study</h2>
+        <div class="hub-sub">Interactive Scripture Study Companion</div>
+        <p>A deep-dive study app for Alma 31 — the Rameumptom and true prayer. Includes full scripture text, thematic analysis, visual gallery, and study applications.</p>
+        <div class="hub-meta">
+          <span class="hub-tag">Scripture</span>
+          <span class="hub-tag">Analysis</span>
+          <span class="hub-tag">Gallery</span>
+          <span class="hub-tag">Study Guide</span>
+        </div>
+      </div>
+      <div class="hub-footer">
+        <a href="alma31.html" class="btn-hub gold-btn">
+          Open Study App
+          <svg viewBox="0 0 20 20" fill="currentColor" style="width:14px;height:14px;"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        </a>
+        <span class="hub-count">5 pages</span>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div>Israel Canyon Saratoga Springs Stake &nbsp;&middot;&nbsp; The Church of Jesus Christ of Latter-day Saints</div>
+  <div style="margin-top:6px;">
+    <a href="https://www.churchofjesuschrist.org" target="_blank" rel="noopener">ChurchofJesusChrist.org</a>
+  </div>
+</footer>
+
 </body>
 </html>
