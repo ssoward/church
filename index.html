@@ -60,16 +60,6 @@
     .site-nav-link:hover { border-color: var(--blue); color: var(--blue); }
     .site-nav-link.active { background: var(--blue); border-color: var(--blue); color: white; }
 
-    /* ===== FILTER BAR ===== */
-    .filter-bar {
-      background: white; border-bottom: 1px solid #e5e7eb; padding: 14px 24px;
-      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    }
-    .filter-label { font-size: 0.75rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.05em; margin-right: 4px; }
-    .filter-btn { padding: 5px 16px; border-radius: 20px; border: 1.5px solid #d1d5db; background: white; color: var(--gray); font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: all 0.2s; font-family: inherit; }
-    .filter-btn:hover { border-color: var(--blue); color: var(--blue); }
-    .filter-btn.active { background: var(--blue); border-color: var(--blue); color: white; }
 
     /* ===== MAIN ===== */
     main { max-width: 1140px; margin: 0 auto; padding: 48px 24px 80px; }
@@ -126,15 +116,18 @@
     .cat-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
     .cat-card {
       flex: 1; min-width: 110px; display: flex; flex-direction: column; align-items: center;
-      padding: 20px 12px 16px; border-radius: 12px; text-decoration: none;
+      padding: 20px 12px 14px; border-radius: 12px; cursor: pointer;
       background: white; border: 1.5px solid #e5e7eb;
-      transition: transform 0.2s, box-shadow 0.2s; text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; text-align: center;
       box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
-    .cat-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+    .cat-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+    .cat-card.active { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,48,135,0.08), 0 2px 8px rgba(0,0,0,0.08); }
     .cat-icon { font-size: 1.8rem; margin-bottom: 8px; }
     .cat-name { font-size: 0.78rem; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
-    .cat-count { font-size: 0.62rem; color: var(--gray); }
+    .cat-count { font-size: 0.62rem; color: var(--gray); margin-bottom: 8px; }
+    .cat-link { font-size: 0.6rem; color: #9ca3af; text-decoration: none; padding: 2px 8px; border-radius: 8px; border: 1px solid #e5e7eb; transition: all 0.15s; }
+    .cat-link:hover { color: var(--blue); border-color: var(--blue); }
 
     /* ===== FOOTER ===== */
     footer {
@@ -181,44 +174,44 @@
   <a href="conferences/" class="site-nav-link">Conferences</a>
 </nav>
 
-<div class="filter-bar">
-  <span class="filter-label">Filter</span>
-  <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
-  <button class="filter-btn" onclick="filterCards('gospel', this)">Gospel</button>
-  <button class="filter-btn" onclick="filterCards('tech', this)">Tech & Philosophy</button>
-  <button class="filter-btn" onclick="filterCards('activity', this)">Activities</button>
-  <button class="filter-btn" onclick="filterCards('scripture', this)">Scripture</button>
-  <button class="filter-btn" onclick="filterCards('conference', this)">Conferences</button>
-</div>
-
 <main>
 
   <div class="cat-row">
-    <a href="presentations/" class="cat-card">
+    <div class="cat-card active" onclick="filterCat('all', this)">
+      <div class="cat-icon">🗂️</div>
+      <div class="cat-name">All</div>
+      <div class="cat-count">11 items</div>
+    </div>
+    <div class="cat-card" onclick="filterCat('gospel', this)">
       <div class="cat-icon">✝️</div>
       <div class="cat-name">Gospel</div>
       <div class="cat-count">6 presentations</div>
-    </a>
-    <a href="tech-presentations/" class="cat-card">
+      <a href="presentations/" class="cat-link" onclick="event.stopPropagation()">View all →</a>
+    </div>
+    <div class="cat-card" onclick="filterCat('tech', this)">
       <div class="cat-icon">🤖</div>
       <div class="cat-name">Tech & AI</div>
       <div class="cat-count">3 presentations</div>
-    </a>
-    <a href="conferences/" class="cat-card">
+      <a href="tech-presentations/" class="cat-link" onclick="event.stopPropagation()">View all →</a>
+    </div>
+    <div class="cat-card" onclick="filterCat('conference', this)">
       <div class="cat-icon">🎤</div>
       <div class="cat-name">Conferences</div>
       <div class="cat-count">2 events</div>
-    </a>
-    <a href="activities/" class="cat-card">
+      <a href="conferences/" class="cat-link" onclick="event.stopPropagation()">View all →</a>
+    </div>
+    <div class="cat-card" onclick="filterCat('activity', this)">
       <div class="cat-icon">🧩</div>
       <div class="cat-name">Activities</div>
       <div class="cat-count">1 puzzle</div>
-    </a>
-    <a href="alma31.html" class="cat-card">
+      <a href="activities/" class="cat-link" onclick="event.stopPropagation()">View all →</a>
+    </div>
+    <div class="cat-card" onclick="filterCat('scripture', this)">
       <div class="cat-icon">📖</div>
       <div class="cat-name">Scripture</div>
       <div class="cat-count">Alma 31</div>
-    </a>
+      <a href="alma31.html" class="cat-link" onclick="event.stopPropagation()">Open →</a>
+    </div>
   </div>
 
   <div class="cards-grid" id="cards-grid">
@@ -466,16 +459,12 @@
 </footer>
 
 <script>
-  function filterCards(tag, btn) {
-    document.querySelectorAll('.filter-bar .filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+  function filterCat(tag, tile) {
+    document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('active'));
+    tile.classList.add('active');
     document.querySelectorAll('.card-wrapper').forEach(card => {
       const tags = card.dataset.tags || '';
-      if (tag === 'all' || tags.includes(tag)) {
-        card.classList.remove('hidden');
-      } else {
-        card.classList.add('hidden');
-      }
+      card.classList.toggle('hidden', tag !== 'all' && !tags.includes(tag));
     });
   }
 </script>
