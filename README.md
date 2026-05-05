@@ -40,7 +40,7 @@ Logic puzzles and interactive learning tools:
 
 ### Conferences
 Personalized professional conference schedules:
-- Atlassian Team '26 (May 5–7, 2026 · Anaheim) — 3-day agenda with day tabs, priority ratings, conflict warnings, and tips
+- Atlassian Team '26 (May 5–7, 2026 · Anaheim) — 3-day agenda with day tabs, priority ratings, conflict warnings, tips, and an interactive Leaflet/OpenStreetMap venue map with markers for the convention center, hotel, and pickleball courts
 
 ## Project Structure
 

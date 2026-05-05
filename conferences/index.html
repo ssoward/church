@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Conferences & Events — Scott Soward</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -188,6 +189,21 @@
     .tip-card-icon { font-size: 1.4rem; margin-bottom: 8px; }
     .tip-card-title { font-size: 0.8rem; font-weight: 700; color: var(--dark); margin-bottom: 5px; }
     .tip-card-body { font-size: 0.75rem; color: #4b5563; line-height: 1.6; }
+
+    /* ===== MAP SECTION ===== */
+    #venue-map { height: 420px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .map-legend { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-top: 16px; }
+    .legend-card { background: white; border-radius: 10px; padding: 14px 16px; border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.05); display: flex; align-items: flex-start; gap: 12px; }
+    .legend-icon { font-size: 1.6rem; flex-shrink: 0; margin-top: 2px; }
+    .legend-info { flex: 1; min-width: 0; }
+    .legend-name { font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 2px; }
+    .legend-addr { font-size: 0.72rem; color: var(--gray); margin-bottom: 5px; }
+    .legend-note { font-size: 0.7rem; color: #4b5563; line-height: 1.55; }
+    .legend-link { display: inline-block; margin-top: 8px; padding: 5px 12px; border-radius: 6px; background: var(--orange); color: white; font-size: 0.7rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: opacity 0.2s; }
+    .legend-link:hover { opacity: 0.85; }
+    .legend-link.blue { background: #1d4ed8; }
+    .legend-link.green { background: #15803d; }
+    @media (max-width: 600px) { #venue-map { height: 320px; } .map-legend { grid-template-columns: 1fr; } }
 
     /* ===== FOOTER ===== */
     footer {
@@ -823,6 +839,47 @@
     </div>
   </div>
 
+  <!-- ============================
+       VENUE MAP
+       ============================ -->
+  <div class="section-divider">Venue & Area Map</div>
+
+  <div id="venue-map"></div>
+
+  <div class="map-legend">
+
+    <div class="legend-card">
+      <div class="legend-icon">🏛️</div>
+      <div class="legend-info">
+        <div class="legend-name">Anaheim Convention Center</div>
+        <div class="legend-addr">800 W Katella Ave, Anaheim, CA 92802</div>
+        <div class="legend-note">Atlassian Team '26 venue — Expo Hall, Main Stage, all ballrooms</div>
+        <a class="legend-link" href="https://maps.google.com/?q=800+W+Katella+Ave,+Anaheim,+CA+92802" target="_blank" rel="noopener">Directions</a>
+      </div>
+    </div>
+
+    <div class="legend-card">
+      <div class="legend-icon">🏨</div>
+      <div class="legend-info">
+        <div class="legend-name">Hilton Anaheim</div>
+        <div class="legend-addr">777 W Convention Way, Anaheim, CA 92802</div>
+        <div class="legend-note">~2 min walk to Convention Center · Connected via sky bridge</div>
+        <a class="legend-link blue" href="https://maps.google.com/?q=777+W+Convention+Way,+Anaheim,+CA+92802" target="_blank" rel="noopener">Directions</a>
+      </div>
+    </div>
+
+    <div class="legend-card">
+      <div class="legend-icon">🏓</div>
+      <div class="legend-info">
+        <div class="legend-name">Anaheim Tennis & Pickleball Center</div>
+        <div class="legend-addr">975 S State College Blvd, Anaheim, CA 92806</div>
+        <div class="legend-note">10 dedicated pickleball courts · Lights · Mon–Fri 7am–9pm, Sat–Sun 7am–6pm · ~15 min drive · (714) 991-9090</div>
+        <a class="legend-link green" href="https://maps.google.com/?q=975+S+State+College+Blvd,+Anaheim,+CA+92806" target="_blank" rel="noopener">Directions</a>
+      </div>
+    </div>
+
+  </div>
+
 </main>
 
 <footer>
@@ -841,6 +898,38 @@
     document.getElementById('day-' + id).classList.remove('hidden');
     btn.classList.add('active');
   }
+</script>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const map = L.map('venue-map').setView([33.8012, -117.902], 13);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19
+  }).addTo(map);
+
+  function makeMarker(emoji, bg) {
+    return L.divIcon({
+      html: '<div style="background:' + bg + ';border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-size:19px;box-shadow:0 2px 10px rgba(0,0,0,0.35);border:2.5px solid white;">' + emoji + '</div>',
+      iconSize: [38, 38],
+      iconAnchor: [19, 19],
+      popupAnchor: [0, -22],
+      className: ''
+    });
+  }
+
+  L.marker([33.8008, -117.9185], { icon: makeMarker('🏛️', '#c2410c') })
+    .addTo(map)
+    .bindPopup('<b>Anaheim Convention Center</b><br>800 W Katella Ave<br><span style="color:#6b7280;font-size:0.85em;">Atlassian Team \'26 venue</span>');
+
+  L.marker([33.8022, -117.9203], { icon: makeMarker('🏨', '#1d4ed8') })
+    .addTo(map)
+    .bindPopup('<b>Hilton Anaheim</b><br>777 W Convention Way<br><span style="color:#6b7280;font-size:0.85em;">~2 min walk to venue</span>');
+
+  L.marker([33.7990, -117.8695], { icon: makeMarker('🏓', '#15803d') })
+    .addTo(map)
+    .bindPopup('<b>Anaheim Tennis & Pickleball Center</b><br>975 S State College Blvd<br><span style="color:#6b7280;font-size:0.85em;">10 courts · Lights · ~15 min drive<br>(714) 991-9090</span>');
 </script>
 
 </body>
