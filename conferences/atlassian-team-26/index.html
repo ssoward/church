@@ -32,7 +32,7 @@
     /* ===== HEADER ===== */
     header {
       background: linear-gradient(160deg, #7c2d12 0%, #9a3412 40%, #1c1917 100%);
-      color: white; padding: 60px 24px 50px; text-align: center; position: relative; overflow: hidden;
+      color: white; padding: 28px 24px 24px; text-align: left; position: relative; overflow: hidden;
     }
     header::before {
       content: ''; position: absolute; inset: 0;
@@ -40,11 +40,10 @@
                   radial-gradient(ellipse at 70% 80%, rgba(201,168,76,0.1) 0%, transparent 60%);
       pointer-events: none;
     }
-    .header-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
-    .header-divider { width: 60px; height: 3px; background: var(--orange-light); margin: 0 auto 24px; border-radius: 2px; }
-    header h1 { font-size: clamp(1.8rem, 4.5vw, 2.8rem); font-weight: 700; line-height: 1.2; margin-bottom: 12px; text-shadow: 0 2px 10px rgba(0,0,0,0.4); }
-    header .subtitle { font-size: clamp(0.88rem, 2vw, 1.05rem); color: rgba(255,255,255,0.7); line-height: 1.7; max-width: 540px; margin: 0 auto; }
-    header .org { display: inline-block; margin-top: 18px; font-size: 0.75rem; color: var(--gold-light); letter-spacing: 0.06em; text-transform: uppercase; }
+    .header-inner { position: relative; z-index: 1; max-width: 1140px; margin: 0 auto; }
+    .header-badge { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+    header h1 { font-size: clamp(1.3rem, 2vw, 1.75rem); font-weight: 700; line-height: 1.2; color: white; margin-bottom: 6px; }
+    header .subtitle { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
 
     /* ===== SITE NAV ===== */
     .site-nav {
@@ -214,7 +213,7 @@
     footer a:hover { text-decoration: underline; }
 
     @media (max-width: 600px) {
-      header { padding: 44px 16px 36px; }
+      header { padding: 20px 16px 18px; }
       main { padding: 24px 14px 60px; }
       .conf-hero-body { padding: 20px 18px; }
       .session-time { min-width: 80px; width: 80px; }
@@ -230,10 +229,9 @@
 
 <header>
   <div class="header-inner">
-    <div class="header-divider"></div>
-    <h1>Conferences & Events</h1>
-    <p class="subtitle">Personal schedules for professional conferences and events</p>
-    <span class="org">Scott Soward &nbsp;&middot;&nbsp; FamilySearch / Atlassian</span>
+    <div class="header-badge">Hub &nbsp;&middot;&nbsp; Conferences &nbsp;&middot;&nbsp; Atlassian Team '26</div>
+    <h1>Atlassian Team '26</h1>
+    <p class="subtitle">Anaheim Convention Center &nbsp;&middot;&nbsp; May 5–7, 2026 &nbsp;&middot;&nbsp; Personal agenda &amp; session guide</p>
   </div>
 </header>
 
@@ -295,107 +293,94 @@
        ============================ -->
   <div id="day-tue" class="day-panel">
     <div class="day-intro">
-      <strong>Day 1 — Expo + Kickoff.</strong> Start in the Expo Hall as soon as it opens. Use standby lines (show up 5–10 min early). Download the Team '26 app and add sessions to My Schedule.
+      <strong>Day 1 — Rovo Dev + Opening Keynote.</strong> Reserved seat in 304A at 2:15 PM — arrive a few minutes early. Use the 3:45–4:30 gap to hit the Expo. Opening Keynote at 5:30 PM is the highlight of the evening, followed by Welcome Reception.
     </div>
 
     <div class="sessions">
 
-      <div class="session">
+      <div class="session must-attend">
         <div class="session-time">
-          <div class="time-range">3:00 PM<br><span class="time-end">8:00 PM</span></div>
-        </div>
-        <div class="session-content">
-          <div class="session-badges"><span class="badge badge-social">Expo</span></div>
-          <div class="session-title">Expo Hall Open</div>
-          <div class="session-meta">
-            <span class="session-location">📍 Expo Hall</span>
-            <span class="session-stars">★★★★★</span>
-          </div>
-          <div class="session-desc">Heart of the conference. Atlassian Hub + partners showcasing Rovo, Jira admin tools, AI solutions, automation, backup, and Marketplace apps. Great for demos, swag, and quick networking.</div>
-        </div>
-      </div>
-
-      <div class="session">
-        <div class="session-time">
-          <div class="time-range">4:00 PM<br><span class="time-end">4:30 PM</span></div>
-        </div>
-        <div class="session-content">
-          <div class="session-badges"><span class="badge badge-admin">Admin</span></div>
-          <div class="session-title">Networking Cohort: Atlassian Admins (Mid-Career)</div>
-          <div class="session-meta">
-            <span class="session-location">📍 Hall B, Meals Area</span>
-            <span class="session-stars">★★★★★</span>
-          </div>
-          <div class="session-desc">Connect with fellow Jira admins (4+ years experience). Discuss career growth, challenges, and new skills.</div>
-        </div>
-      </div>
-
-      <div class="session standby">
-        <div class="session-time">
-          <div class="time-range">4:00 PM<br><span class="time-end">5:00 PM</span></div>
+          <div class="time-range">2:15 PM<br><span class="time-end">3:45 PM</span></div>
         </div>
         <div class="session-content">
           <div class="session-badges">
-            <span class="badge badge-standby">Standby</span>
-            <span class="badge badge-admin">Admin</span>
+            <span class="badge badge-must">Reserved</span>
+            <span class="badge badge-rovo">Learning · 90 min</span>
           </div>
-          <div class="session-title">Mission possible: Atlassian administrator's playbook for today's era</div>
+          <div class="session-title">Rovo Dev across your entire software lifecycle</div>
           <div class="session-meta">
-            <span class="session-location">📍 304C</span>
+            <span class="session-location">📍 304A</span>
+            <span class="session-stars">★★★★★</span>
+          </div>
+          <div class="session-desc">Jovana Dunisijevic &amp; Lazar Deretic (Atlassian). Deep dive into Rovo Dev integrated across the full SDLC — from planning through deployment.</div>
+        </div>
+      </div>
+
+      <div class="session">
+        <div class="session-time">
+          <div class="time-range">4:30 PM<br><span class="time-end">4:45 PM</span></div>
+        </div>
+        <div class="session-content">
+          <div class="session-badges">
+            <span class="badge badge-panel">Theater · 15 min</span>
+          </div>
+          <div class="session-title">AI-driven incident prevention with Jira Service Management</div>
+          <div class="session-meta">
+            <span class="session-location">📍 Expo Theater A</span>
             <span class="session-stars">★★★★</span>
           </div>
-          <div class="session-desc">As a tech lead/admin, learn how to keep your Atlassian platform secure, efficient, and future-ready.</div>
+          <div class="session-desc">Prithwish Basu (Atlassian). How AI proactively prevents incidents before they impact customers in JSM.</div>
         </div>
       </div>
 
       <div class="session must-attend">
         <div class="session-time">
-          <div class="time-range">5:30 PM<br><span class="time-end">6:15 PM</span></div>
+          <div class="time-range">5:30 PM<br><span class="time-end">6:30 PM</span></div>
         </div>
         <div class="session-content">
           <div class="session-badges">
             <span class="badge badge-must">Must Attend</span>
-            <span class="badge badge-keynote">Keynote</span>
+            <span class="badge badge-keynote">Opening Keynote · 60 min</span>
           </div>
-          <div class="session-title">Opening Keynote: The new shape of teamwork – Designing the Human-AI workforce</div>
+          <div class="session-title">Opening Keynote: The new shape of teamwork — Designing the Human-AI workforce</div>
           <div class="session-meta">
-            <span class="session-location">📍 Main Stage</span>
+            <span class="session-location">📍 Main Stage · Livestream</span>
             <span class="session-stars">★★★★★</span>
           </div>
-          <div class="session-desc">Emily Chang, Ethan Mollick (Wharton), Magnus Östberg (Mercedes-Benz). Big-picture vision on Human-AI collaboration.</div>
-        </div>
-      </div>
-
-      <div class="session standby">
-        <div class="session-time">
-          <div class="time-range">6:30 PM<br><span class="time-end">7:15 PM</span></div>
-        </div>
-        <div class="session-content">
-          <div class="session-badges">
-            <span class="badge badge-standby">Standby</span>
-            <span class="badge badge-rovo">Rovo</span>
-          </div>
-          <div class="session-title">Level up your Rovo Agents: Subagents, evals, agentic workflows, and automation</div>
-          <div class="session-meta">
-            <span class="session-location">📍 Rovo Theater</span>
-            <span class="session-stars">★★★★★</span>
-          </div>
-          <div class="session-desc">Take your Rovo Agents to the next level with advanced patterns — subagents, evaluation frameworks, and full agentic automation.</div>
+          <div class="session-desc">Emily Chang, Ethan Mollick (Wharton), Magnus Östberg (Mercedes-Benz AG). The big-picture vision for the Human-AI workforce.</div>
         </div>
       </div>
 
       <div class="session social">
         <div class="session-time">
-          <div class="time-range">6:30 PM<br><span class="time-end">8:00 PM</span></div>
+          <div class="time-range">6:15 PM</div>
         </div>
         <div class="session-content">
           <div class="session-badges"><span class="badge badge-social">Social</span></div>
-          <div class="session-title">Welcome Reception + Expo Theaters</div>
+          <div class="session-title">Welcome Reception</div>
           <div class="session-meta">
-            <span class="session-location">📍 Expo Hall</span>
+            <span class="session-location">📍 Expo</span>
             <span class="session-stars">★★★★</span>
           </div>
-          <div class="session-desc">Food, drinks, networking + short theater sessions: Cisco Day-in-the-Life with Rovo, Backup & Restore, and more Marketplace demos.</div>
+          <div class="session-desc">Food, drinks, and networking. Keynote wraps at 6:30 — head over right after.</div>
+        </div>
+      </div>
+
+      <div class="session">
+        <div class="session-time">
+          <div class="time-range">6:30 PM<br><span class="time-end">6:45 PM</span></div>
+        </div>
+        <div class="session-content">
+          <div class="session-badges">
+            <span class="badge badge-panel">Theater · 15 min</span>
+          </div>
+          <div class="session-title">The shortcuts across the SDLC you are yet to discover</div>
+          <div class="session-meta">
+            <span class="session-location">📍 Expo Theater A</span>
+            <span class="session-stars">★★★★</span>
+          </div>
+          <div class="session-desc">Jovana Dunisijevic (Atlassian). Quick-hit productivity tips across the software development lifecycle.</div>
+          <div class="conflict-note">⚡ Runs during Welcome Reception — 15 min, then rejoin reception</div>
         </div>
       </div>
 
@@ -404,225 +389,34 @@
     <div class="day-tips">
       <div class="day-tips-title">Tuesday Tips</div>
       <ul>
-        <li>Start in the Expo Hall as soon as it opens at 3 PM — hit Atlassian Hub first.</li>
-        <li>Admin Networking Cohort overlaps with the Admin Playbook session — prioritize the Cohort for peer connections.</li>
-        <li>Show up 5–10 minutes early for standby sessions (Rovo Theater fills fast).</li>
-        <li>Download the Team '26 app and add all sessions to My Schedule tonight.</li>
+        <li>Reserved seat for Rovo Dev (304A) at 2:15 PM — arrive 5 min early.</li>
+        <li>Gap 3:45–4:30 PM: explore Expo Hall and hit the Atlassian Hub booth.</li>
+        <li>Theater sessions are 15 min each — easy to squeeze in around the reception.</li>
+        <li>Keynote ends at 6:30 PM same time as the theater session — reception first after the keynote.</li>
       </ul>
     </div>
   </div>
 
-  <!-- ============================
+    <!-- ============================
        WEDNESDAY
        ============================ -->
   <div id="day-wed" class="day-panel hidden">
     <div class="day-intro">
-      <strong>Day 2 — Your strongest day.</strong> Heaviest concentration of keynotes and deep dives aligned to your focus areas. Use "Bites & Breakthroughs" peer meetup (11:30 AM–1:30 PM) for lunch + conversations.
+      <strong>Day 2 — Founder Keynote + Agentic Pivot.</strong> Founder Keynote at 9 AM is the headline session of the entire conference. Large gap mid-morning and at lunch — use it for Expo and networking. Your afternoon anchors: Jira AI agents (1:30 PM) and the Agentic Pivot Solution Keynote (4:00 PM).
     </div>
 
     <div class="sessions">
-
-      <div class="session must-attend">
-        <div class="session-time">
-          <div class="time-range">9:00 AM<br><span class="time-end">10:15 AM</span></div>
-        </div>
-        <div class="session-content">
-          <div class="session-badges">
-            <span class="badge badge-must">Must Attend</span>
-            <span class="badge badge-keynote">Founder Keynote</span>
-          </div>
-          <div class="session-title">Founder Keynote: Human-AI collaboration at scale</div>
-          <div class="session-meta">
-            <span class="session-location">📍 Main Stage</span>
-            <span class="session-stars">★★★★★</span>
-          </div>
-          <div class="session-desc">Mike Cannon-Brookes, Sherif Mansour, Tamar Yehoshua. Reimagine teamwork in the AI era — the headline session of the entire conference.</div>
-        </div>
-      </div>
-
-      <div class="session must-attend">
-        <div class="session-time">
-          <div class="time-range">10:45 AM<br><span class="time-end">11:15 AM</span></div>
-        </div>
-        <div class="session-content">
-          <div class="session-badges"><span class="badge badge-keynote">Collection Keynote</span></div>
-          <div class="session-title">Teamwork Collection Keynote: Power the era of human-AI collaboration</div>
-          <div class="session-meta">
-            <span class="session-location">📍 Ballroom A</span>
-            <span class="session-stars">★★★★★</span>
-          </div>
-          <div class="session-desc">How to bring humans, agents, and automation together in one unified system of work.</div>
-        </div>
-      </div>
-
-      <div class="session">
-        <div class="session-time">
-          <div class="time-range">11:30 AM<br><span class="time-end">12:00 PM</span></div>
-        </div>
-        <div class="session-content">
-          <div class="session-badges"><span class="badge badge-keynote">Collection Keynote</span></div>
-          <div class="session-title">Shatter the service quo (Service Collection Keynote)</div>
-          <div class="session-meta">
-            <span class="session-location">📍 Ballroom A</span>
-            <span class="session-stars">★★★★</span>
-          </div>
-          <div class="session-desc">AI-powered service management across the entire organization — beyond traditional IT service desk.</div>
-        </div>
-      </div>
-
-      <div class="session standby">
-        <div class="session-time">
-          <div class="time-range">12:00 PM<br><span class="time-end">12:45 PM</span></div>
-        </div>
-        <div class="session-content">
-          <div class="session-badges">
-            <span class="badge badge-standby">Standby</span>
-            <span class="badge badge-rovo">Rovo</span>
-          </div>
-          <div class="session-title">Rovo Dev in Jira – Your coding force multiplier</div>
-          <div class="session-meta">
-            <span class="session-location">📍 Rovo Theater</span>
-            <span class="session-stars">★★★★★</span>
-          </div>
-          <div class="session-desc">How Rovo Dev integrates into your daily Jira workflow to accelerate software delivery — practical hands-on focus.</div>
-        </div>
-      </div>
-
-      <div class="session must-attend">
-        <div class="session-time">
-          <div class="time-range">1:15 PM<br><span class="time-end">1:45 PM</span></div>
-        </div>
-        <div class="session-content">
-          <div class="session-badges">
-            <span class="badge badge-rovo">Rovo</span>
-          </div>
-          <div class="session-title">Building AI-native teams with Atlassian Rovo</div>
-          <div class="session-meta">
-            <span class="session-location">📍 Ballroom A</span>
-            <span class="session-stars">★★★★★</span>
-          </div>
-          <div class="session-desc">How Rovo uses the Teamwork Graph to understand your entire business context — the foundation of AI-native team workflows.</div>
-          <div class="conflict-note">⚡ Overlaps with Elevating Admins at 1:30 PM in Ballroom E — choose one or split the time</div>
-        </div>
-      </div>
-
-      <div class="session must-attend">
-        <div class="session-time">
-          <div class="time-range">1:30 PM<br><span class="time-end">2:15 PM</span></div>
-        </div>
-        <div class="session-content">
-          <div class="session-badges">
-            <span class="badge badge-admin">Admin</span>
-          </div>
-          <div class="session-title">Elevating admins: Shape, secure, and transform your system of work</div>
-          <div class="session-meta">
-            <span class="session-location">📍 Ballroom E</span>
-            <span class="session-stars">★★★★★</span>
-          </div>
-          <div class="session-desc">Move from gatekeeper to strategic leader in the AI era — the key admin session of the conference.</div>
-          <div class="conflict-note">⚡ Overlaps with Building AI-native teams at 1:15 PM (Ballroom A) and Platform Keynote at 2:15 PM</div>
-        </div>
-      </div>
-
-      <div class="session must-attend">
-        <div class="session-time">
-          <div class="time-range">2:15 PM<br><span class="time-end">2:45 PM</span></div>
-        </div>
-        <div class="session-content">
-          <div class="session-badges"><span class="badge badge-keynote">Platform Keynote</span></div>
-          <div class="session-title">Platform Keynote: Close the AI context gap with data you can trust</div>
-          <div class="session-meta">
-            <span class="session-location">📍 Ballroom A</span>
-            <span class="session-stars">★★★★★</span>
-          </div>
-          <div class="session-desc">Governance, control, and trusted data for AI agents — the critical infrastructure keynote for admins and platform owners.</div>
-        </div>
-      </div>
-
-      <div class="session">
-        <div class="session-time">
-          <div class="time-range">2:30 PM<br><span class="time-end">3:15 PM</span></div>
-        </div>
-        <div class="session-content">
-          <div class="session-badges"><span class="badge badge-admin">Security</span></div>
-          <div class="session-title">Your AI is only as secure as your data</div>
-          <div class="session-meta">
-            <span class="session-location">📍 Ballroom C</span>
-            <span class="session-stars">★★★★</span>
-          </div>
-          <div class="session-desc">Security and compliance for AI agents — data governance, risk management, and safe AI rollout strategies.</div>
-          <div class="conflict-note">⚡ Overlaps with Platform Keynote — attend Platform Keynote, then join this session partway through</div>
-        </div>
-      </div>
-
-      <div class="session must-attend">
-        <div class="session-time">
-          <div class="time-range">3:15 PM<br><span class="time-end">3:45 PM</span></div>
-        </div>
-        <div class="session-content">
-          <div class="session-badges"><span class="badge badge-keynote">Collection Keynote</span></div>
-          <div class="session-title">From gut-feel to confident strategic delivery with Strategy Collection and Rovo</div>
-          <div class="session-meta">
-            <span class="session-location">📍 Ballroom A</span>
-            <span class="session-stars">★★★★★</span>
-          </div>
-          <div class="session-desc">Connect goals, funds, teams, and work with AI — translating strategy into confident execution using Rovo's planning intelligence.</div>
-        </div>
-      </div>
-
-      <div class="session must-attend">
-        <div class="session-time">
-          <div class="time-range">4:00 PM<br><span class="time-end">4:30 PM</span></div>
-        </div>
-        <div class="session-content">
-          <div class="session-badges"><span class="badge badge-rovo">Rovo</span></div>
-          <div class="session-title">The agentic pivot: Building software in the era of human-AI collaboration</div>
-          <div class="session-meta">
-            <span class="session-location">📍 Ballroom A</span>
-            <span class="session-stars">★★★★★</span>
-          </div>
-          <div class="session-desc">The new product builder role in the AI era — how software teams restructure around agentic workflows and human-AI pair programming.</div>
-        </div>
-      </div>
 
       <div class="session social">
         <div class="session-time">
-          <div class="time-range">Evening</div>
+          <div class="time-range">8:00 AM</div>
         </div>
         <div class="session-content">
-          <div class="session-badges"><span class="badge badge-social">Social</span></div>
-          <div class="session-title">Rovo Happy Hour</div>
-          <div class="session-meta">
-            <span class="session-location">📍 Expo / Venue</span>
-            <span class="session-stars">★★★★</span>
-          </div>
-          <div class="session-desc">Relaxed networking with Rovo-focused attendees — great for following up on conversations from the day's sessions.</div>
+          <div class="session-badges"><span class="badge badge-social">Expo</span></div>
+          <div class="session-title">Breakfast</div>
+          <div class="session-meta"><span class="session-location">📍 Expo Hall</span></div>
         </div>
       </div>
-
-    </div><!-- /sessions -->
-
-    <div class="day-tips">
-      <div class="day-tips-title">Wednesday Tips</div>
-      <ul>
-        <li>This is the busiest and most valuable day — bring your A-game and a charged phone.</li>
-        <li>1:15–2:15 PM conflict zone: prioritize Elevating Admins (Ballroom E), then catch Rovo content on replay.</li>
-        <li>Use the "Bites &amp; Breakthroughs" peer meetup (11:30 AM–1:30 PM) for lunch networking.</li>
-        <li>The 2:15–3:15 PM block has simultaneous sessions in A and C — Platform Keynote is the stronger pick.</li>
-        <li>End the day at Rovo Happy Hour to solidify connections from sessions.</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- ============================
-       THURSDAY
-       ============================ -->
-  <div id="day-thu" class="day-panel hidden">
-    <div class="day-intro">
-      <strong>Day 3 — Leadership + Actionable Takeaways + Closing.</strong> Lighter schedule — focus on applying what you've learned and building final connections before the BASH.
-    </div>
-
-    <div class="sessions">
 
       <div class="session must-attend">
         <div class="session-time">
@@ -631,109 +425,255 @@
         <div class="session-content">
           <div class="session-badges">
             <span class="badge badge-must">Must Attend</span>
-            <span class="badge badge-keynote">Closing Keynote</span>
+            <span class="badge badge-keynote">Founder Keynote · 60 min</span>
           </div>
-          <div class="session-title">Closing Keynote: Permission to build – Hardwiring a founder mindset</div>
+          <div class="session-title">Founder Keynote: Human-AI collaboration at scale</div>
           <div class="session-meta">
-            <span class="session-location">📍 Main Stage</span>
+            <span class="session-location">📍 Main Stage · Livestream</span>
             <span class="session-stars">★★★★★</span>
           </div>
-          <div class="session-desc">Mike Cannon-Brookes + Alexis Ohanian (Reddit co-founder). Leadership, resilience, and building with conviction in the AI era.</div>
+          <div class="session-desc">Mike Cannon-Brookes, Sherif Mansour, Tamar Yehoshua (Atlassian). The headline keynote — reimagining teamwork in the AI era.</div>
+        </div>
+      </div>
+
+      <div class="session social">
+        <div class="session-time">
+          <div class="time-range">11:30 AM</div>
+        </div>
+        <div class="session-content">
+          <div class="session-badges"><span class="badge badge-social">Expo</span></div>
+          <div class="session-title">Lunch</div>
+          <div class="session-meta"><span class="session-location">📍 Expo Hall</span></div>
+          <div class="session-desc">Use the morning gap (10 AM–1:30 PM) and lunch for Expo demos and peer connections.</div>
         </div>
       </div>
 
       <div class="session">
         <div class="session-time">
-          <div class="time-range">10:30 AM<br><span class="time-end">11:15 AM</span></div>
+          <div class="time-range">1:30 PM<br><span class="time-end">2:15 PM</span></div>
         </div>
         <div class="session-content">
-          <div class="session-badges"><span class="badge badge-panel">Panel</span></div>
-          <div class="session-title">Loom for leaders: Authentic communication with Loom and AI</div>
+          <div class="session-badges">
+            <span class="badge badge-rovo">Rovo</span>
+            <span class="badge badge-keynote">On Demand · 45 min</span>
+          </div>
+          <div class="session-title">Bring the power of AI agents to your Jira workflows</div>
           <div class="session-meta">
             <span class="session-location">📍 Ballroom B</span>
-            <span class="session-stars">★★★★</span>
+            <span class="session-stars">★★★★★</span>
           </div>
-          <div class="session-desc">Leadership communication in the AI era — how async video and AI change how leaders communicate with distributed teams.</div>
-          <div class="conflict-note">⚡ Simultaneous with Williams F1 session in Ballroom A — choose based on interest</div>
-        </div>
-      </div>
-
-      <div class="session">
-        <div class="session-time">
-          <div class="time-range">10:30 AM<br><span class="time-end">11:15 AM</span></div>
-        </div>
-        <div class="session-content">
-          <div class="session-badges"><span class="badge badge-rovo">Strategy</span></div>
-          <div class="session-title">Designing for flow: How Atlassian Williams F1 Team is building an AI-led System of Work</div>
-          <div class="session-meta">
-            <span class="session-location">📍 Ballroom A</span>
-            <span class="session-stars">★★★★</span>
-          </div>
-          <div class="session-desc">Strategy + execution at the elite level — how Williams Racing applies Atlassian tools and AI to operate at F1 speed.</div>
+          <div class="session-desc">Matthew Canham &amp; Natalie Chung (Atlassian). Practical walkthrough of embedding Rovo AI agents directly into Jira workflows.</div>
         </div>
       </div>
 
       <div class="session must-attend">
+        <div class="session-time">
+          <div class="time-range">4:00 PM<br><span class="time-end">4:30 PM</span></div>
+        </div>
+        <div class="session-content">
+          <div class="session-badges">
+            <span class="badge badge-must">Must Attend</span>
+            <span class="badge badge-keynote">Solution Keynote · 30 min</span>
+          </div>
+          <div class="session-title">The agentic pivot: Building software in the era of human-AI collaboration</div>
+          <div class="session-meta">
+            <span class="session-location">📍 Ballroom A · On Demand</span>
+            <span class="session-stars">★★★★★</span>
+          </div>
+          <div class="session-desc">Ming Wu &amp; Tanguy Crusson (Atlassian). How software teams restructure around agentic workflows and human-AI pair programming.</div>
+        </div>
+      </div>
+
+      <div class="session social">
+        <div class="session-time">
+          <div class="time-range">4:15 PM</div>
+        </div>
+        <div class="session-content">
+          <div class="session-badges"><span class="badge badge-social">Social</span></div>
+          <div class="session-title">Rovo Happy Hour</div>
+          <div class="session-meta">
+            <span class="session-location">📍 Expo</span>
+            <span class="session-stars">★★★★</span>
+          </div>
+          <div class="session-desc">Networking with Rovo-focused attendees. Keynote ends at 4:30 — head straight over.</div>
+          <div class="conflict-note">⚡ Starts during the Agentic Pivot keynote — join at 4:30 PM when keynote wraps</div>
+        </div>
+      </div>
+
+      <div class="session">
+        <div class="session-time">
+          <div class="time-range">5:00 PM<br><span class="time-end">5:15 PM</span></div>
+        </div>
+        <div class="session-content">
+          <div class="session-badges">
+            <span class="badge badge-panel">Theater · 15 min</span>
+          </div>
+          <div class="session-title">AI-assisted engineering: 5 trends we're seeing from 500+ organizations</div>
+          <div class="session-meta">
+            <span class="session-location">📍 Expo Theater B</span>
+            <span class="session-stars">★★★★</span>
+          </div>
+          <div class="session-desc">Data-backed research on AI adoption trends across engineering teams — quick insight you can bring back to your org.</div>
+        </div>
+      </div>
+
+    </div><!-- /sessions -->
+
+    <div class="day-tips">
+      <div class="day-tips-title">Wednesday Tips</div>
+      <ul>
+        <li>Arrive early for the Founder Keynote — Main Stage fills quickly for MCB appearances.</li>
+        <li>10 AM–1:30 PM is a big open gap: great for Expo demos, the Atlassian Hub, and lunch at 11:30.</li>
+        <li>Agentic Pivot keynote (4:00 PM) ends exactly when Rovo Happy Hour starts — walk straight over at 4:30.</li>
+        <li>The 5 PM theater session is 15 min — easy to catch on your way out of happy hour.</li>
+      </ul>
+    </div>
+  </div>
+
+    <!-- ============================
+       THURSDAY
+       ============================ -->
+  <div id="day-thu" class="day-panel hidden">
+    <div class="day-intro">
+      <strong>Day 3 — Closing Keynote + Breakouts.</strong> Back-to-back Bitbucket Cloud (10:30) and AI code review (11:30). Three quick 15-min theater sessions right after lunch. Last session wraps at 3:30 PM — depart for airport at 4:00 PM.
+    </div>
+
+    <div class="sessions">
+
+      <div class="session social">
+        <div class="session-time">
+          <div class="time-range">8:00 AM</div>
+        </div>
+        <div class="session-content">
+          <div class="session-badges"><span class="badge badge-social">Expo</span></div>
+          <div class="session-title">Breakfast</div>
+          <div class="session-meta"><span class="session-location">📍 Expo Hall</span></div>
+        </div>
+      </div>
+
+      <div class="session must-attend">
+        <div class="session-time">
+          <div class="time-range">9:00 AM<br><span class="time-end">10:00 AM</span></div>
+        </div>
+        <div class="session-content">
+          <div class="session-badges">
+            <span class="badge badge-must">Must Attend</span>
+            <span class="badge badge-keynote">Closing Keynote · 60 min</span>
+          </div>
+          <div class="session-title">Closing Keynote: Permission to build — Hardwiring a founder mindset into the enterprise</div>
+          <div class="session-meta">
+            <span class="session-location">📍 Main Stage · Livestream</span>
+            <span class="session-stars">★★★★★</span>
+          </div>
+          <div class="session-desc">Alexis Ohanian (Seven Seven Six) &amp; Mike Cannon-Brookes (Atlassian). Leadership, resilience, and the founder mindset inside large organizations.</div>
+        </div>
+      </div>
+
+      <div class="session">
+        <div class="session-time">
+          <div class="time-range">10:30 AM<br><span class="time-end">11:15 AM</span></div>
+        </div>
+        <div class="session-content">
+          <div class="session-badges">
+            <span class="badge badge-rovo">SDLC · 45 min</span>
+          </div>
+          <div class="session-title">Embracing the AI-native SDLC with Bitbucket Cloud</div>
+          <div class="session-meta">
+            <span class="session-location">📍 304A</span>
+            <span class="session-stars">★★★★</span>
+          </div>
+          <div class="session-desc">Chris Clarke &amp; Edmund Munday (Atlassian). How Bitbucket Cloud is being rebuilt for an AI-native development workflow from day one.</div>
+        </div>
+      </div>
+
+      <div class="session">
         <div class="session-time">
           <div class="time-range">11:30 AM<br><span class="time-end">12:15 PM</span></div>
         </div>
         <div class="session-content">
           <div class="session-badges">
-            <span class="badge badge-panel">Panel</span>
-            <span class="badge badge-rovo">Rovo</span>
+            <span class="badge badge-rovo">AI Code · 45 min</span>
           </div>
-          <div class="session-title">Customers leading the AI Rovo-lution</div>
+          <div class="session-title">Beyond the pull request: AI-native code review and incident resolution</div>
+          <div class="session-meta">
+            <span class="session-location">📍 Ballroom C</span>
+            <span class="session-stars">★★★★</span>
+          </div>
+          <div class="session-desc">Natalija Fuksmane &amp; Ryan Jiang (Atlassian). How AI reshapes code review and links it directly to incident response.</div>
+        </div>
+      </div>
+
+      <div class="session social">
+        <div class="session-time">
+          <div class="time-range">12:15 PM</div>
+        </div>
+        <div class="session-content">
+          <div class="session-badges"><span class="badge badge-social">Expo</span></div>
+          <div class="session-title">Lunch</div>
+          <div class="session-meta"><span class="session-location">📍 Expo Hall</span></div>
+        </div>
+      </div>
+
+      <div class="session">
+        <div class="session-time">
+          <div class="time-range">12:30 PM<br><span class="time-end">12:45 PM</span></div>
+        </div>
+        <div class="session-content">
+          <div class="session-badges"><span class="badge badge-panel">Theater · 15 min</span></div>
+          <div class="session-title">Beyond adoption: What it actually means to be an AI native engineering org</div>
+          <div class="session-meta">
+            <span class="session-location">📍 Expo Theater A</span>
+            <span class="session-stars">★★★★</span>
+          </div>
+          <div class="session-desc">Brittni Allen (DX). What "AI native" actually requires in culture, process, and tooling — beyond just adopting new tools.</div>
+        </div>
+      </div>
+
+      <div class="session">
+        <div class="session-time">
+          <div class="time-range">12:55 PM<br><span class="time-end">1:10 PM</span></div>
+        </div>
+        <div class="session-content">
+          <div class="session-badges"><span class="badge badge-panel">Theater · 15 min</span></div>
+          <div class="session-title">Build a customer service AI agent: From zero to hero in 15 minutes</div>
+          <div class="session-meta">
+            <span class="session-location">📍 Expo Theater A</span>
+            <span class="session-stars">★★★★</span>
+          </div>
+          <div class="session-desc">Vincent Wong (Atlassian). Live demo: build a working customer service Rovo Agent from scratch in 15 minutes.</div>
+        </div>
+      </div>
+
+      <div class="session">
+        <div class="session-time">
+          <div class="time-range">1:20 PM<br><span class="time-end">1:35 PM</span></div>
+        </div>
+        <div class="session-content">
+          <div class="session-badges"><span class="badge badge-panel">Theater · 15 min</span></div>
+          <div class="session-title">Build Plans That Move at the Speed of Your Business</div>
+          <div class="session-meta">
+            <span class="session-location">📍 Expo Theater B</span>
+            <span class="session-stars">★★★★</span>
+          </div>
+          <div class="session-desc">Ingrid Blake &amp; Jake Comito (Atlassian). Build strategic Jira plans that update dynamically with your business.</div>
+        </div>
+      </div>
+
+      <div class="session">
+        <div class="session-time">
+          <div class="time-range">1:45 PM<br><span class="time-end">2:30 PM</span></div>
+        </div>
+        <div class="session-content">
+          <div class="session-badges">
+            <span class="badge badge-admin">Product Discovery · 45 min</span>
+            <span class="badge badge-keynote">On Demand</span>
+          </div>
+          <div class="session-title">From strategy to impact: Jira Product Discovery in practice</div>
           <div class="session-meta">
             <span class="session-location">📍 Ballroom B</span>
-            <span class="session-stars">★★★★★</span>
-          </div>
-          <div class="session-desc">Real customer stories from LVT, Rover, Pythian, and L.L.Bean — how teams are actually using Rovo Agents in production today.</div>
-        </div>
-      </div>
-
-      <div class="session">
-        <div class="session-time">
-          <div class="time-range">12:30 PM<br><span class="time-end">1:15 PM</span></div>
-        </div>
-        <div class="session-content">
-          <div class="session-badges"><span class="badge badge-keynote">Live Podcast</span></div>
-          <div class="session-title">Masters of Scale live podcast recording (Rivian CEO)</div>
-          <div class="session-meta">
-            <span class="session-location">📍 Ballroom A</span>
             <span class="session-stars">★★★★</span>
           </div>
-          <div class="session-desc">Reid Hoffman's Masters of Scale recorded live — leadership and scaling insights with the CEO of Rivian.</div>
-        </div>
-      </div>
-
-      <div class="session">
-        <div class="session-time">
-          <div class="time-range">1:45 PM<br><span class="time-end">2:30 PM</span></div>
-        </div>
-        <div class="session-content">
-          <div class="session-badges"><span class="badge badge-keynote">Design</span></div>
-          <div class="session-title">Designing for the beautiful mess of modern work</div>
-          <div class="session-meta">
-            <span class="session-location">📍 Ballroom A</span>
-            <span class="session-stars">★★★★</span>
-          </div>
-          <div class="session-desc">Charlie Sutton (Atlassian CDO) + Figma CDO — designing products and processes for how humans actually work, not how we wish they worked.</div>
-          <div class="conflict-note">⚡ Simultaneous with Zero to Hero: Building Rovo Agents in Ballroom D — Rovo Agents is the stronger pick for your focus areas</div>
-        </div>
-      </div>
-
-      <div class="session must-attend">
-        <div class="session-time">
-          <div class="time-range">1:45 PM<br><span class="time-end">2:30 PM</span></div>
-        </div>
-        <div class="session-content">
-          <div class="session-badges"><span class="badge badge-rovo">Rovo</span></div>
-          <div class="session-title">Zero to hero: Building Rovo Agents</div>
-          <div class="session-meta">
-            <span class="session-location">📍 Ballroom D</span>
-            <span class="session-stars">★★★★★</span>
-          </div>
-          <div class="session-desc">No-code guide to creating effective AI agents — practical step-by-step walkthrough for building your first production Rovo Agent.</div>
+          <div class="session-desc">Axel Sooriah (Atlassian), Brent Johnson (Maple), Luke Strobel (Erie Insurance), Suzanna Sargsyan. Real teams share how they use Jira Product Discovery in production.</div>
         </div>
       </div>
 
@@ -743,48 +683,43 @@
         </div>
         <div class="session-content">
           <div class="session-badges">
-            <span class="badge badge-rovo">Rovo</span>
-            <span class="badge badge-admin">Admin</span>
+            <span class="badge badge-rovo">Learning · 45 min</span>
           </div>
-          <div class="session-title">Rovo agents in action: Accelerating self-service deflection</div>
-          <div class="session-meta">
-            <span class="session-location">📍 Ballroom D</span>
-            <span class="session-stars">★★★★</span>
-          </div>
-          <div class="session-desc">Practical admin + support use cases — how teams are using Rovo Agents to reduce ticket volume and enable self-service at scale.</div>
-        </div>
-      </div>
-
-      <div class="session">
-        <div class="session-time">
-          <div class="time-range">3:45 PM<br><span class="time-end">4:30 PM</span></div>
-        </div>
-        <div class="session-content">
-          <div class="session-badges"><span class="badge badge-keynote">Practical</span></div>
-          <div class="session-title">Your meetings need a makeover (Confluence, Jira &amp; Loom)</div>
+          <div class="session-title">Jira Plans (Advanced Roadmaps) for project management</div>
           <div class="session-meta">
             <span class="session-location">📍 Ballroom E</span>
-            <span class="session-stars stars-3">★★★</span>
+            <span class="session-stars">★★★★</span>
           </div>
-          <div class="session-desc">Practical frameworks to reduce meeting overload using async-first tools — good takeaway session before the BASH.</div>
+          <div class="session-desc">Alex Ortiz (Apetech LLC). Practical guide to cross-team roadmaps and project management with Jira Plans.</div>
         </div>
       </div>
 
-      <div class="session social must-attend">
+      <div class="session" style="border-left: 4px solid #f59e0b; background: #fffbeb;">
+        <div class="session-time">
+          <div class="time-range">4:00 PM</div>
+        </div>
+        <div class="session-content">
+          <div class="session-badges"><span class="badge" style="background:#fef3c7;color:#92400e;">Departure</span></div>
+          <div class="session-title">✈️ Head to Airport</div>
+          <div class="session-meta"><span class="session-location">📍 Anaheim Convention Center → Airport</span></div>
+          <div class="session-desc">Leave venue by 4:00 PM. Bash starts at 4:30 — skipping to catch flight.</div>
+        </div>
+      </div>
+
+      <div class="session" style="opacity: 0.45;">
         <div class="session-time">
           <div class="time-range">4:30 PM<br><span class="time-end">7:00 PM</span></div>
         </div>
         <div class="session-content">
           <div class="session-badges">
-            <span class="badge badge-must">Don't Miss</span>
             <span class="badge badge-social">Social</span>
+            <span class="badge" style="background:#fee2e2;color:#b91c1c;">Skipping</span>
           </div>
-          <div class="session-title">BASH — Closing Party</div>
+          <div class="session-title">Bash — Closing Party</div>
           <div class="session-meta">
             <span class="session-location">📍 Conference Venue</span>
-            <span class="session-stars">★★★★★</span>
           </div>
-          <div class="session-desc">Live music, food, and final networking — the celebration cap to Team '26. Great for exchanging contacts and making lasting connections.</div>
+          <div class="session-desc">Missed — airport departure at 4:00 PM.</div>
         </div>
       </div>
 
@@ -793,15 +728,16 @@
     <div class="day-tips">
       <div class="day-tips-title">Thursday Tips</div>
       <ul>
-        <li>10:30 AM conflict: Loom for Leaders vs. F1 Team — both are 4-star; pick based on morning energy and interest.</li>
-        <li>At 1:45 PM, choose Zero to Hero: Building Rovo Agents over the design talk — directly actionable for your role.</li>
-        <li>Use the 12:30–1:30 PM lunch break to write down your top 3 takeaways while they're fresh.</li>
-        <li>Don't skip the BASH — the best conversations happen there.</li>
+        <li>Back-to-back: Bitbucket Cloud (304A, 10:30) then AI code review (Ballroom C, 11:30) — plan the room change.</li>
+        <li>Lunch is at 12:15 but theater sessions start at 12:30 — grab food quickly or eat during the sessions.</li>
+        <li>Three back-to-back theater sessions (12:30 / 12:55 / 1:20) — all Expo Theater A &amp; B, easy to hit all three.</li>
+        <li>Last session ends 3:30 PM — 30-min window before airport departure. Use it to write top takeaways and say goodbyes.</li>
+        <li>✈️ Leave venue by 4:00 PM sharp — Bash starts at 4:30 but you'll be on the road.</li>
       </ul>
     </div>
   </div>
 
-  <!-- ============================
+    <!-- ============================
        GENERAL TIPS
        ============================ -->
   <div class="section-divider">General Conference Tips</div>
