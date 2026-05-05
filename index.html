@@ -29,6 +29,7 @@
     header {
       background: linear-gradient(160deg, var(--blue) 0%, #001a4d 50%, #0a0a2e 100%);
       color: white; padding: 60px 24px 50px; text-align: center; position: relative; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: center; min-height: 320px;
     }
     header::before {
       content: ''; position: absolute; inset: 0;
@@ -41,8 +42,7 @@
     header h1 { font-size: clamp(1.8rem, 4.5vw, 2.8rem); font-weight: 700; line-height: 1.2; margin-bottom: 12px; text-shadow: 0 2px 10px rgba(0,0,0,0.4); }
     header .subtitle { font-size: clamp(0.88rem, 2vw, 1.05rem); color: rgba(255,255,255,0.7); line-height: 1.7; max-width: 580px; margin: 0 auto; }
     header .org { display: inline-block; margin-top: 18px; font-size: 0.75rem; color: var(--gold-light); letter-spacing: 0.06em; text-transform: uppercase; }
-    .header-eyebrow { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.45); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; }
-    .header-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 20px; }
+.header-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 20px; }
     .header-pill { display: inline-block; padding: 4px 14px; border-radius: 20px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); font-size: 0.7rem; color: rgba(255,255,255,0.75); letter-spacing: 0.02em; }
 
     /* ===== SITE NAV ===== */
@@ -138,7 +138,7 @@
     footer a:hover { text-decoration: underline; }
 
     @media (max-width: 600px) {
-      header { padding: 44px 16px 36px; }
+      header { padding: 44px 16px 36px; min-height: auto; }
       main { padding: 28px 16px 60px; }
       .cards-grid { grid-template-columns: 1fr; gap: 18px; }
       .cat-card { min-width: 80px; padding: 14px 8px 12px; }
@@ -154,7 +154,6 @@
 
 <header>
   <div class="header-inner">
-    <div class="header-eyebrow">Scott Soward</div>
     <div class="header-divider"></div>
     <h1>Hub</h1>
     <p class="subtitle">Gospel teaching resources &nbsp;&middot;&nbsp; Technology & AI presentations &nbsp;&middot;&nbsp; Conference schedules &nbsp;&middot;&nbsp; Scripture study &nbsp;&middot;&nbsp; Interactive experiences</p>

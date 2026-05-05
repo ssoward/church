@@ -25,6 +25,7 @@
     header {
       background: linear-gradient(160deg, #7c2d12 0%, #9a3412 40%, #1c1917 100%);
       color: white; padding: 60px 24px 50px; text-align: center; position: relative; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: center; min-height: 320px;
     }
     header::before {
       content: ''; position: absolute; inset: 0;
@@ -121,7 +122,7 @@
     footer a:hover { text-decoration: underline; }
 
     @media (max-width: 600px) {
-      header { padding: 44px 16px 36px; }
+      header { padding: 44px 16px 36px; min-height: auto; }
       main { padding: 28px 16px 60px; }
       .cards-grid { grid-template-columns: 1fr; gap: 18px; }
     }
