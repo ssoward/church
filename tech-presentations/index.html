@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech & Philosophy Presentations</title>
+  <title>Tech & AI — Hub</title>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -82,20 +82,10 @@
     .btn-open:hover { background: #4c1d95; transform: translateX(1px); }
     .slides-count { font-size: 0.7rem; color: #9ca3af; }
 
-    /* ===== ADD NEW PLACEHOLDER ===== */
-    .card-add { border: 2px dashed #d1d5db; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 24px; text-align: center; color: #9ca3af; background: transparent; min-height: 260px; transition: border-color 0.2s, color 0.2s; }
-    .card-add:hover { border-color: var(--purple-light); color: var(--purple-light); }
-    .card-add svg { width: 34px; height: 34px; margin-bottom: 12px; opacity: 0.45; }
-    .card-add strong { font-size: 0.88rem; display: block; margin-bottom: 6px; }
-    .card-add p { font-size: 0.8rem; line-height: 1.6; }
-    .card-add code { font-size: 0.78rem; background: #f3f4f6; padding: 1px 5px; border-radius: 4px; }
-
     /* ===== FOOTER ===== */
     footer { background: var(--dark); color: rgba(255,255,255,0.5); text-align: center; padding: 26px 24px; font-size: 0.76rem; line-height: 1.7; }
     footer a { color: var(--gold); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
-
-    .card-wrapper.hidden { display: none; }
 
     @media (max-width: 600px) {
       header { padding: 40px 16px 36px; }
@@ -109,7 +99,7 @@
 <header>
   <div class="header-inner">
     <div class="header-divider"></div>
-    <h1>Tech & Philosophy</h1>
+    <h1>Tech & AI</h1>
     <p class="subtitle">Presentations on technology, artificial intelligence, and philosophical inquiry</p>
     <span class="org">Israel Canyon Saratoga Springs Stake</span>
   </div>
@@ -117,8 +107,8 @@
 
 <nav class="site-nav">
   <a href="../" class="site-nav-link">Home</a>
-  <a href="../presentations/" class="site-nav-link">Gospel Presentations</a>
-  <a href="./" class="site-nav-link active">Tech & Philosophy</a>
+  <a href="../presentations/" class="site-nav-link">Gospel</a>
+  <a href="./" class="site-nav-link active">Tech & AI</a>
   <a href="../activities/" class="site-nav-link">Activities</a>
   <a href="../conferences/" class="site-nav-link">Conferences</a>
 </nav>
@@ -130,7 +120,7 @@
   <div class="cards-grid" id="cards-grid">
 
     <!-- CARD: THE MEANING OF LIFE FOR AI -->
-    <div class="card-wrapper" data-tags="philosophy technology ai">
+    <div class="card-wrapper">
       <div class="card">
         <div class="card-banner" style="background: linear-gradient(90deg, #7c3aed 0%, #a78bfa 100%);"></div>
         <div class="card-body">
@@ -162,7 +152,7 @@
     </div>
 
     <!-- CARD: A DAY IN THE LIFE OF AI -->
-    <div class="card-wrapper" data-tags="technology ai">
+    <div class="card-wrapper">
       <div class="card">
         <div class="card-banner" style="background: linear-gradient(90deg, #5b21b6 0%, #a78bfa 50%, #3b1f7a 100%);"></div>
         <div class="card-body">
@@ -193,7 +183,7 @@
     </div>
 
     <!-- CARD: THE EVOLUTION OF AI -->
-    <div class="card-wrapper" data-tags="technology ai">
+    <div class="card-wrapper">
       <div class="card">
         <div class="card-banner" style="background: linear-gradient(90deg, #9ca3af 0%, #14b8a6 18%, #10b981 36%, #a855f7 54%, #f59e0b 72%, #ec4899 100%);"></div>
         <div class="card-body">
@@ -220,24 +210,6 @@
           </a>
           <span class="slides-count">7 Eras · Interactive</span>
         </div>
-      </div>
-    </div>
-
-    <!-- ============================================================ -->
-    <!-- ADD NEW PRESENTATION                                         -->
-    <!-- 1. Create a subfolder under tech-presentations/              -->
-    <!-- 2. Add your index.html (Reveal.js recommended)              -->
-    <!-- 3. Copy a card block above, update data-tags, content, href  -->
-    <!-- ============================================================ -->
-    <div class="card-wrapper" data-tags="all">
-      <div class="card-add">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="12" cy="12" r="10"/>
-          <line x1="12" y1="8" x2="12" y2="16"/>
-          <line x1="8" y1="12" x2="16" y2="12"/>
-        </svg>
-        <strong>Add a Presentation</strong>
-        <p>Create a subfolder, add an <code>index.html</code>,<br>then copy a card block into this file.</p>
       </div>
     </div>
 
