@@ -4,15 +4,15 @@ A static web application serving as a personal hub for gospel study, tech presen
 
 ## View Online
 
-**Live site**: https://ssoward.github.io/church/
+**Live site**: https://ssoward.github.io/hub/
 
 | Section | URL |
 |---------|-----|
-| Home | https://ssoward.github.io/church/ |
-| Gospel Presentations | https://ssoward.github.io/church/presentations/ |
-| Tech & Philosophy | https://ssoward.github.io/church/tech-presentations/ |
-| Activities | https://ssoward.github.io/church/activities/ |
-| Conferences | https://ssoward.github.io/church/conferences/ |
+| Home | https://ssoward.github.io/hub/ |
+| Gospel Presentations | https://ssoward.github.io/hub/presentations/ |
+| Tech & Philosophy | https://ssoward.github.io/hub/tech-presentations/ |
+| Activities | https://ssoward.github.io/hub/activities/ |
+| Conferences | https://ssoward.github.io/hub/conferences/ |
 
 ## Site Sections
 
