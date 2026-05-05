@@ -1,79 +1,100 @@
-# Alma 31 Study Web Application
+# Gospel Study & Presentations Hub
 
-A responsive web application for deep, interactive study of Alma 31 from the Book of Mormon. Inspired by the clean, reverent design of churchofjesuschrist.org.
+A static web application serving as a personal hub for gospel study, tech presentations, interactive activities, and conference schedules.
 
 ## View Online
 
-**Gospel Presentations**: https://ssoward.github.io/church/presentations/
+**Live site**: https://ssoward.github.io/church/
 
-## Features
+| Section | URL |
+|---------|-----|
+| Home | https://ssoward.github.io/church/ |
+| Gospel Presentations | https://ssoward.github.io/church/presentations/ |
+| Tech & Philosophy | https://ssoward.github.io/church/tech-presentations/ |
+| Activities | https://ssoward.github.io/church/activities/ |
+| Conferences | https://ssoward.github.io/church/conferences/ |
 
-- **Scripture Text**: Full Alma 31 with verse-by-verse display
-- **Analysis**: Thematic breakdowns and spiritual insights
-- **Visual Gallery**: Illustrations including Rameumptom artwork
-- **Study Applications**: Personal, family, and teaching prompts
-- **Interactive Tools**: Search, bookmarks, reflection journal
-- **Responsive Design**: Works seamlessly on mobile, tablet, and desktop
-- **PWA Support**: Installable app with offline capabilities
+## Site Sections
+
+### Gospel Presentations
+Stake and ward-level teaching resources built with Reveal.js:
+- Ward Sunday School Presidents Training
+- Ward Conference 2026 (PMG vs. Teaching in the Savior's Way)
+- Confidence in the Presence of God (Pres. Nelson)
+- AI in the Tech Industry — BYU Idaho students
+- Easter Week Art Display (8-day Holy Week series)
+- All Who Have Endured Valiantly (Elder Bednar)
+
+### Tech & Philosophy
+Interactive presentations on technology and AI:
+- The Meaning of Life for AI (15-slide Reveal.js)
+- A Day in the Life of AI (canvas animation)
+- The Evolution of AI (7-era interactive gallery)
+
+### Activities
+Logic puzzles and interactive learning tools:
+- The Alien Hat Riddle (step-by-step simulation)
+
+### Scripture
+- Alma 31 Study App — full text, analysis, gallery, and study tools
+
+### Conferences
+Personalized professional conference schedules:
+- Atlassian Team '26 (May 5–7, 2026 · Anaheim) — 3-day agenda with day tabs, priority ratings, conflict warnings, and tips
 
 ## Project Structure
 
 ```
-alma31-study/
-├── index.html              # Home page
-├── pages/                  # Additional HTML pages
-│   ├── scripture.html      # Full scripture text
-│   ├── analysis.html       # Thematic analysis
-│   ├── gallery.html        # Visual gallery
-│   ├── applications.html   # Study applications
-│   └── about.html          # About page
-├── css/                    # Stylesheets
-│   ├── main.css           # Main styles (church-inspired)
-│   └── responsive.css     # Mobile/responsive styles
-├── js/                     # JavaScript files
-│   ├── main.js            # Core functionality
-│   ├── search.js          # Search functionality
-│   └── pwa.js             # PWA service worker
-├── assets/                 # Static assets
-│   ├── images/            # Illustrations and photos
-│   ├── icons/             # PWA icons
-│   └── audio/             # Scripture audio files
-├── manifest.json          # PWA manifest
-└── sw.js                  # Service worker
+church/
+├── index.html                    # Home hub (card grid with category filter)
+├── presentations/
+│   ├── index.html                # Gospel presentations hub
+│   └── <name>/index.html         # Individual Reveal.js presentations
+├── tech-presentations/
+│   ├── index.html                # Tech & philosophy hub
+│   └── <name>/index.html         # Individual presentations
+├── activities/
+│   ├── index.html                # Activities hub
+│   └── <name>/index.html         # Individual activities
+├── conferences/
+│   └── index.html                # Conference schedules (day-tab agenda)
+├── pages/                        # Alma 31 study sub-pages
+├── css/                          # Shared stylesheets
+├── js/                           # Shared JavaScript
+├── assets/                       # Images and icons
+├── alma31.html                   # Alma 31 study app entry point
+├── manifest.json                 # PWA manifest
+└── sw.js                         # Service worker
 ```
 
 ## Development
 
-### Local Development
 ```bash
 # Start local server
 npm start
 # Opens at http://localhost:8080
 ```
 
-### Deployment
+The site is pure static HTML/CSS/JS — no build step required. Each page is self-contained with inline styles.
 
-This is a static site that can be deployed to:
-- **Vercel**: Connect GitHub repo for auto-deployment
-- **Netlify**: Drag & drop build folder or Git integration
-- **GitHub Pages**: Enable in repository settings
-- **AWS S3 + CloudFront**: For production scalability
+## Deployment
 
-## Design Guidelines
+Deployed via GitHub Pages from the `main` branch. Push to `main` triggers auto-deploy.
 
-- **Colors**: White background (#FFFFFF), Church blue (#002E5D), Black text (#000000)
-- **Typography**: Serif fonts (Georgia) for body text, Sans-serif for headers
-- **Layout**: Two-column desktop, single-column mobile
-- **Accessibility**: WCAG 2.1 compliant with keyboard navigation and alt text
+```bash
+git push origin main
+```
 
-## Content Sources
+## Design System
 
-All scripture text and analysis derived from official Church resources and public domain materials, following the reverent style of churchofjesuschrist.org.
-
-## License
-
-MIT License - See LICENSE file for details
+All pages share a consistent design language:
+- **Font**: system-ui stack (Apple/Segoe/Roboto)
+- **Background**: `#fafaf8` (off-white)
+- **Cards**: white, `border-radius: 12px`, soft shadow, 7px color banner
+- **Nav**: sticky white pill-link bar
+- **Category colors**: Blue (Gospel), Purple (Tech), Teal (Activity), Brown (Scripture), Orange (Conferences)
+- **Responsive**: CSS Grid `auto-fill minmax(320px, 1fr)`, mobile-first
 
 ---
 
-*"And behold, as they were crossing the river Sidon, the Lamanites and the Amalekites, being as numerous almost, as it were, as the sands of the sea, came upon them to destroy them."* - Alma 31:3
+*Israel Canyon Saratoga Springs Stake · The Church of Jesus Christ of Latter-day Saints*
