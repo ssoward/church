@@ -51,17 +51,6 @@
     .site-nav-link:hover { border-color: var(--blue); color: var(--blue); }
     .site-nav-link.active { background: var(--blue); border-color: var(--blue); color: white; }
 
-    /* ===== FILTER BAR ===== */
-    .filter-bar {
-      background: white; border-bottom: 1px solid #e5e7eb; padding: 14px 24px;
-      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    }
-    .filter-label { font-size: 0.75rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.05em; margin-right: 4px; }
-    .filter-btn { padding: 5px 16px; border-radius: 20px; border: 1.5px solid #d1d5db; background: white; color: var(--gray); font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
-    .filter-btn:hover { border-color: var(--blue); color: var(--blue); }
-    .filter-btn.active { background: var(--blue); border-color: var(--blue); color: white; }
-
     /* ===== MAIN ===== */
     main { max-width: 1140px; margin: 0 auto; padding: 48px 24px 80px; }
     .section-heading { font-size: 0.72rem; font-weight: 700; color: var(--gray); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
@@ -138,16 +127,6 @@
   <a href="../conferences/" class="site-nav-link">Conferences</a>
 </nav>
 
-<div class="filter-bar">
-  <span class="filter-label">Filter</span>
-  <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
-  <button class="filter-btn" onclick="filterCards('stake', this)">Stake</button>
-  <button class="filter-btn" onclick="filterCards('ward', this)">Ward</button>
-  <button class="filter-btn" onclick="filterCards('teaching', this)">Teaching</button>
-  <button class="filter-btn" onclick="filterCards('leadership', this)">Leadership</button>
-  <button class="filter-btn" onclick="filterCards('technology', this)">Technology</button>
-  <button class="filter-btn" onclick="filterCards('youth', this)">Youth</button>
-</div>
 
 <main>
   <div class="section-heading">Presentations</div>
@@ -377,14 +356,7 @@
 </footer>
 
 <script>
-  function filterCards(tag, btn) {
-    document.querySelectorAll('.filter-bar .filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.card-wrapper').forEach(card => {
-      const tags = card.dataset.tags || '';
-      if (tag === 'all' || tags.includes(tag)) {
-        card.classList.remove('hidden');
-      } else {
+ else {
         card.classList.add('hidden');
       }
     });
