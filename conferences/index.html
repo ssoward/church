@@ -24,8 +24,7 @@
     /* ===== HEADER ===== */
     header {
       background: linear-gradient(160deg, #7c2d12 0%, #9a3412 40%, #1c1917 100%);
-      color: white; padding: 60px 24px 50px; text-align: center; position: relative; overflow: hidden;
-      display: flex; flex-direction: column; justify-content: center; min-height: 320px;
+      color: white; padding: 28px 24px 24px; text-align: left; position: relative; overflow: hidden;
     }
     header::before {
       content: ''; position: absolute; inset: 0;
@@ -33,11 +32,10 @@
                   radial-gradient(ellipse at 70% 80%, rgba(201,168,76,0.1) 0%, transparent 60%);
       pointer-events: none;
     }
-    .header-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
-    .header-divider { width: 60px; height: 3px; background: var(--orange-light); margin: 0 auto 24px; border-radius: 2px; }
-    header h1 { font-size: clamp(1.8rem, 4.5vw, 2.8rem); font-weight: 700; line-height: 1.2; margin-bottom: 12px; text-shadow: 0 2px 10px rgba(0,0,0,0.4); }
-    header .subtitle { font-size: clamp(0.88rem, 2vw, 1.05rem); color: rgba(255,255,255,0.7); line-height: 1.7; max-width: 540px; margin: 0 auto; }
-    header .org { display: inline-block; margin-top: 18px; font-size: 0.75rem; color: var(--gold-light); letter-spacing: 0.06em; text-transform: uppercase; }
+    .header-inner { position: relative; z-index: 1; max-width: 1140px; margin: 0 auto; }
+    .header-badge { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+    header h1 { font-size: clamp(1.3rem, 2vw, 1.75rem); font-weight: 700; line-height: 1.2; color: white; margin-bottom: 6px; }
+    header .subtitle { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
 
     /* ===== SITE NAV ===== */
     .site-nav {
@@ -122,7 +120,7 @@
     footer a:hover { text-decoration: underline; }
 
     @media (max-width: 600px) {
-      header { padding: 44px 16px 36px; min-height: auto; }
+      header { padding: 20px 16px 18px; }
       main { padding: 28px 16px 60px; }
       .cards-grid { grid-template-columns: 1fr; gap: 18px; }
     }
@@ -132,10 +130,9 @@
 
 <header>
   <div class="header-inner">
-    <div class="header-divider"></div>
-    <h1>Conferences & Events</h1>
+    <div class="header-badge">Hub &nbsp;&middot;&nbsp; Conferences</div>
+    <h1>Conferences &amp; Events</h1>
     <p class="subtitle">Personal schedules and coordination tools for professional and family conferences</p>
-    <span class="org">Scott Soward</span>
   </div>
 </header>
 
