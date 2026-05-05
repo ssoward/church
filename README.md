@@ -39,8 +39,9 @@ Logic puzzles and interactive learning tools:
 - Alma 31 Study App — full text, analysis, gallery, and study tools
 
 ### Conferences
-Personalized professional conference schedules:
-- Atlassian Team '26 (May 5–7, 2026 · Anaheim) — 3-day agenda with day tabs, priority ratings, conflict warnings, tips, and an interactive Leaflet/OpenStreetMap venue map with markers for the convention center, hotel, and pickleball courts
+Hub for professional and family conference schedules and coordination tools:
+- **Atlassian Team '26** (May 5–7, 2026 · Anaheim) — personalized 3-day agenda, day tabs, priority ratings, conflict warnings, tips, interactive venue map (Leaflet/OSM) with markers for convention center, hotel, and pickleball courts
+- **RootsTech 2026** (Mar 6–8, 2026 · Salt Lake City) — full production coordination dashboard for the FamilySearch GMC/Interactive TV team; tabs for Dashboard, Schedule, Videos & Scripts, and Logistics
 
 ## Project Structure
 
@@ -57,7 +58,9 @@ church/
 │   ├── index.html                # Activities hub
 │   └── <name>/index.html         # Individual activities
 ├── conferences/
-│   └── index.html                # Conference schedules (day-tab agenda)
+│   ├── index.html                # Conferences hub (card listing)
+│   ├── atlassian-team-26/        # Atlassian Team '26 personal agenda + map
+│   └── rootstech-2026/           # RootsTech 2026 coordination dashboard
 ├── pages/                        # Alma 31 study sub-pages
 ├── css/                          # Shared stylesheets
 ├── js/                           # Shared JavaScript

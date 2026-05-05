@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RootsTech 2026 Coordination</title>
+<style>
+  :root {
+    --green: #2e7d32;
+    --green-light: #e8f5e9;
+    --teal: #00695c;
+    --teal-light: #e0f2f1;
+    --blue: #1565c0;
+    --blue-light: #e3f2fd;
+    --orange: #e65100;
+    --orange-light: #fff3e0;
+    --purple: #6a1b9a;
+    --purple-light: #f3e5f5;
+    --gray: #546e7a;
+    --gray-light: #eceff1;
+    --yellow: #f57f17;
+    --yellow-light: #fffde7;
+    --red: #c62828;
+    --red-light: #ffebee;
+    --bg: #f5f7f9;
+    --card: #ffffff;
+    --border: #dde2e8;
+    --text: #1a2332;
+    --text-secondary: #5a6a7a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; }
+
+  /* Header */
+  .header { background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 60%, #00695c 100%); color: white; padding: 16px 20px; display: flex; align-items: center; gap: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+  .header-logo { font-size: 28px; }
+  .header-title h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+  .header-title p { font-size: 12px; opacity: 0.8; margin-top: 2px; }
+  .date-badge { margin-left: auto; background: rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 12px; font-size: 12px; text-align: right; }
+  .date-badge strong { display: block; font-size: 14px; }
+
+  /* Alert Banner */
+  .alert-banner { background: #b71c1c; color: white; padding: 10px 20px; display: flex; align-items: center; gap: 10px; font-size: 13px; }
+  .alert-banner strong { font-size: 14px; }
+
+  /* Nav Tabs */
+  .nav-tabs { display: flex; background: white; border-bottom: 2px solid var(--border); padding: 0 16px; overflow-x: auto; }
+  .nav-tab { padding: 12px 18px; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--text-secondary); border-bottom: 3px solid transparent; margin-bottom: -2px; white-space: nowrap; transition: all 0.15s; }
+  .nav-tab:hover { color: var(--green); }
+  .nav-tab.active { color: var(--green); border-bottom-color: var(--green); }
+
+  /* Content */
+  .content { padding: 16px 20px; max-width: 1100px; margin: 0 auto; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* Cards */
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 14px; }
+  .card-title { font-size: 13px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+  .card h2 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+
+  /* Dashboard grid */
+  .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 680px) { .dashboard-grid { grid-template-columns: 1fr; } }
+
+  /* Alert cards */
+  .alert-card { border-left: 4px solid var(--red); background: var(--red-light); }
+  .alert-card .alert-item { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .alert-card .alert-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .alert-icon { font-size: 16px; flex-shrink: 0; }
+  .alert-text strong { display: block; font-size: 13px; color: var(--red); }
+  .alert-text span { font-size: 12px; color: #5a3030; }
+
+  /* Keynote card */
+  .keynote-list { display: flex; flex-direction: column; gap: 8px; }
+  .keynote-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px; background: var(--green-light); border-radius: 6px; }
+  .keynote-day { font-size: 11px; font-weight: 700; color: var(--green); background: white; border: 1px solid #a5d6a7; border-radius: 4px; padding: 2px 6px; flex-shrink: 0; }
+  .keynote-info strong { font-size: 13px; display: block; }
+  .keynote-info span { font-size: 12px; color: var(--text-secondary); }
+
+  /* Virtual keynotes */
+  .vk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .vk-item { background: var(--teal-light); border-radius: 6px; padding: 8px 10px; }
+  .vk-item strong { font-size: 13px; display: block; }
+  .vk-item span { font-size: 11px; color: var(--teal); }
+
+  /* Info pill list */
+  .pill-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pill { background: var(--blue-light); color: var(--blue); border-radius: 20px; padding: 3px 10px; font-size: 12px; font-weight: 600; }
+  .pill.green { background: var(--green-light); color: var(--green); }
+  .pill.orange { background: var(--orange-light); color: var(--orange); }
+
+  /* Schedule */
+  .day-tabs { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+  .day-tab { padding: 7px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; border: 2px solid var(--border); color: var(--text-secondary); background: white; transition: all 0.15s; }
+  .day-tab:hover { border-color: var(--green); color: var(--green); }
+  .day-tab.active { background: var(--green); color: white; border-color: var(--green); }
+  .day-tab.conf { border-color: #a5d6a7; }
+  .day-tab.conf.active { background: var(--teal); border-color: var(--teal); }
+
+  .day-schedule { display: none; }
+  .day-schedule.active { display: block; }
+
+  .schedule-legend { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-secondary); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  .time-block { display: flex; gap: 12px; padding: 6px 0; border-bottom: 1px solid var(--border); }
+  .time-block:last-child { border-bottom: none; }
+  .time-label { width: 62px; flex-shrink: 0; font-size: 12px; color: var(--text-secondary); font-weight: 600; padding-top: 4px; text-align: right; }
+  .time-events { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+  .event-chip { border-radius: 6px; padding: 6px 10px; }
+  .event-chip .event-title { font-size: 13px; font-weight: 600; }
+  .event-chip .event-meta { font-size: 11px; opacity: 0.8; margin-top: 2px; }
+
+  .chip-meal { background: var(--gray-light); color: var(--gray); }
+  .chip-studio { background: var(--blue-light); color: var(--blue); }
+  .chip-broll { background: var(--green-light); color: var(--green); }
+  .chip-rehearsal { background: var(--yellow-light); color: var(--yellow); }
+  .chip-interview { background: var(--orange-light); color: var(--orange); }
+  .chip-session { background: var(--purple-light); color: var(--purple); }
+  .chip-break { background: #fce4ec; color: #880e4f; }
+  .chip-alert { background: var(--red-light); color: var(--red); font-weight: 700; }
+  .chip-wrap { background: #e8eaf6; color: #3949ab; }
+  .chip-training { background: #fff8e1; color: #f57f17; }
+
+  /* Videos */
+  .video-list { display: flex; flex-direction: column; gap: 10px; }
+  .video-card { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .video-header { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: var(--green-light); cursor: pointer; }
+  .video-icon { font-size: 20px; }
+  .video-info { flex: 1; }
+  .video-info h3 { font-size: 14px; font-weight: 700; }
+  .video-info .video-meta { font-size: 12px; color: var(--green); margin-top: 2px; }
+  .video-toggle { font-size: 18px; color: var(--green); transition: transform 0.2s; }
+  .video-card.open .video-toggle { transform: rotate(180deg); }
+  .video-body { display: none; padding: 14px; background: white; border-top: 1px solid #c8e6c9; }
+  .video-card.open .video-body { display: block; }
+  .video-body p { font-size: 13px; line-height: 1.6; color: var(--text-secondary); margin-bottom: 8px; }
+  .video-body p:last-child { margin-bottom: 0; }
+  .film-schedule { background: var(--gray-light); border-radius: 6px; padding: 10px 12px; margin-top: 10px; }
+  .film-schedule h4 { font-size: 12px; font-weight: 700; color: var(--gray); text-transform: uppercase; margin-bottom: 6px; }
+  .film-row { display: flex; gap: 10px; font-size: 12px; padding: 3px 0; }
+  .film-time { font-weight: 700; color: var(--text); width: 60px; flex-shrink: 0; }
+  .film-person { color: var(--text-secondary); }
+
+  /* Logistics */
+  .logistics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 680px) { .logistics-grid { grid-template-columns: 1fr; } }
+  .info-block { padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .info-block:last-child { border-bottom: none; }
+  .info-block h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .info-block p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+  .info-block ul { list-style: none; padding: 0; }
+  .info-block ul li { font-size: 13px; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative; }
+  .info-block ul li::before { content: '•'; position: absolute; left: 0; color: var(--green); }
+  .highlight-box { background: var(--yellow-light); border: 1px solid #ffe082; border-radius: 8px; padding: 12px 14px; margin-top: 4px; }
+  .highlight-box strong { color: var(--yellow); }
+
+  .emcee-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; margin-top: 8px; }
+  .emcee-card { background: var(--teal-light); border-radius: 8px; padding: 8px 10px; text-align: center; }
+  .emcee-card .name { font-size: 13px; font-weight: 700; color: var(--teal); }
+  .emcee-card .role { font-size: 11px; color: var(--text-secondary); }
+
+  .radio-steps { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+  .radio-step { display: flex; gap: 10px; align-items: flex-start; }
+  .step-num { width: 22px; height: 22px; border-radius: 50%; background: var(--green); color: white; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-text { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+
+  .theme-card { background: linear-gradient(135deg, var(--green-light), var(--teal-light)); border: 1px solid #a5d6a7; border-radius: 10px; padding: 16px; text-align: center; margin-bottom: 14px; }
+  .theme-card .theme-word { font-size: 36px; font-weight: 800; color: var(--green); letter-spacing: -1px; }
+  .theme-card p { font-size: 13px; color: var(--teal); margin-top: 4px; max-width: 480px; margin: 6px auto 0; }
+
+  .section-full { grid-column: 1 / -1; }
+
+  /* ===== RESPONSIVE / MOBILE ===== */
+
+  /* Fix flex overflow — flex children need min-width:0 to prevent text blowout */
+  .time-events { min-width: 0; }
+  .video-info { min-width: 0; }
+  .alert-text { min-width: 0; }
+  .keynote-info { min-width: 0; }
+  .step-text { min-width: 0; }
+  .film-person { min-width: 0; overflow-wrap: break-word; }
+
+  /* Prevent long filming-order strings from overflowing */
+  .event-meta, .video-meta { overflow-wrap: break-word; word-break: break-word; }
+
+  /* iOS momentum scrolling for tab bars */
+  .nav-tabs { -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+
+  /* Improve touch tap targets on pointer:coarse (touchscreen) devices */
+  @media (hover: none) and (pointer: coarse) {
+    .nav-tab { padding: 14px 18px; }
+    .day-tab { padding: 10px 16px; min-height: 40px; }
+    .video-header { min-height: 56px; }
+  }
+
+  /* ── Tablets & large phones (≤ 680px) ─────────────────────────────── */
+  @media (max-width: 680px) {
+    .content { padding: 12px 14px; }
+  }
+
+  /* ── Small phones (≤ 520px) ───────────────────────────────────────── */
+  @media (max-width: 520px) {
+    /* Header — compress title, let date badge wrap below */
+    .header { padding: 10px 14px; gap: 10px; flex-wrap: wrap; }
+    .header-logo { font-size: 24px; }
+    .header-title h1 { font-size: 16px; }
+    .header-title p { font-size: 11px; }
+    .date-badge { margin-left: 0; width: 100%; padding: 4px 10px; font-size: 11px; text-align: left; }
+    .date-badge strong { display: inline; font-size: 12px; margin-right: 4px; }
+
+    /* Alert banner — allow text to wrap */
+    .alert-banner { padding: 8px 14px; gap: 8px; flex-wrap: wrap; font-size: 12px; }
+    .alert-banner strong { font-size: 13px; }
+
+    /* Content padding */
+    .content { padding: 10px 12px; }
+
+    /* Cards — tighter padding */
+    .card { padding: 12px; }
+
+    /* Theme word — scale down on small screens */
+    .theme-card .theme-word { font-size: 26px; }
+    .theme-card { padding: 14px 12px; }
+
+    /* Virtual keynotes — single column on small phones */
+    .vk-grid { grid-template-columns: 1fr; }
+
+    /* Schedule time label — slightly narrower */
+    .time-label { width: 52px; font-size: 11px; }
+    .time-block { gap: 8px; }
+    .event-chip { padding: 5px 8px; }
+    .event-chip .event-title { font-size: 12px; }
+    .event-chip .event-meta { font-size: 11px; }
+
+    /* Video cards */
+    .video-header { padding: 10px 12px; gap: 8px; }
+    .video-icon { font-size: 18px; }
+    .video-info h3 { font-size: 13px; }
+    .video-info .video-meta { font-size: 11px; }
+    .video-body { padding: 12px; }
+    .film-schedule { padding: 8px 10px; }
+    .film-row { font-size: 11px; }
+    .film-time { width: 52px; }
+
+    /* Emcee grid — smaller minimum card width */
+    .emcee-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 6px; }
+
+    /* Legend items — tighter */
+    .schedule-legend { gap: 6px; }
+    .legend-item { font-size: 11px; }
+
+    /* Day tabs — fit more on screen */
+    .day-tab { padding: 7px 12px; font-size: 11px; }
+  }
+
+  /* ── Very small phones (≤ 380px) ─────────────────────────────────── */
+  @media (max-width: 380px) {
+    .content { padding: 8px 10px; }
+    .time-label { width: 44px; font-size: 10px; }
+    .card { padding: 10px; border-radius: 8px; }
+    .theme-card .theme-word { font-size: 22px; }
+    .video-body { padding: 10px; }
+  }
+</style>
+</head>
+<body>
+<style>
+  .site-nav-bar {
+    background: white; border-bottom: 1px solid #e5e7eb; padding: 10px 20px;
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    position: sticky; top: 0; z-index: 200;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .site-nav-bar a {
+    padding: 4px 14px; border-radius: 20px; border: 1.5px solid #d1d5db;
+    background: white; color: #6b7280; font-size: 0.78rem; font-weight: 500;
+    text-decoration: none; transition: all 0.2s; font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  .site-nav-bar a:hover { border-color: #2e7d32; color: #2e7d32; }
+  .site-nav-bar a.active { background: #2e7d32; border-color: #2e7d32; color: white; }
+</style>
+<nav class="site-nav-bar">
+  <a href="../../">Home</a>
+  <a href="../../presentations/">Gospel Presentations</a>
+  <a href="../../tech-presentations/">Tech &amp; Philosophy</a>
+  <a href="../../activities/">Activities</a>
+  <a href="../" class="active">Conferences</a>
+</nav>
+
+<div class="header">
+  <div class="header-logo">🌿</div>
+  <div class="header-title">
+    <h1>RootsTech 2026</h1>
+    <p>Coordination Dashboard &mdash; GMC / Interactive TV</p>
+  </div>
+  <div class="date-badge">
+    <strong>Mar 6&ndash;8, 2026</strong>
+    Salt Palace, Salt Lake City
+  </div>
+</div>
+
+<div class="alert-banner">
+  <span>&#9888;</span>
+  <span><strong>Key Reminder:</strong> Finale rehearsal Friday 5:00 PM (30 min) &bull; Be backstage by <strong>11:45 AM Saturday</strong> for General Session 3 finale stage appearance</span>
+</div>
+
+<div class="nav-tabs">
+  <div class="nav-tab active" onclick="showTab('dashboard')">Dashboard</div>
+  <div class="nav-tab" onclick="showTab('schedule')">Schedule</div>
+  <div class="nav-tab" onclick="showTab('videos')">Videos & Scripts</div>
+  <div class="nav-tab" onclick="showTab('logistics')">Logistics</div>
+</div>
+
+<div class="content">
+
+  <!-- DASHBOARD TAB -->
+  <div class="tab-panel active" id="tab-dashboard">
+
+    <div class="theme-card">
+      <div class="theme-word">Together</div>
+      <p>Bringing people together across generations, cultures, and continents through family history.</p>
+    </div>
+
+    <div class="dashboard-grid">
+
+      <!-- ALERTS -->
+      <div class="card alert-card">
+        <div class="card-title">&#9888; Action Required</div>
+        <div class="alert-item">
+          <div class="alert-icon">🎤</div>
+          <div class="alert-text">
+            <strong>Friday, Mar 7 &mdash; 5:00 PM</strong>
+            <span>General Session 3 Finale Rehearsal (30 min). All FamilySearch Coordinators & Captains in jackets.</span>
+          </div>
+        </div>
+        <div class="alert-item">
+          <div class="alert-icon">🏟️</div>
+          <div class="alert-text">
+            <strong>Saturday, Mar 8 &mdash; Be backstage by 11:45 AM</strong>
+            <span>General Session 3 finale. You + your jacket = representing hundreds of volunteers on stage.</span>
+          </div>
+        </div>
+        <div class="alert-item">
+          <div class="alert-icon">📻</div>
+          <div class="alert-text">
+            <strong>Pick up radio from Tree House (Room 254)</strong>
+            <span>Look for your name (alphabetical by first name). Hold mic button, wait 1 second, then speak.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- KEYNOTES -->
+      <div class="card">
+        <div class="card-title">Main Stage Keynotes</div>
+        <div class="keynote-list">
+          <div class="keynote-item">
+            <div class="keynote-day">THU</div>
+            <div class="keynote-info">
+              <strong>Marlee Matlin</strong>
+              <span>Academy Award-winning actress &bull; FamilySearch CEO Steve Rockwood opens event</span>
+            </div>
+          </div>
+          <div class="keynote-item">
+            <div class="keynote-day">FRI</div>
+            <div class="keynote-info">
+              <strong>Tara Roberts</strong>
+              <span>National Geographic Explorer &bull; Uncovering stories of African American slaves</span>
+            </div>
+          </div>
+          <div class="keynote-item">
+            <div class="keynote-day">SAT</div>
+            <div class="keynote-info">
+              <strong>Steve Young</strong>
+              <span>NFL Hall of Fame Quarterback &bull; Family Discovery Day &bull; Elder Ronald A. Rasband</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIRTUAL KEYNOTES -->
+      <div class="card">
+        <div class="card-title">Virtual Keynotes (Live on RootsTech.org)</div>
+        <div class="vk-grid">
+          <div class="vk-item">
+            <strong>Jessica Soho</strong>
+            <span>Philippines &bull; Broadcast journalist</span>
+          </div>
+          <div class="vk-item">
+            <strong>Zico</strong>
+            <span>Brazil &bull; Soccer legend</span>
+          </div>
+          <div class="vk-item">
+            <strong>Gardiner Brothers</strong>
+            <span>Ireland &bull; World Champion Irish Dancers</span>
+          </div>
+          <div class="vk-item">
+            <strong>Jose Hernandez</strong>
+            <span>California &bull; Migrant worker turned astronaut</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- EVENT AT A GLANCE -->
+      <div class="card">
+        <div class="card-title">Event At A Glance</div>
+        <div class="pill-list">
+          <span class="pill green">180+ Exhibitors</span>
+          <span class="pill green">40+ Languages</span>
+          <span class="pill">Relatives at RootsTech</span>
+          <span class="pill">Online Expo Hall</span>
+          <span class="pill orange">Family Discovery Day</span>
+          <span class="pill">In-Depth Forums</span>
+          <span class="pill green">FamilySearch 101 Series</span>
+          <span class="pill">Innovation & Tech Forum</span>
+          <span class="pill orange">RootsTech 2027: Mar 4-6</span>
+        </div>
+        <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border);">
+          <div class="card-title" style="margin-bottom:6px;">Locations</div>
+          <div class="pill-list">
+            <span class="pill">RootsTech Studio</span>
+            <span class="pill">Main Stage</span>
+            <span class="pill">Buddhist Temple (Base Camp)</span>
+            <span class="pill">Tree House — Room 254</span>
+            <span class="pill">FamilySearch Library</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCHEDULE TAB -->
+  <div class="tab-panel" id="tab-schedule">
+
+    <div class="schedule-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#b0bec5"></div> Meal/Break</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#1565c0"></div> Studio Time</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#2e7d32"></div> B-roll / Video Filming</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f57f17"></div> Rehearsal / Training</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#e65100"></div> Interview</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#6a1b9a"></div> General Session</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#c62828"></div> Key Deadline</div>
+    </div>
+
+    <div class="day-tabs">
+      <div class="day-tab" id="tab-btn-tue" onclick="showDay('tue', true)">Tue Mar 4</div>
+      <div class="day-tab" id="tab-btn-wed" onclick="showDay('wed', true)">Wed Mar 5</div>
+      <div class="day-tab conf" id="tab-btn-thu" onclick="showDay('thu', true)">Thu Mar 6 ★</div>
+      <div class="day-tab conf" id="tab-btn-fri" onclick="showDay('fri', true)">Fri Mar 7 ★</div>
+      <div class="day-tab conf" id="tab-btn-sat" onclick="showDay('sat', true)">Sat Mar 8 ★</div>
+    </div>
+
+    <!-- TUESDAY -->
+    <div class="day-schedule card" id="day-tue">
+      <div style="margin-bottom:10px"><strong style="color:var(--text-secondary);font-size:13px;">TUESDAY, MARCH 4 &mdash; Pre-Production Day 1 (B-roll Filming)</strong></div>
+      <div class="time-block">
+        <div class="time-label">7:00 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-meal"><div class="event-title">Breakfast</div><div class="event-meta">Buddhist Temple</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">9:00 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-training"><div class="event-title">Orientation & Walkthrough</div><div class="event-meta">Meet at Salt Shaker</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">10:00 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-broll"><div class="event-title">Introduction to Main Stage and Virtual Keynotes</div><div class="event-meta">Main Stage &bull; Teleprompter ALL (Korean/Japanese) &bull; Filming order: 10:00 Denise &rarr; 10:15 Nicole &rarr; 10:30 Isaac+Janella &rarr; 10:45 Junior &rarr; 11:00 Rosca/Hannah &rarr; 11:15 Hiromi &rarr; 11:30 Jin Young &rarr; 11:45 Katrina</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">12:00 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-meal"><div class="event-title">Lunch</div><div class="event-meta">Buddhist Temple</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">12:45 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-break"><div class="event-title">Travel to Location</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">1:00 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-training"><div class="event-title">Interview Training</div><div class="event-meta">FSL Classroom B</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">2:00 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-break"><div class="event-title">Refresh for Filming</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">2:15 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-broll"><div class="event-title">Visit to the FamilySearch Library</div><div class="event-meta">FamilySearch Library &bull; Teleprompter ALL (Korean/Japanese) &bull; Filming order: 2:15 Isaac+Janella &rarr; 2:30 Nicole &rarr; 2:45 Junior &rarr; 3:00 Rosca &rarr; 3:15 Jin Young &rarr; 3:30 Hiromi &rarr; 3:45 Katrina &rarr; 4:00 Denise &rarr; 4:15 Hannah</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">5:30 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-wrap"><div class="event-title">Est. Wrap Time</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">5:45 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-break"><div class="event-title">Drive Nicole to Recording</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">6:00 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-rehearsal"><div class="event-title">Isaac Rehearsal 6–8 PM</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEDNESDAY -->
+    <div class="day-schedule card" id="day-wed">
+      <div style="margin-bottom:10px"><strong style="color:var(--text-secondary);font-size:13px;">WEDNESDAY, MARCH 5 &mdash; Pre-Production Day 2 (Main B-roll Filming)</strong></div>
+      <div class="time-block">
+        <div class="time-label">7:00 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-meal"><div class="event-title">Breakfast</div><div class="event-meta">Buddhist Temple &bull; H&MU Available</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">8:00 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-broll"><div class="event-title">English/French GS Intros</div><div class="event-meta">RootsTech Studio &bull; Teleprompter ALL (Korean/Japanese) &bull; Isaac + Janella / Rosca</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">8:30 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-training"><div class="event-title">Election Night TV Training</div><div class="event-meta">RootsTech Studio</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">9:30 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-broll"><div class="event-title">Welcome to RootsTech 2026</div><div class="event-meta">RootsTech Studio &bull; Teleprompter ALL (Korean/Japanese) &bull; Filming order: 9:30 Isaac+Janella &rarr; 9:45 Nicole &rarr; 10:00 Junior &rarr; 10:15 Rosca &rarr; 10:30 Denise &rarr; 10:45 Hannah &rarr; 11:15 Hiromi &rarr; 11:30 Katrina</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">11:00 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-broll"><div class="event-title">Family Discovery Day (Video)</div><div class="event-meta">RootsTech Studio &bull; Jin Young (11:00) &rarr; Hiromi (11:15) &rarr; Katrina (11:30)</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">12:30 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-broll"><div class="event-title">Online Expo Hall Tour</div><div class="event-meta">RootsTech Studio &bull; Teleprompter ALL (Korean/Japanese) &bull; Filming order: 12:30 Isaac+Janella &rarr; 12:45 Nicole/Junior/Rosca &rarr; 1:00 Denise/Hannah &rarr; 1:15 Katrina &rarr; 1:30 Jin Young/Hiromi</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">1:45 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-broll"><div class="event-title">Discover RootsTech Classes</div><div class="event-meta">RootsTech Studio</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">3:00 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-interview"><div class="event-title">Interviews with Kirby</div><div class="event-meta">Isaac + Janella / Junior</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">3:30 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-broll"><div class="event-title">Visit to FamilySearch &amp; Homeland Booths</div><div class="event-meta">RootsTech Studio &bull; Teleprompter ALL (Korean/Japanese) &bull; 3:30 Isaac+Janella/Ann Metcalf &rarr; 3:45 Katrina/??? &rarr; 4:00 Denise/Andrew Trexler &rarr; 4:15 Hannah/Henriette Baumann &rarr; 4:30 Hiromi/Hiroko Biesinger &rarr; 4:45 Jin Young/Hyewon Lee</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">5:00 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">LatAm Studio Time</div><div class="event-meta">Junior + Nicole &bull; 5:00 Junior/Jairo Lopez &amp; Amalia Para &rarr; 5:15 Rosca/Gilles François &rarr; 5:30 Nicole/Daniel Dornelles</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">5:45 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-rehearsal"><div class="event-title">Isaac Rehearsal 5–8 PM</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">6:00 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-wrap"><div class="event-title">Est. Wrap Time</div><div class="event-meta">Korean and ASL Interpreters Needed</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THURSDAY -->
+    <div class="day-schedule card" id="day-thu">
+      <div style="margin-bottom:10px"><strong style="color:var(--green);font-size:13px;">THURSDAY, MARCH 6 &mdash; Conference Day 1 ★</strong></div>
+      <div class="time-block">
+        <div class="time-label">7:00 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-meal"><div class="event-title">Breakfast</div><div class="event-meta">Buddhist Temple &bull; H&MU Available</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">7:30 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-rehearsal"><div class="event-title">Meet up at Fishbowl</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">7:45 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-rehearsal"><div class="event-title">Event Kick off with ALL Emcees!</div><div class="event-meta">RootsTech Studio</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">8:00 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">LatAm Studio Time</div><div class="event-meta">Junior</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">8:30 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">Africa Studio Time</div><div class="event-meta">Rosca and Nicole &bull; Nicole Rehearsal on stage</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">9:15 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">LatAm Studio Time</div><div class="event-meta">Junior</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">10:00 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">North America Studio Time</div><div class="event-meta">Isaac</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">10:15 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">LatAm Studio Time</div><div class="event-meta">Junior</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">11:00 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-session"><div class="event-title">Watch General Session 1</div><div class="event-meta">Main Stage &bull; Nicole on Stage</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">12:00 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-broll"><div class="event-title">Live General Session 1 Recap</div><div class="event-meta">RootsTech Studio &bull; Denise, Hannah, Katrina</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">1:00 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">LatAm Studio Time</div><div class="event-meta">Junior and Nicole</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">1:30 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">Africa Studio Time</div><div class="event-meta">Janella and Isaac</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">2:15 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">ASL Studio Time</div><div class="event-meta">Katrina</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">2:30 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-break"><div class="event-title">Break</div><div class="event-meta">Greenroom</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">3:00 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-interview"><div class="event-title">AED Interviews</div><div class="event-meta">Isaac and Hiromi &bull; Isaac Rehearsal 3–5</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">3:30 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">Europe Studio Time</div><div class="event-meta">Marco's Team</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">4:15 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">Africa Studio Time</div><div class="event-meta">Janella / Isaac</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">4:45 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">APAC Studio Time</div><div class="event-meta">Hiromi</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">5:00 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">LatAm Studio Time</div><div class="event-meta">Junior and Nicole</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">6:00 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-wrap"><div class="event-title">Est. Wrap Time</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FRIDAY -->
+    <div class="day-schedule card" id="day-fri">
+      <div style="margin-bottom:10px"><strong style="color:var(--green);font-size:13px;">FRIDAY, MARCH 7 &mdash; Conference Day 2 ★</strong></div>
+      <div class="time-block">
+        <div class="time-label">7:00 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-meal"><div class="event-title">Breakfast</div><div class="event-meta">Buddhist Temple &bull; H&MU Available</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">7:30 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-rehearsal"><div class="event-title">Junior, Janella, Isaac Stage Rehearsal</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">8:00 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-broll"><div class="event-title">Thank You for Attending RootsTech 2026 &amp; See You at RootsTech 2027</div><div class="event-meta">Overlook Area by South Escalator &bull; Teleprompter ALL (Korean/Japanese) &bull; Filming order: 7:30 Jin Young/Hiromi &rarr; 7:50 Katrina/Hannah &rarr; 8:00 Rosca &rarr; 8:10 Denise &rarr; 8:15 Isaac+Janella &rarr; 8:20 Junior/Nicole</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">9:30 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-break"><div class="event-title">Break</div><div class="event-meta">Greenroom</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">10:00 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-interview"><div class="event-title">Jonathan Wing Interview</div><div class="event-meta">Janella and Isaac</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">10:15 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-interview"><div class="event-title">AED Interviews</div><div class="event-meta">Denise and Isaac</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">10:45 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">LatAm Studio Time</div><div class="event-meta">Junior</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">11:00 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-session"><div class="event-title">Watch General Session 2</div><div class="event-meta">Main Stage &bull; Junior on Stage (11:00) &bull; Janella on Stage (11:30)</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">12:00 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-broll"><div class="event-title">Live General Session 2 Recap</div><div class="event-meta">RootsTech Studio &bull; Denise, Hannah, Katrina</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">1:00 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">LatAm Studio Time + Nicole Rehearsal</div><div class="event-meta">Junior</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">1:15 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-interview"><div class="event-title">Keynote Interview</div><div class="event-meta">Janella (lunch brought for Janella) &bull; Need lunch brought for Junior</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">1:30 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">LatAm Studio Time</div><div class="event-meta">Junior and Nicole</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">2:45 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-break"><div class="event-title">Break</div><div class="event-meta">Greenroom</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">3:15 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">Europe Studio Time</div><div class="event-meta">Marco's Team</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">4:15 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">LatAm Studio Time</div><div class="event-meta">Nicole</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">4:00 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-rehearsal"><div class="event-title">Isaac Rehearsal 4–5 PM</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">4:45 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">ASL Studio Time</div><div class="event-meta">Katrina</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">5:00 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-alert"><div class="event-title">FINALE REHEARSAL &mdash; ALL ON STAGE</div><div class="event-meta">30 minutes &bull; All FamilySearch Coordinators/Captains in jackets required</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">6:00 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-wrap"><div class="event-title">Est. Wrap Time</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SATURDAY -->
+    <div class="day-schedule card" id="day-sat">
+      <div style="margin-bottom:10px"><strong style="color:var(--green);font-size:13px;">SATURDAY, MARCH 8 &mdash; Conference Day 3 &mdash; Final Day ★</strong></div>
+      <div class="time-block">
+        <div class="time-label">7:00 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-meal"><div class="event-title">Breakfast</div><div class="event-meta">Buddhist Temple</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">7:30 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-rehearsal"><div class="event-title">Give Away Rehearsal</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">8:00 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">LatAm Studio Time</div><div class="event-meta">Junior</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">8:00 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-broll"><div class="event-title">Thank You / See You at RootsTech 2027 Filming</div><div class="event-meta">Overlook Area &bull; Jin Young (7:30), Katrina/Hannah (7:50), Rosca (8:00), Denise (8:10), Isaac+Janella (8:15), Junior/Nicole (8:20)</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">8:30 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-rehearsal"><div class="event-title">Nicole Rehearsal on Stage</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">8:45 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">North America Studio Time</div><div class="event-meta">Isaac</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">9:00 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-break"><div class="event-title">Break</div><div class="event-meta">Greenroom</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">9:30 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">ASL Studio Time</div><div class="event-meta">Katrina</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">10:00 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">LatAm Studio Time</div><div class="event-meta">Nicole</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">10:15 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-studio"><div class="event-title">APAC Studio Time</div><div class="event-meta">Janella</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">11:00 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-session"><div class="event-title">Watch General Session 3</div><div class="event-meta">Main Stage &bull; Steve Young Keynote &bull; Elder Rasband &bull; Isaac/Nicole on Stage (11:30) &bull; All on Stage (11:45)</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">11:45 AM</div>
+        <div class="time-events">
+          <div class="event-chip chip-alert"><div class="event-title">BE BACKSTAGE BY 11:45 AM</div><div class="event-meta">All Coordinators &amp; Captains in jackets &bull; Finale stage appearance during closing song</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">12:00 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-broll"><div class="event-title">Live General Session 3 Recap</div><div class="event-meta">Junior &bull; Nicole, Isaac + Janella also on stage</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">12:30 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-break"><div class="event-title">Wrap-up notes</div><div class="event-meta">Denise, Hannah, Katrina wrapping up &bull; Isaac gone for good</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">1:00 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-meal"><div class="event-title">Lunch</div><div class="event-meta">Greenroom</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">1:30 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-session"><div class="event-title">Watch Family Discovery Day General Session</div><div class="event-meta">Main Stage &bull; Rosca backstage</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">2:00 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-rehearsal"><div class="event-title">Denise on Stage</div></div>
+        </div>
+      </div>
+      <div class="time-block">
+        <div class="time-label">3:00 PM</div>
+        <div class="time-events">
+          <div class="event-chip chip-wrap"><div class="event-title">Est. Event Wrap Time!</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- VIDEOS TAB -->
+  <div class="tab-panel" id="tab-videos">
+
+    <div class="card" style="margin-bottom:14px; background: var(--green-light); border-color:#a5d6a7;">
+      <p style="font-size:13px;color:var(--green);">All videos below are part of the RootsTech 2026 Interactive TV B-roll package. Teleprompter available for ALL in Korean and Japanese unless noted. Click any video to expand the full script.</p>
+    </div>
+
+    <div class="video-list">
+
+      <div class="video-card" id="v1">
+        <div class="video-header" onclick="toggleVideo('v1')">
+          <div class="video-icon">🎬</div>
+          <div class="video-info">
+            <h3>Welcome to RootsTech 2026</h3>
+            <div class="video-meta">3:45 &bull; Wed Mar 5, 9:30 AM &bull; RootsTech Studio &bull; Teleprompter ALL</div>
+          </div>
+          <div class="video-toggle">&#8964;</div>
+        </div>
+        <div class="video-body">
+          <p>Welcome to RootsTech 2026! My name is __________, one of this year's ten global emcees, here to guide you through the many incredible experiences we have planned for our worldwide audience. You are joining me in the brand-new RootsTech Studio.</p>
+          <p>This year's theme is <strong>"Together,"</strong> which was chosen to reflect one of the most important aspects of RootsTech: bringing people together across generations, cultures, and continents through family history.</p>
+          <p>Over the next three days, we will learn about RootsTech classes (available in over 40 languages), our inspirational live and virtual keynote speakers, the FamilySearch Experiences you can participate in, and meet our many amazing exhibitors, societies, archivists, and sponsors!</p>
+          <p>Exciting opportunities are in store, including Relatives at RootsTech, the vibrant Expo Hall—both online and in-person, in-depth expert forums, and of course Family Discovery Day.</p>
+          <p><strong>Navigation Guide:</strong> Tap the globe icon to change language &amp; find regional pages. Use tabs at top for Class Schedule, Speakers, Expo Hall, Watch Videos, and Help (? icon).</p>
+          <div class="film-schedule">
+            <h4>Filming Order</h4>
+            <div class="film-row"><div class="film-time">9:30 AM</div><div class="film-person">Isaac + Janella</div></div>
+            <div class="film-row"><div class="film-time">9:45 AM</div><div class="film-person">Nicole</div></div>
+            <div class="film-row"><div class="film-time">10:00 AM</div><div class="film-person">Junior</div></div>
+            <div class="film-row"><div class="film-time">10:15 AM</div><div class="film-person">Rosca</div></div>
+            <div class="film-row"><div class="film-time">10:30 AM</div><div class="film-person">Denise</div></div>
+            <div class="film-row"><div class="film-time">10:45 AM</div><div class="film-person">Hannah</div></div>
+            <div class="film-row"><div class="film-time">11:15 AM</div><div class="film-person">Hiromi</div></div>
+            <div class="film-row"><div class="film-time">11:30 AM</div><div class="film-person">Katrina</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-card" id="v2">
+        <div class="video-header" onclick="toggleVideo('v2')">
+          <div class="video-icon">🎬</div>
+          <div class="video-info">
+            <h3>Introduction to Main Stage and Virtual Keynotes</h3>
+            <div class="video-meta">1:40 &bull; Tue Mar 4, 10:00 AM &bull; Main Stage &bull; Teleprompter ALL (Korean/Japanese)</div>
+          </div>
+          <div class="video-toggle">&#8964;</div>
+        </div>
+        <div class="video-body">
+          <p>Hello, RootsTech family! Welcome to the main stage for RootsTech 2026. Each year, exciting keynotes take the stage at RootsTech!</p>
+          <p><strong>Thursday:</strong> Academy Award-winning actress <strong>Marlee Matlin</strong><br>
+          <strong>Friday:</strong> National Geographic Explorer <strong>Tara Roberts</strong><br>
+          <strong>Saturday:</strong> NFL Hall of Fame Quarterback <strong>Steve Young</strong></p>
+          <p>During each General Session, you will hear messages from our platinum sponsors about their newest innovations, and FamilySearch CEO Steve Rockwood will kick off the event on Thursday.</p>
+          <p><strong>Virtual Keynotes</strong> from Philippines (Jessica Soho), Brazil (Zico), Ireland (Gardiner Brothers — Michael &amp; Matthew), and California (Jose Hernandez). Now live on RootsTech.org!</p>
+          <div class="film-schedule">
+            <h4>Filming Order</h4>
+            <div class="film-row"><div class="film-time">10:00 AM</div><div class="film-person">Denise</div></div>
+            <div class="film-row"><div class="film-time">10:15 AM</div><div class="film-person">Nicole</div></div>
+            <div class="film-row"><div class="film-time">10:30 AM</div><div class="film-person">Isaac + Janella</div></div>
+            <div class="film-row"><div class="film-time">10:45 AM</div><div class="film-person">Junior</div></div>
+            <div class="film-row"><div class="film-time">11:00 AM</div><div class="film-person">Rosca / Hannah</div></div>
+            <div class="film-row"><div class="film-time">11:15 AM</div><div class="film-person">Hiromi</div></div>
+            <div class="film-row"><div class="film-time">11:30 AM</div><div class="film-person">Jin Young</div></div>
+            <div class="film-row"><div class="film-time">11:45 AM</div><div class="film-person">Katrina</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-card" id="v3">
+        <div class="video-header" onclick="toggleVideo('v3')">
+          <div class="video-icon">🎬</div>
+          <div class="video-info">
+            <h3>Discover RootsTech Classes</h3>
+            <div class="video-meta">1:45 &bull; Wed Mar 5, 1:45 PM &bull; RootsTech Studio</div>
+          </div>
+          <div class="video-toggle">&#8964;</div>
+        </div>
+        <div class="video-body">
+          <p>As people from all over the world come together for RootsTech 2026, we're excited to share some of the classes you can explore this year! This year, RootsTech is offering hundreds of new online sessions, taught in more than a dozen languages.</p>
+          <p><strong>For online audience:</strong> Recommended sessions by homeland. [Insert by homeland]</p>
+          <p><strong>New this year:</strong> FamilySearch 101 series — basics on beginning your family tree on FamilySearch.org</p>
+          <p>Find sessions at <strong>RootsTech.org → RootsTech Event → Class Schedule</strong> (sort by online/in-person, by day). Browse past classes under <strong>Watch Videos</strong> (filter by year, skill level, content type, speaker).</p>
+          <p><em>*(English, ASL, Spanish &amp; Portuguese versions needed)</em></p>
+        </div>
+      </div>
+
+      <div class="video-card" id="v4">
+        <div class="video-header" onclick="toggleVideo('v4')">
+          <div class="video-icon">🎬</div>
+          <div class="video-info">
+            <h3>Online Expo Hall Tour</h3>
+            <div class="video-meta">1:30 &bull; Wed Mar 5, 12:30 PM &bull; RootsTech Studio &bull; Teleprompter ALL</div>
+          </div>
+          <div class="video-toggle">&#8964;</div>
+        </div>
+        <div class="video-body">
+          <p>RootsTech has grown tremendously over the last 16 years. This global reach wouldn't be possible without our industry partners! In the Expo Hall, exhibitors share exciting new innovations and products.</p>
+          <p>This year, more than <strong>180 sponsors, exhibitors, and societies</strong> have joined us in person. All now have online booth pages! Currently in English only—use browser auto-translation (e.g., Google Chrome).</p>
+          <p>Search for companies you know, or browse tags like Technology, DNA, or Storytelling. Many exhibitor pages feature videos, classes, demonstrations, live chat, and exclusive promotional deals.</p>
+          <div class="film-schedule">
+            <h4>Filming Order</h4>
+            <div class="film-row"><div class="film-time">12:30 PM</div><div class="film-person">Isaac + Janella</div></div>
+            <div class="film-row"><div class="film-time">12:45 PM</div><div class="film-person">Nicole, Junior, Rosca</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-card" id="v5">
+        <div class="video-header" onclick="toggleVideo('v5')">
+          <div class="video-icon">🎬</div>
+          <div class="video-info">
+            <h3>Visit to the FamilySearch Library</h3>
+            <div class="video-meta">2:15 &bull; Tue Mar 4, 2:15 PM &bull; FamilySearch Library &bull; Teleprompter ALL</div>
+          </div>
+          <div class="video-toggle">&#8964;</div>
+        </div>
+        <div class="video-body">
+          <p><em>[B-roll of FamilySearch Library visit]</em></p>
+          <div class="film-schedule">
+            <h4>Filming Order (Tue Mar 4)</h4>
+            <div class="film-row"><div class="film-time">2:15 PM</div><div class="film-person">Isaac + Janella</div></div>
+            <div class="film-row"><div class="film-time">2:30 PM</div><div class="film-person">Nicole</div></div>
+            <div class="film-row"><div class="film-time">2:45 PM</div><div class="film-person">Junior</div></div>
+            <div class="film-row"><div class="film-time">3:00 PM</div><div class="film-person">Rosca</div></div>
+            <div class="film-row"><div class="film-time">3:15 PM</div><div class="film-person">Jin Young</div></div>
+            <div class="film-row"><div class="film-time">3:30 PM</div><div class="film-person">Hiromi</div></div>
+            <div class="film-row"><div class="film-time">3:45 PM</div><div class="film-person">Katrina</div></div>
+            <div class="film-row"><div class="film-time">4:00 PM</div><div class="film-person">Denise</div></div>
+            <div class="film-row"><div class="film-time">4:15 PM</div><div class="film-person">Hannah</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-card" id="v6">
+        <div class="video-header" onclick="toggleVideo('v6')">
+          <div class="video-icon">🎬</div>
+          <div class="video-info">
+            <h3>Visit to FamilySearch &amp; Homeland Booths</h3>
+            <div class="video-meta">~1 min + Q&amp;A &bull; Wed Mar 5, 3:30 PM &bull; RootsTech Studio &bull; Teleprompter ALL</div>
+          </div>
+          <div class="video-toggle">&#8964;</div>
+        </div>
+        <div class="video-body">
+          <p>Hey, RootsTech family! We've left our home in the RootsTech Studio for just a moment to show you what this year's FamilySearch—Homeland Booth experience looks like here in Salt Lake City!</p>
+          <p>These booths were created to help connect you with people who can support you in your part of the world. The FamilySearch booth has interactive activities, expert guidance, and tools to help you preserve memories and make connections.</p>
+          <p><strong>Potential Interview Talking Points:</strong> What is a FamilySearch homeland? What makes your homeland unique for family history? What records/resources are most common? How does FamilySearch work with local communities? Challenges in researching from your region? Story of someone who discovered a meaningful connection?</p>
+          <div class="film-schedule">
+            <h4>Interview Guests (Wed Mar 5)</h4>
+            <div class="film-row"><div class="film-time">3:30 PM</div><div class="film-person">Isaac + Janella — Ann Metcalf</div></div>
+            <div class="film-row"><div class="film-time">3:45 PM</div><div class="film-person">Katrina — guest TBD (???)</div></div>
+            <div class="film-row"><div class="film-time">4:00 PM</div><div class="film-person">Denise — Andrew Trexler</div></div>
+            <div class="film-row"><div class="film-time">4:15 PM</div><div class="film-person">Hannah — Henriette Baumann</div></div>
+            <div class="film-row"><div class="film-time">4:30 PM</div><div class="film-person">Hiromi — Hiroko Biesinger</div></div>
+            <div class="film-row"><div class="film-time">4:45 PM</div><div class="film-person">Jin Young — Hyewon Lee</div></div>
+            <div class="film-row"><div class="film-time">5:00 PM</div><div class="film-person">Junior — Jairo Lopez, Amalia Para</div></div>
+            <div class="film-row"><div class="film-time">5:15 PM</div><div class="film-person">Rosca — Gilles François</div></div>
+            <div class="film-row"><div class="film-time">5:30 PM</div><div class="film-person">Nicole — Daniel Dornelles</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-card" id="v7">
+        <div class="video-header" onclick="toggleVideo('v7')">
+          <div class="video-icon">🎬</div>
+          <div class="video-info">
+            <h3>Family Discovery Day</h3>
+            <div class="video-meta">1:25 &bull; Wed Mar 5, 11:00 AM &bull; RootsTech Studio</div>
+          </div>
+          <div class="video-toggle">&#8964;</div>
+        </div>
+        <div class="video-body">
+          <p>RootsTech is all about family, and there's no better way to end this incredible conference than with Family Discovery Day—a celebration that places families at the heart of it all. Designed to be experienced together and inspire and empower people of all ages.</p>
+          <p>We're honored to welcome <strong>Elder Ronald A. Rasband</strong> of the Quorum of the Twelve Apostles and his wife, <strong>Sister Melanie Rasband</strong>. They will share messages about uniting families for eternity through Jesus Christ.</p>
+          <p>We'll also enjoy a special presentation from the <strong>British Pageant</strong>, which brings to life the true story of Sister Rasband's ancestor's legacy of faith and sacrifice.</p>
+          <p>Family Discovery Day also offers classes, FamilySearch tools, and experiences for everyone—young or old.</p>
+        </div>
+      </div>
+
+      <div class="video-card" id="v8">
+        <div class="video-header" onclick="toggleVideo('v8')">
+          <div class="video-icon">🎬</div>
+          <div class="video-info">
+            <h3>Thank You for Attending RootsTech 2026</h3>
+            <div class="video-meta">2:20 &bull; Fri Mar 7 &amp; Sat Mar 8, 8:00 AM &bull; Overlook Area by South Escalator</div>
+          </div>
+          <div class="video-toggle">&#8964;</div>
+        </div>
+        <div class="video-body">
+          <p>Hi, RootsTech family! Wow, what a conference this has been. RootsTech 2026 has truly been a time of learning, and growth together.</p>
+          <p><strong>Keynote highlights:</strong> Marlee Matlin (breaking barriers), Tara Roberts (uncovering lost stories of African American slaves), Steve Young (love and strength from family and teamwork).</p>
+          <p><strong>Virtual keynotes</strong> from Brazil, Philippines, Mexico to America, and Ireland—sharing stories that unite us no matter where we live.</p>
+          <p>The expo hall buzzed with innovation. Classes in the latest family history advancements. Family Discovery Day and Relatives at RootsTech brought families together in powerful ways.</p>
+          <p>Visit RootsTech.org to revisit your favorite sessions or catch anything you missed. Together, we can make family discovery a shared journey for generations to come!</p>
+          <div class="film-schedule">
+            <h4>Filming Order</h4>
+            <div class="film-row"><div class="film-time">7:30</div><div class="film-person">Jin Young, Hiromi</div></div>
+            <div class="film-row"><div class="film-time">7:50</div><div class="film-person">Katrina, Hannah</div></div>
+            <div class="film-row"><div class="film-time">8:00</div><div class="film-person">Rosca</div></div>
+            <div class="film-row"><div class="film-time">8:10</div><div class="film-person">Denise</div></div>
+            <div class="film-row"><div class="film-time">8:15</div><div class="film-person">Isaac + Janella</div></div>
+            <div class="film-row"><div class="film-time">8:20</div><div class="film-person">Junior, Nicole</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-card" id="v9">
+        <div class="video-header" onclick="toggleVideo('v9')">
+          <div class="video-icon">🎬</div>
+          <div class="video-info">
+            <h3>See You at RootsTech 2027</h3>
+            <div class="video-meta">1:20 &bull; Same shoot as Thank You video &bull; Overlook Area</div>
+          </div>
+          <div class="video-toggle">&#8964;</div>
+        </div>
+        <div class="video-body">
+          <p>Hi, RootsTech family! What an amazing experience this year has been—a true celebration of connection, discovery, and the power of family and working together.</p>
+          <p>RootsTech 2026 highlights: unforgettable main stage moments, surprise performance by the <strong>Gardiner Brothers</strong>, 7 keynote speakers, classes in over 13 languages, expo hall innovations, FamilySearch Forums.</p>
+          <p><strong>RootsTech 2027: March 4–6, 2027</strong></p>
+          <p>Registration opens in September! Visit RootsTech.org to revisit your favorite sessions or catch anything you missed.</p>
+          <p><em>Together, we can make family discovery a shared journey for generations to come.</em></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LOGISTICS TAB -->
+  <div class="tab-panel" id="tab-logistics">
+    <div class="logistics-grid">
+
+      <!-- RADIO -->
+      <div class="card">
+        <div class="card-title">Radio Assignment</div>
+        <div class="info-block">
+          <h4>Pickup Location</h4>
+          <p><strong>Tree House — Salt Palace Room 254</strong><br>Radios on tables in chargers, labeled by first name (alphabetical order)</p>
+        </div>
+        <div class="info-block">
+          <h4>Operating Instructions</h4>
+          <div class="radio-steps">
+            <div class="radio-step"><div class="step-num">1</div><div class="step-text">Find your labeled radio in Room 254 (Tree House)</div></div>
+            <div class="radio-step"><div class="step-num">2</div><div class="step-text">Ensure the radio is charged before heading out</div></div>
+            <div class="radio-step"><div class="step-num">3</div><div class="step-text"><strong>To speak:</strong> Press and hold the microphone button</div></div>
+            <div class="radio-step"><div class="step-num">4</div><div class="step-text"><strong>Wait 1 full second</strong> after pressing before speaking</div></div>
+            <div class="radio-step"><div class="step-num">5</div><div class="step-text">Speak clearly, release button when done</div></div>
+          </div>
+        </div>
+        <div class="info-block">
+          <h4>Contact</h4>
+          <p>Cyndi Sheffield-Buhler and Kathryn Charles<br>See attached PPTX for full radio instructions</p>
+        </div>
+      </div>
+
+      <!-- FINALE -->
+      <div class="card">
+        <div class="card-title">General Session 3 Finale Participation</div>
+        <div class="highlight-box">
+          <p><strong>You are invited to be on stage</strong> during the final song of General Session 3 on Saturday, March 8!</p>
+        </div>
+        <div style="height:10px"></div>
+        <div class="info-block">
+          <h4>Who</h4>
+          <p>All FamilySearch Coordinators and Captains — <strong>wear your jacket</strong></p>
+        </div>
+        <div class="info-block">
+          <h4>Rehearsal</h4>
+          <p><strong>Friday, March 7 at 5:00 PM</strong> &mdash; 30 minutes<br>Reply if you cannot make it</p>
+        </div>
+        <div class="info-block">
+          <h4>Day-of Call Time</h4>
+          <p><strong>Saturday, March 8 — Backstage by 11:45 AM</strong></p>
+        </div>
+        <div class="info-block">
+          <h4>Significance</h4>
+          <p>You in your jacket will represent the hundreds of people you've been leading through the event. A meaningful way to say goodbye to RootsTech 2026.</p>
+        </div>
+      </div>
+
+      <!-- EMCEES -->
+      <div class="card section-full">
+        <div class="card-title">Emcee Team</div>
+        <div class="emcee-grid">
+          <div class="emcee-card"><div class="name">Isaac</div><div class="role">English / North America</div></div>
+          <div class="emcee-card"><div class="name">Janella</div><div class="role">English / APAC</div></div>
+          <div class="emcee-card"><div class="name">Nicole</div><div class="role">English / ASL</div></div>
+          <div class="emcee-card"><div class="name">Junior</div><div class="role">LatAm (Portuguese)</div></div>
+          <div class="emcee-card"><div class="name">Rosca</div><div class="role">Africa / French</div></div>
+          <div class="emcee-card"><div class="name">Hannah</div><div class="role">Europe</div></div>
+          <div class="emcee-card"><div class="name">Katrina</div><div class="role">ASL</div></div>
+          <div class="emcee-card"><div class="name">Hiromi</div><div class="role">APAC / Japanese</div></div>
+          <div class="emcee-card"><div class="name">Jin Young</div><div class="role">APAC / Korean</div></div>
+          <div class="emcee-card"><div class="name">Denise</div><div class="role">English / North America</div></div>
+          <div class="emcee-card"><div class="name">Marco's Team</div><div class="role">Europe</div></div>
+        </div>
+      </div>
+
+      <!-- BASE CAMP HOURS -->
+      <div class="card">
+        <div class="card-title">Base Camp (Buddhist Temple) Hours</div>
+        <div class="info-block">
+          <h4>Conference Days (Thu–Sat)</h4>
+          <ul>
+            <li>Breakfast: 5:30–8:00 AM</li>
+            <li>Break: 5:30–8:00 AM (varies by day)</li>
+            <li>Lunch: 11:00 AM–1:30 PM</li>
+            <li>Dinner: 5:00–6:30 PM</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>Dress Code (Interpreters)</h4>
+          <ul>
+            <li>Women alternate Purple / Blue by day</li>
+            <li>Men alternate Blue / Purple by day</li>
+            <li>Thu: Women Purple, Men Blue</li>
+            <li>Fri: Women Blue, Men Purple</li>
+            <li>Sat: Women Purple, Men Blue</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- KEY CONTACTS & LINKS -->
+      <div class="card">
+        <div class="card-title">Key Info</div>
+        <div class="info-block">
+          <h4>Conference Dates</h4>
+          <p>Thursday–Saturday, March 6–8, 2026<br>Salt Palace Convention Center, Salt Lake City</p>
+        </div>
+        <div class="info-block">
+          <h4>Pre-Production</h4>
+          <p>Tuesday Mar 4 &amp; Wednesday Mar 5<br>Buddhist Temple Base Camp</p>
+        </div>
+        <div class="info-block">
+          <h4>RootsTech Studio</h4>
+          <p>Home base for online emcee segments, interviews, and live recaps</p>
+        </div>
+        <div class="info-block">
+          <h4>RootsTech 2027</h4>
+          <p>March 4–6, 2027 &bull; Registration opens September 2026</p>
+        </div>
+        <div class="info-block">
+          <h4>Help During Event</h4>
+          <p>RootsTech.org → ? icon → Live Chat available during conference<br>Or reach out to another attendee</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showTab(tab) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function showDay(day, fromClick) {
+  document.querySelectorAll('.day-schedule').forEach(d => d.classList.remove('active'));
+  document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('day-' + day).classList.add('active');
+  document.getElementById('tab-btn-' + day).classList.add('active');
+  if (fromClick) event.target.classList.add('active');
+}
+
+// Auto-select today's day on load
+(function() {
+  const dayMap = { 4: 'tue', 5: 'wed', 6: 'thu', 7: 'fri', 8: 'sat' };
+  const d = new Date();
+  const isMar2026 = d.getFullYear() === 2026 && d.getMonth() === 2; // month 2 = March
+  const day = isMar2026 && dayMap[d.getDate()] ? dayMap[d.getDate()] : 'thu';
+  showDay(day);
+})();
+
+function toggleVideo(id) {
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+}
+</script>
+
+</body>
+</html>
