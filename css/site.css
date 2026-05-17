@@ -54,6 +54,10 @@
 
 /* ===== Reset / base ===== */
 *, *::before, *::after { box-sizing: border-box; }
+/* Ensure the HTML `hidden` attribute always wins over component display rules
+   (otherwise `.card { display: flex }` overrides the UA `[hidden] { display: none }`
+   and JS-driven filter toggles do nothing). */
+[hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
