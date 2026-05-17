@@ -3,9 +3,9 @@
  * Provides offline functionality and improved performance through caching
  */
 
-const CACHE_NAME = 'alma31-study-v1.3.2';
-const STATIC_CACHE_NAME = 'alma31-static-v1.3.2';
-const DYNAMIC_CACHE_NAME = 'alma31-dynamic-v1.3.2';
+const CACHE_NAME = 'alma31-study-v1.3.3';
+const STATIC_CACHE_NAME = 'alma31-static-v1.3.3';
+const DYNAMIC_CACHE_NAME = 'alma31-dynamic-v1.3.3';
 
 // Static files to cache immediately
 const STATIC_ASSETS = [
@@ -31,12 +31,10 @@ const STATIC_ASSETS = [
     '/presentations/confidence-in-presence-of-god/confidence-presentation.html',
     '/presentations/confidence-in-presence-of-god/confidence-presentation-fixes.css',
     '/presentations/confidence-in-presence-of-god/critical-fixes.css',
-    // Add common icon paths
-    '/assets/icons/icon-192x192.png',
-    '/assets/icons/icon-512x512.png',
-    '/assets/icons/favicon.ico',
-    // Add any common images
-    '/assets/images/og-image.jpg'
+    // Icons
+    '/assets/icons/favicon.svg',
+    '/assets/icons/icon-192.svg',
+    '/assets/icons/icon-512.svg'
 ];
 
 // Network-first strategies for these paths
@@ -436,8 +434,8 @@ self.addEventListener('push', (event) => {
 
         const options = {
             body: data.message || 'New content available in Alma 31 Study',
-            icon: '/assets/icons/icon-192x192.png',
-            badge: '/assets/icons/icon-96x96.png',
+            icon: '/assets/icons/icon-192.svg',
+            badge: '/assets/icons/favicon.svg',
             vibrate: [200, 100, 200],
             data: {
                 dateOfArrival: Date.now(),
@@ -447,12 +445,12 @@ self.addEventListener('push', (event) => {
                 {
                     action: 'explore',
                     title: 'Study Now',
-                    icon: '/assets/icons/icon-72x72.png'
+                    icon: '/assets/icons/favicon.svg'
                 },
                 {
                     action: 'close',
                     title: 'Later',
-                    icon: '/assets/icons/icon-72x72.png'
+                    icon: '/assets/icons/favicon.svg'
                 }
             ]
         };
