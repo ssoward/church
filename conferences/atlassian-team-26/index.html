@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Conferences & Events — Scott Soward</title>
+  <meta name="theme-color" content="#1d4ed8">
+  <title>Atlassian Team '26 — Scott Soward</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="../../css/site.css">
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
     :root {
       --orange: #c2410c;
       --orange-light: #ea580c;
@@ -18,50 +18,12 @@
       --amber-pale: #fffbeb;
       --amber-border: #fde68a;
       --red: #b91c1c;
-      --gold: #C9A84C;
-      --gold-light: #e8c97a;
-      --dark: #1a1a2e;
-      --gray: #6b7280;
       --gray-light: #f3f4f6;
-      --border: #e5e7eb;
     }
 
-    html { scroll-behavior: smooth; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Georgia, sans-serif; background: #fafaf8; color: var(--dark); min-height: 100vh; }
-
-    /* ===== HEADER ===== */
-    header {
-      background: linear-gradient(160deg, #7c2d12 0%, #9a3412 40%, #1c1917 100%);
-      color: white; padding: 28px 24px 24px; text-align: left; position: relative; overflow: hidden;
-    }
-    header::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 30% 20%, rgba(234,88,12,0.25) 0%, transparent 60%),
-                  radial-gradient(ellipse at 70% 80%, rgba(201,168,76,0.1) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .header-inner { position: relative; z-index: 1; max-width: 1140px; margin: 0 auto; }
-    .header-badge { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
-    header h1 { font-size: clamp(1.3rem, 2vw, 1.75rem); font-weight: 700; line-height: 1.2; color: white; margin-bottom: 6px; }
-    header .subtitle { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
-
-    /* ===== SITE NAV ===== */
-    .site-nav {
-      background: white; border-bottom: 1px solid var(--border); padding: 12px 24px;
-      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-      position: sticky; top: 0; z-index: 100;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    }
-    .site-nav-link {
-      padding: 5px 16px; border-radius: 20px; border: 1.5px solid #d1d5db;
-      background: white; color: var(--gray); font-size: 0.8rem; font-weight: 500;
-      text-decoration: none; transition: all 0.2s;
-    }
-    .site-nav-link:hover { border-color: var(--orange); color: var(--orange); }
-    .site-nav-link.active { background: var(--orange); border-color: var(--orange); color: white; }
-
-    /* ===== MAIN ===== */
-    main { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+    /* Page-specific content styles only — site.css owns chrome */
+    main#main { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+    @media (max-width: 640px) { main#main { padding: 24px 16px 60px; } }
 
     /* ===== CONFERENCE HERO ===== */
     .conf-hero {
@@ -204,17 +166,7 @@
     .legend-link.green { background: #15803d; }
     @media (max-width: 600px) { #venue-map { height: 320px; } .map-legend { grid-template-columns: 1fr; } }
 
-    /* ===== FOOTER ===== */
-    footer {
-      background: var(--dark); color: rgba(255,255,255,0.5); text-align: center;
-      padding: 28px 24px; font-size: 0.76rem; line-height: 1.7;
-    }
-    footer a { color: var(--gold); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-
     @media (max-width: 600px) {
-      header { padding: 20px 16px 18px; }
-      main { padding: 24px 14px 60px; }
       .conf-hero-body { padding: 20px 18px; }
       .session-time { min-width: 80px; width: 80px; }
       .tips-grid { grid-template-columns: 1fr; }
@@ -227,23 +179,29 @@
 </head>
 <body>
 
-<header>
-  <div class="header-inner">
-    <div class="header-badge">Hub &nbsp;&middot;&nbsp; Conferences &nbsp;&middot;&nbsp; Atlassian Team '26</div>
-    <h1>Atlassian Team '26</h1>
-    <p class="subtitle">Anaheim Convention Center &nbsp;&middot;&nbsp; May 5–7, 2026 &nbsp;&middot;&nbsp; Personal agenda &amp; session guide</p>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container site-header-inner">
+    <a class="brand" href="../../">
+      <span class="brand-name">Scott Soward</span>
+      <span class="brand-role">Engineer · Builder · Teacher</span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle menu">
+      <span aria-hidden="true">☰</span>
+    </button>
+    <nav id="primary-nav" class="site-nav" aria-label="Primary">
+      <a href="../../">Home</a>
+      <a href="../../presentations/">Gospel</a>
+      <a href="../../tech-presentations/">Tech &amp; AI</a>
+      <a href="../../activities/">Activities</a>
+      <a href="../" aria-current="page">Conferences</a>
+      <a href="../../alma31.html">Scripture</a>
+    </nav>
   </div>
 </header>
 
-<nav class="site-nav">
-  <a href="../../" class="site-nav-link">Home</a>
-  <a href="../../presentations/" class="site-nav-link">Gospel</a>
-  <a href="../../tech-presentations/" class="site-nav-link">Tech & AI</a>
-  <a href="../../activities/" class="site-nav-link">Activities</a>
-  <a href="../" class="site-nav-link active">Conferences</a>
-</nav>
-
-<main>
+<main id="main">
 
   <!-- ============================
        CONFERENCE HERO
@@ -270,18 +228,18 @@
   <!-- ============================
        DAY TABS
        ============================ -->
-  <div class="day-tabs">
-    <button class="day-tab active" onclick="showDay('tue', this)">
+  <div class="day-tabs" role="tablist" aria-label="Conference days">
+    <button class="day-tab active" role="tab" id="tab-tue" aria-controls="day-tue" aria-selected="true" tabindex="0">
       <span class="day-weekday">Tue</span>
       <span class="day-date">May 5</span>
       <span class="day-label">Expo + Kickoff</span>
     </button>
-    <button class="day-tab" onclick="showDay('wed', this)">
+    <button class="day-tab" role="tab" id="tab-wed" aria-controls="day-wed" aria-selected="false" tabindex="-1">
       <span class="day-weekday">Wed</span>
       <span class="day-date">May 6</span>
       <span class="day-label">Keynotes + Deep Dives</span>
     </button>
-    <button class="day-tab" onclick="showDay('thu', this)">
+    <button class="day-tab" role="tab" id="tab-thu" aria-controls="day-thu" aria-selected="false" tabindex="-1">
       <span class="day-weekday">Thu</span>
       <span class="day-date">May 7</span>
       <span class="day-label">Leadership + Closing</span>
@@ -291,7 +249,7 @@
   <!-- ============================
        TUESDAY
        ============================ -->
-  <div id="day-tue" class="day-panel">
+  <div id="day-tue" class="day-panel" role="tabpanel" aria-labelledby="tab-tue">
     <div class="day-intro">
       <strong>Day 1 — Rovo Dev + Opening Keynote.</strong> Reserved seat in 304A at 2:15 PM — arrive a few minutes early. Use the 3:45–4:30 gap to hit the Expo. Opening Keynote at 5:30 PM is the highlight of the evening, followed by Welcome Reception.
     </div>
@@ -440,7 +398,7 @@
     <!-- ============================
        WEDNESDAY
        ============================ -->
-  <div id="day-wed" class="day-panel hidden">
+  <div id="day-wed" class="day-panel hidden" role="tabpanel" aria-labelledby="tab-wed">
     <div class="day-intro">
       <strong>Day 2 — Packed day from 10:45 AM on.</strong> Founder Keynote at 9 AM kicks it off, then Teamwork Collection keynote (10:45) — and Axel Springer Rovo Dev case study also at 10:45 (pick one), and lunch at 12:30. Afternoon: Jira AI agents (1:30), two competing breakouts at 2:30, and the Agentic Pivot keynote (4:00). Pick your battles — several sessions conflict.
     </div>
@@ -685,7 +643,7 @@
     <!-- ============================
        THURSDAY
        ============================ -->
-  <div id="day-thu" class="day-panel hidden">
+  <div id="day-thu" class="day-panel hidden" role="tabpanel" aria-labelledby="tab-thu">
     <div class="day-intro">
       <strong>Day 3 — Closing Keynote + Breakouts.</strong> Back-to-back Bitbucket Cloud (10:30) and AI code review (11:30). Three quick 15-min theater sessions right after lunch. Two 3:45 PM sessions in schedule but leave at 4:00 PM — only 15 min usable. Depart for airport at 4:00 PM.
     </div>
@@ -1009,22 +967,64 @@
 
 </main>
 
-<footer>
-  <div>Atlassian Team '26 &nbsp;&middot;&nbsp; May 5–7, 2026 &nbsp;&middot;&nbsp; Anaheim Convention Center</div>
-  <div style="margin-top:6px;">
-    <a href="../../">← Back to Conferences</a>
-    &nbsp;&middot;&nbsp;
-    Personalized agenda for Scott Soward
+<footer class="site-footer">
+  <div class="container site-footer-inner">
+    <span>© <span id="year">2026</span> Scott Soward · Atlassian Team '26 personal agenda</span>
+    <a href="../">&larr; Back to conferences</a>
   </div>
 </footer>
 
 <script>
-  function showDay(id, btn) {
-    document.querySelectorAll('.day-panel').forEach(p => p.classList.add('hidden'));
-    document.querySelectorAll('.day-tab').forEach(b => b.classList.remove('active'));
-    document.getElementById('day-' + id).classList.remove('hidden');
-    btn.classList.add('active');
-  }
+  (function() {
+    const btn = document.querySelector('.nav-toggle');
+    const nav = document.getElementById('primary-nav');
+    if (btn && nav) {
+      btn.addEventListener('click', () => {
+        const open = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(open));
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && nav.classList.contains('open')) {
+          nav.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+          btn.focus();
+        }
+      });
+    }
+  })();
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Accessible tablist with keyboard navigation
+  (function() {
+    const lists = document.querySelectorAll('[role="tablist"]');
+    lists.forEach(list => {
+      const tabs = Array.from(list.querySelectorAll('[role="tab"]'));
+      const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+      function activate(i, setFocus) {
+        tabs.forEach((t, j) => {
+          const sel = j === i;
+          t.setAttribute('aria-selected', String(sel));
+          t.tabIndex = sel ? 0 : -1;
+          t.classList.toggle('active', sel);
+          if (panels[j]) {
+            panels[j].classList.toggle('hidden', !sel);
+          }
+        });
+        if (setFocus) tabs[i].focus();
+      }
+      list.addEventListener('keydown', (e) => {
+        const i = tabs.indexOf(document.activeElement);
+        if (i < 0) return;
+        let next = -1;
+        if (e.key === 'ArrowRight') next = (i + 1) % tabs.length;
+        if (e.key === 'ArrowLeft')  next = (i - 1 + tabs.length) % tabs.length;
+        if (e.key === 'Home') next = 0;
+        if (e.key === 'End')  next = tabs.length - 1;
+        if (next >= 0) { e.preventDefault(); activate(next, true); }
+      });
+      tabs.forEach((t, i) => t.addEventListener('click', () => activate(i, false)));
+    });
+  })();
 </script>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

@@ -3,8 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RootsTech 2026 Coordination</title>
+<meta name="theme-color" content="#1d4ed8">
+<title>RootsTech 2026 — Scott Soward</title>
+<link rel="stylesheet" href="../../css/site.css">
 <style>
+  /* Page-local tokens — keep original names so the body markup stays valid.
+     site.css tokens (--accent, --ink, etc.) remain accessible. */
   :root {
     --green: #2e7d32;
     --green-light: #e8f5e9;
@@ -22,14 +26,12 @@
     --yellow-light: #fffde7;
     --red: #c62828;
     --red-light: #ffebee;
-    --bg: #f5f7f9;
     --card: #ffffff;
-    --border: #dde2e8;
     --text: #1a2332;
     --text-secondary: #5a6a7a;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; }
+  /* Override site.css's body / surface tokens locally for the dashboard look */
+  body { background: #f5f7f9; color: var(--text); font-size: 14px; }
 
   /* Header */
   .header { background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 60%, #00695c 100%); color: white; padding: 16px 20px; display: flex; align-items: center; gap: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
@@ -268,37 +270,39 @@
 </style>
 </head>
 <body>
-<style>
-  .site-nav-bar {
-    background: white; border-bottom: 1px solid #e5e7eb; padding: 10px 20px;
-    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-    position: sticky; top: 0; z-index: 200;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-  }
-  .site-nav-bar a {
-    padding: 4px 14px; border-radius: 20px; border: 1.5px solid #d1d5db;
-    background: white; color: #6b7280; font-size: 0.78rem; font-weight: 500;
-    text-decoration: none; transition: all 0.2s; font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  }
-  .site-nav-bar a:hover { border-color: #2e7d32; color: #2e7d32; }
-  .site-nav-bar a.active { background: #2e7d32; border-color: #2e7d32; color: white; }
-</style>
-<nav class="site-nav-bar">
-  <a href="../../">Home</a>
-  <a href="../../presentations/">Gospel</a>
-  <a href="../../tech-presentations/">Tech &amp; AI</a>
-  <a href="../../activities/">Activities</a>
-  <a href="../" class="active">Conferences</a>
-</nav>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container site-header-inner">
+    <a class="brand" href="../../">
+      <span class="brand-name">Scott Soward</span>
+      <span class="brand-role">Engineer · Builder · Teacher</span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle menu">
+      <span aria-hidden="true">☰</span>
+    </button>
+    <nav id="primary-nav" class="site-nav" aria-label="Primary">
+      <a href="../../">Home</a>
+      <a href="../../presentations/">Gospel</a>
+      <a href="../../tech-presentations/">Tech &amp; AI</a>
+      <a href="../../activities/">Activities</a>
+      <a href="../" aria-current="page">Conferences</a>
+      <a href="../../alma31.html">Scripture</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
 
 <div class="header">
-  <div class="header-logo">🌿</div>
+  <div class="header-logo" aria-hidden="true">🌿</div>
   <div class="header-title">
     <h1>RootsTech 2026</h1>
-    <p>Coordination Dashboard &mdash; GMC / Interactive TV</p>
+    <p>Coordination Dashboard — GMC / Interactive TV</p>
   </div>
   <div class="date-badge">
-    <strong>Mar 6&ndash;8, 2026</strong>
+    <strong>Mar 6–8, 2026</strong>
     Salt Palace, Salt Lake City
   </div>
 </div>
@@ -308,17 +312,17 @@
   <span><strong>Key Reminder:</strong> Finale rehearsal Friday 5:00 PM (30 min) &bull; Be backstage by <strong>11:45 AM Saturday</strong> for General Session 3 finale stage appearance</span>
 </div>
 
-<div class="nav-tabs">
-  <div class="nav-tab active" onclick="showTab('dashboard')">Dashboard</div>
-  <div class="nav-tab" onclick="showTab('schedule')">Schedule</div>
-  <div class="nav-tab" onclick="showTab('videos')">Videos & Scripts</div>
-  <div class="nav-tab" onclick="showTab('logistics')">Logistics</div>
+<div class="nav-tabs" role="tablist" aria-label="Coordination sections">
+  <button class="nav-tab active" role="tab" id="tabbtn-dashboard" aria-controls="tab-dashboard" aria-selected="true" tabindex="0">Dashboard</button>
+  <button class="nav-tab" role="tab" id="tabbtn-schedule" aria-controls="tab-schedule" aria-selected="false" tabindex="-1">Schedule</button>
+  <button class="nav-tab" role="tab" id="tabbtn-videos" aria-controls="tab-videos" aria-selected="false" tabindex="-1">Videos &amp; Scripts</button>
+  <button class="nav-tab" role="tab" id="tabbtn-logistics" aria-controls="tab-logistics" aria-selected="false" tabindex="-1">Logistics</button>
 </div>
 
 <div class="content">
 
   <!-- DASHBOARD TAB -->
-  <div class="tab-panel active" id="tab-dashboard">
+  <div class="tab-panel active" id="tab-dashboard" role="tabpanel" aria-labelledby="tabbtn-dashboard">
 
     <div class="theme-card">
       <div class="theme-word">Together</div>
@@ -434,7 +438,7 @@
   </div>
 
   <!-- SCHEDULE TAB -->
-  <div class="tab-panel" id="tab-schedule">
+  <div class="tab-panel" id="tab-schedule" role="tabpanel" aria-labelledby="tabbtn-schedule">
 
     <div class="schedule-legend">
       <div class="legend-item"><div class="legend-dot" style="background:#b0bec5"></div> Meal/Break</div>
@@ -962,7 +966,7 @@
   </div>
 
   <!-- VIDEOS TAB -->
-  <div class="tab-panel" id="tab-videos">
+  <div class="tab-panel" id="tab-videos" role="tabpanel" aria-labelledby="tabbtn-videos">
 
     <div class="card" style="margin-bottom:14px; background: var(--green-light); border-color:#a5d6a7;">
       <p style="font-size:13px;color:var(--green);">All videos below are part of the RootsTech 2026 Interactive TV B-roll package. Teleprompter available for ALL in Korean and Japanese unless noted. Click any video to expand the full script.</p>
@@ -1188,7 +1192,7 @@
   </div>
 
   <!-- LOGISTICS TAB -->
-  <div class="tab-panel" id="tab-logistics">
+  <div class="tab-panel" id="tab-logistics" role="tabpanel" aria-labelledby="tabbtn-logistics">
     <div class="logistics-grid">
 
       <!-- RADIO -->
@@ -1311,35 +1315,88 @@
 
 </div>
 
+</main>
+
+<footer class="site-footer">
+  <div class="container site-footer-inner">
+    <span>© <span id="year">2026</span> Scott Soward · RootsTech 2026 coordination</span>
+    <a href="../">&larr; Back to conferences</a>
+  </div>
+</footer>
+
 <script>
-function showTab(tab) {
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('tab-' + tab).classList.add('active');
-  event.target.classList.add('active');
-}
+  (function() {
+    const btn = document.querySelector('.nav-toggle');
+    const nav = document.getElementById('primary-nav');
+    if (btn && nav) {
+      btn.addEventListener('click', () => {
+        const open = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(open));
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && nav.classList.contains('open')) {
+          nav.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+          btn.focus();
+        }
+      });
+    }
+  })();
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-function showDay(day, fromClick) {
-  document.querySelectorAll('.day-schedule').forEach(d => d.classList.remove('active'));
-  document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('day-' + day).classList.add('active');
-  document.getElementById('tab-btn-' + day).classList.add('active');
-  if (fromClick) event.target.classList.add('active');
-}
+  // Accessible primary tablist (Dashboard / Schedule / Videos / Logistics)
+  (function() {
+    const list = document.querySelector('.nav-tabs[role="tablist"]');
+    if (!list) return;
+    const tabs = Array.from(list.querySelectorAll('[role="tab"]'));
+    const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+    function activate(i, setFocus) {
+      tabs.forEach((t, j) => {
+        const sel = j === i;
+        t.setAttribute('aria-selected', String(sel));
+        t.tabIndex = sel ? 0 : -1;
+        t.classList.toggle('active', sel);
+        if (panels[j]) panels[j].classList.toggle('active', sel);
+      });
+      if (setFocus) tabs[i].focus();
+    }
+    list.addEventListener('keydown', (e) => {
+      const i = tabs.indexOf(document.activeElement);
+      if (i < 0) return;
+      let next = -1;
+      if (e.key === 'ArrowRight') next = (i + 1) % tabs.length;
+      if (e.key === 'ArrowLeft')  next = (i - 1 + tabs.length) % tabs.length;
+      if (e.key === 'Home') next = 0;
+      if (e.key === 'End')  next = tabs.length - 1;
+      if (next >= 0) { e.preventDefault(); activate(next, true); }
+    });
+    tabs.forEach((t, i) => t.addEventListener('click', () => activate(i, false)));
+  })();
 
-// Auto-select today's day on load
-(function() {
-  const dayMap = { 4: 'tue', 5: 'wed', 6: 'thu', 7: 'fri', 8: 'sat' };
-  const d = new Date();
-  const isMar2026 = d.getFullYear() === 2026 && d.getMonth() === 2; // month 2 = March
-  const day = isMar2026 && dayMap[d.getDate()] ? dayMap[d.getDate()] : 'thu';
-  showDay(day);
-})();
+  // Day picker inside schedule tab (legacy showDay JS preserved as DOM-bound handler)
+  function showDay(day, fromClick) {
+    document.querySelectorAll('.day-schedule').forEach(d => d.classList.remove('active'));
+    document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+    const panel = document.getElementById('day-' + day);
+    const btn = document.getElementById('tab-btn-' + day);
+    if (panel) panel.classList.add('active');
+    if (btn) btn.classList.add('active');
+  }
+  window.showDay = showDay;
 
-function toggleVideo(id) {
-  const card = document.getElementById(id);
-  card.classList.toggle('open');
-}
+  (function() {
+    const dayMap = { 4: 'tue', 5: 'wed', 6: 'thu', 7: 'fri', 8: 'sat' };
+    const d = new Date();
+    const isMar2026 = d.getFullYear() === 2026 && d.getMonth() === 2;
+    const day = isMar2026 && dayMap[d.getDate()] ? dayMap[d.getDate()] : 'thu';
+    showDay(day);
+  })();
+
+  function toggleVideo(id) {
+    const card = document.getElementById(id);
+    if (card) card.classList.toggle('open');
+  }
+  window.toggleVideo = toggleVideo;
 </script>
 
 </body>
